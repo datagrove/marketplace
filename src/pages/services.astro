@@ -7,35 +7,40 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-
-import { Services } from './services.astro';
-
 ---
-
 <astro>
-    const serviceData = {
-      imageSrc: "/service.jpg",
+  import { PreviewCard } from '../components/PreviewCard.astro';
+  
+  const services = [
+    {
+      title: "Servicio de jardinería 1",
+      imageSrc: "/ruta/imagen1.jpg",
       category: "Jardinería",
-      location: "Ciudad, País",
-    }
-    
-    export default function Index() {
-      return (
-        <div>
-          <img src={serviceData.imageSrc} alt="Servicio de jardinería" />
-          <div>
-            <p>Categoría: {serviceData.category}</p>
-            <p>Lugar: {serviceData.location}</p>
-          </div>
+      location: "Ciudad 1, País",
+    },
+    {
+      title: "Servicio de jardinería 2",
+      imageSrc: "/ruta/imagen2.jpg",
+      category: "Jardinería",
+      location: "Ciudad 2, País",
+    },
+    // Agrega más objetos de servicios aquí...
+  ];
+  
+  export default function ServicesPage() {
+    return (
+      <div>
+        <h1 class="text-2xl font-bold mb-4">Servicios</h1>
+        <div class="grid gap-4 grid-cols-2">
+          {services.map((service, index) => (
+            <PreviewCard {...service} key={index} />
+          ))}
         </div>
-      )
-    }
-    </astro>
-    
-    
-
-
-
+      </div>
+    );
+  }
+  </astro>
+  
 
 <PageLayout pageTitle="Services">
     <div class="text-center mt-4 mb-8 bg-primaryBackground">
