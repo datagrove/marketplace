@@ -6,7 +6,36 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+
+import { Services } from './services.astro';
+
 ---
+
+<astro>
+    const serviceData = {
+      imageSrc: "/service.jpg",
+      category: "Jardinería",
+      location: "Ciudad, País",
+    }
+    
+    export default function Index() {
+      return (
+        <div>
+          <img src={serviceData.imageSrc} alt="Servicio de jardinería" />
+          <div>
+            <p>Categoría: {serviceData.category}</p>
+            <p>Lugar: {serviceData.location}</p>
+          </div>
+        </div>
+      )
+    }
+    </astro>
+    
+    
+
+
+
 
 <PageLayout pageTitle="Services">
     <div class="text-center mt-4 mb-8 bg-primaryBackground">
