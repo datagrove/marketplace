@@ -23,4 +23,4 @@
 * Non-user images should be public domain or permissive licenses such as MIT, ISC, etc
 * All icon type images should be svg format
    
-Maycol's Test
+Maycol's Second Test
