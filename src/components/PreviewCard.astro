@@ -1,4 +1,23 @@
-<astro>
+---
+const { title, category, location, imageSrc } = Astro.props;
+---
+
+<div class="border border-gray-300 rounded-lg shadow-lg">
+  <img 
+  src={imageSrc} 
+  alt={title} 
+  class="rounded-t-lg w-full h-40 object-cover" 
+  />
+
+  <div class="p-4">
+    <h3 class="text-xl font-bold mb-2 text-000000 dark:text-white">{title}</h3>
+    <p class="text-#F0F0F0 text-sm mb-2 dark:text-#000000">{category}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000">{location}</p>
+  </div>
+</div>
+
+<!-- ======================================DELETE============================================
+  <astro>
     export function PreviewCard({ title, imageSrc, category, location }) {
       return (
         <div class="border border-gray-300 rounded-lg shadow-lg">
@@ -11,5 +30,4 @@
         </div>
       );
     }
-    </astro>
-    
+    </astro> -->

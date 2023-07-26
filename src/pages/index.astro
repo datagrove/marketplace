@@ -6,8 +6,55 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 import '../styles/global.css';
+
+//Example only delete after testing
+
+import PreviewCard from '../components/PreviewCard.astro';
+import garden from '../assets/garden.svg';
+
+
+const services = [
+    {
+      title: "Delivery Service",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 1, Country",
+    },
+    {
+      title: "Gardering Service",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 2, Country",
+    },
+    // Agrega más objetos de servicios aquí...
+  ];
+---
+
+<Layout pageTitle={t('pageTitles.home')}>
+	<h1>{t('pageTitles.home')}</h1>
+	<div>
+		{services.map((service) => (
+			<div>
+				<PreviewCard title={service.title} imageSrc={service.imageSrc} category={service.category} location={service.location}/>
+			</div>
+		))}
+	</div>
+</Layout>
+
+
+<!-- =================**************** ORIGINAL INDEX CODE - NO DELETE *****************=================
+---
+import { SITE } from '../config';
+import Layout from '../layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+import '../styles/global.css';
 ---
 
 <Layout pageTitle={t('pageTitles.home')}>
 	<h1>{t('pageTitles.home')}</h1>
 </Layout>
+-->
+
