@@ -2,17 +2,19 @@
 const { title, category, location, imageSrc } = Astro.props;
 ---
 
-<div class="border border-gray-300 rounded-lg shadow-lg">
-  <img 
-  src={imageSrc} 
-  alt={title} 
-  class="rounded-t-lg w-full h-40 object-cover" 
+<div class="border border-#7E9E85 rounded-lg shadow-lg width-full md:flex- flexbox justify-center flex-wrap">
+  <img src={imageSrc} alt={title} 
+  class="rounded-t-lg w-full h-20 object-cover .max-w-full .h-auto .border .transition-shadow" 
   />
 
-  <div class="p-4">
-    <h3 class="text-xl font-bold mb-2 text-000000 dark:text-white">{title}</h3>
-    <p class="text-#F0F0F0 text-sm mb-2 dark:text-#000000">{category}</p>
-    <p class="text-#2E2E2E text-sm dark:text-#000000">{location}</p>
+  <div class="p-16 py-30 px-15 py-8 m-4 w-68 justify-center flex-wrap content-between">
+
+    <h3 class="text-xl font-bold mb-2 text-000000 dark:text-white sm:text-center text-left md:max-xl:flex">{title}</h3>
+    <p class="text-#F0F0F0 text-sm mb-2 dark:text-#000000 sm:text-center text-left md:max-xl:flex">{category}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{location}</p>
+
+    <div class="flex-wrap"></div>
+
   </div>
 </div>
 

@@ -16,22 +16,58 @@ import garden from '../assets/garden.svg';
 const services = [
     {
       title: "Delivery Service",
-      imageSrc: garden,
+      imageSrc: "https://tecdn.b-cdn.net/img/new/slides/041.jpg",
       category: "Category",
       location: "City 1, Country",
     },
     {
       title: "Gardering Service",
-      imageSrc: garden,
+      imageSrc: "https://tecdn.b-cdn.net/img/new/standard/city/041.jpg",
       category: "Category",
       location: "City 2, Country",
     },
     // Agrega más objetos de servicios aquí...
+    {
+      title: "Service 3",
+      imageSrc: "https://tecdn.b-cdn.net/img/new/standard/city/042.jpg",
+      category: "Category",
+      location: "City 2, Country",
+    },
+    {
+      title: "Service 4",
+      imageSrc: "https://tecdn.b-cdn.net/img/new/standard/city/041.webp",
+      category: "Category",
+      location: "City 2, Country",
+    },
+    {
+      title: "Service 5",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 2, Country",
+    },
+    {
+      title: "Service 6",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 2, Country",
+    },
+    {
+      title: "Service 7",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 2, Country",
+    },
+    {
+      title: " Other Service",
+      imageSrc: garden,
+      category: "Category",
+      location: "City 2, Country",
+    },
   ];
 ---
 
 <Layout pageTitle={t('pageTitles.home')}>
-	<h1>{t('pageTitles.home')}</h1>
+	<h1 class= text-end>{t('pageTitles.home')}</h1>
 	<div>
 		{services.map((service) => (
 			<div>
