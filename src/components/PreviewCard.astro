@@ -1,5 +1,5 @@
 ---
-const { title, category, imageSrc, provider_name, content, major_muni, minor_muni, governing_muni } = Astro.props;
+const { title, category, imageSrc, location, provider_name, content, major_muni, minor_muni, governing_muni } = Astro.props;
 
 ---
 
@@ -10,7 +10,12 @@ const { title, category, imageSrc, provider_name, content, major_muni, minor_mun
 
     <h3 class="text-xl font-bold mb-2 text-000000 dark:text-white sm:text-center text-left md:max-xl:flex">{title}</h3>
     <p class="text-#F0F0F0 text-sm mb-2 dark:text-#000000 sm:text-center text-left md:max-xl:flex">{category}</p>
-    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{location}</p>
+    <!-- DELETE**** we don't need more  <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{location}</p>-->
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{major_muni}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{minor_muni}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{governing_muni}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{content}</p>
+    <p class="text-#2E2E2E text-sm dark:text-#000000 sm:text-center text-left md:max-xl:flex">{provider_name}</p>
 
     <div class="flex-wrap"></div>
 
