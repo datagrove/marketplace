@@ -30,9 +30,9 @@ const services = [
         Please send me your idea / concept, budget and schedule, and I'll let you know how I can turn your vision into reality.
         
         Looking forward to making magic with and for YOU :-)`,
-      major_muni: "Alajuela",
-      minor_muni: "Alajuela",
-      governing_muni: "Alajuela",
+      major_muni: "Puntarenas",
+      minor_muni: "Esparza",
+      governing_muni: "Miramar",
     },
     {
       title: "Cleanups/Mowing- Call Brian today- Free Estimates!!! (Colonie, Albany, Schenectady, Latham Area NY)",
@@ -47,9 +47,9 @@ const services = [
         -Mowing
         -Mulch
         -Hedge trimming`,
-      major_muni: "Alajuela",
-      minor_muni: "Alajuela",
-      governing_muni: "Alajuela",
+      major_muni: "San Jose",
+      minor_muni: "Purral",
+      governing_muni: "Goicoechea",
     },
   
     {
@@ -207,7 +207,14 @@ const services = [
 	<div>
 		{services.map((service) => (
 			<div>
-				<PreviewCard title={service.title} imageSrc={service.imageSrc} category={service.category} location={service.location}/>
+				<PreviewCard title={service.title} 
+        imageSrc={service.imageSrc} 
+        category={service.category} 
+        major_muni={service.major_muni} 
+        minor_muni={service.minor_muni} 
+        governing_muni={service.governing_muni} 
+        content={service.content} 
+        provider_name={service.provider_name} />
 			</div>
 		))}
 	</div>

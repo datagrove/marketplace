@@ -1,9 +1,10 @@
 ---
-const { title, category, location, imageSrc } = Astro.props;
+const { title, category, imageSrc, provider_name, content, major_muni, minor_muni, governing_muni } = Astro.props;
+
 ---
 
 <div class="border border-#7E9E85 rounded-lg shadow-lg width-full md:flex flexbox justify-center">
-  <img src={imageSrc} alt={title} class="rounded-t-lg w-full h-40 object-cover"/>
+  <img src={imageSrc} alt={title} class="rounded-t-lg w-full h-48 object-cover"/>
 
   <div class="p-16 py-30 px-15 py-8 m-4 w-68 justify-center flex-wrap content-between">
 
