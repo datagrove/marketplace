@@ -146,7 +146,7 @@ export const Auth: Component = (props) => {
                 </button>
               </div>
               <div>
-                <p class="text-sm text-text1 dark:text-text1-DM">
+                <p class="text-sm text-ptext1 dark:text-ptext1-DM">
                   {" "}
                   {t("messages.noAccount")}
                   <a
@@ -199,14 +199,14 @@ export const Auth: Component = (props) => {
                 {regularExpressionPassword.test(password()) ? (
                   <span
                     id="pwlength"
-                    class="text-sm text-text1 dark:text-text1-DM "
+                    class="text-sm text-ptext1 dark:text-ptext1-DM "
                   >
                     {t("messages.passwordValid")}
                   </span>
                 ) : (
                   <span
                     id="pwlength"
-                    class="text-sm text-text1 dark:text-text1-DM whitespace-pre-wrap"
+                    class="text-sm text-ptext1 dark:text-ptext1-DM whitespace-pre-wrap"
                   >
                     {t("messages.passwordLength")}
                   </span>
@@ -243,11 +243,11 @@ export const Auth: Component = (props) => {
                 {t("messages.clickWrap1")}{" "}
                 <span class="font-medium">{t("pageTitles.signUp")}</span>{" "}
                 {t("messages.clickWrap2")}{" "}
-                <a class="text-link2-DM hover:underline">
+                <a href={`/${lang}/terms`} target="_blank" class="text-link2-DM hover:underline">
                   {t("pageTitles.terms")}
                 </a>{" "}
                 &{" "}
-                <a class="text-link2-DM hover:underline">
+                <a href={`/${lang}/privacy`} target="_blank" class="text-link2-DM hover:underline">
                   {t("pageTitles.privacy")}
                 </a>
               </div>
@@ -267,7 +267,7 @@ export const Auth: Component = (props) => {
               </div>
 
               <div class="my-2">
-                <p class="text-text1 dark:text-text1-DM">
+                <p class="text-ptext1 dark:text-ptext1-DM">
                   {t("messages.alreadyAccount")}
                   <span> </span>
                   <a
