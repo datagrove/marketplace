@@ -125,7 +125,7 @@ export const English = {
   },
 
   toolTips: {
-    providerPhone: 'We require all users to provide valid phone numbers as part of our efforts to ensure the safety of our users. This number will be available to clients in order to  contact you regarding your services.',
+    providerPhone: 'Each provider profile must have a unique phone number. This number will be available to clients in order to  contact you regarding your services. We require all users to provide valid phone numbers as part of our efforts to ensure the safety of our users.',
     clientPhone: 'We require clients to provide valid phone numbers as part of our efforts to ensure the safety of our users. This number may be used by providers to contact you regarding quotes for requested services.',
     firstName: 'This should be your legal name as it appears on your government ID. If you do not provide a display name your first and last name will be displayed instead.',
     lastName: 'This should be your legal name as it appears on your government ID. If you do not provide a display name your first and last name will be displayed instead.',
@@ -134,6 +134,30 @@ export const English = {
     changeEmail: 'If you update your email you must confirm the change at the old email address and the new email address to complete the change.',
     locationUpdate: 'If you update your location all fields must be completed.',
     postImages: 'The first image uploaded will be displayed on post previews. To upload additional images just click "Upload Image" again.',
+  },
+
+  apiErrors: {
+    missingFields: "Missing required fields",
+    noSession: "Session not found",
+    noUser: "User not found",
+    providerExists: "Provider Profile already exists",
+    profileCreateError: "Error creating profile",
+    profileEditError: "Error updating profile",
+    noDistrict: "District not found",
+    noMinorMunicipality: "Minor Municipality not found",
+    noMajorMunicipality: "Major Municipality not found",
+    noCountry: "Country not found",
+    locationError: "Location not submitted",
+    providerCreateProfileError: "Error creating provider profile",
+    providerEditProfileError: "Error updating provider profile",
+    noProfileData: "No profile Data returned",
+    success: "Success!",
+    emailError: "Error updating email",
+    noCategory: "Category not found",
+    postError: "Error creating post",
+    noPost: "No post returned",
+    clientExists: "Client already exists",
+    clientCreateProfileError: "Error creating client profile",
   },
 
   headerData: {
@@ -205,7 +229,7 @@ export const English = {
       { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/todoserviscostarica/' },
       { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/TodoServisCostaRica' },
       // { ariaLabel: 'RSS', icon: 'tabler:rss', href: '/rss.xml' },
-      { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/datagrovecr' },
+      { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/datagrove/marketplace' },
       { ariaLabel: 'Whatsapp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/message/RUD233VVIVPMG1'},
       { ariaLabel: 'Discord', icon: 'tabler:brand-discord', href: 'https://discord.gg/NpV44vS6bF'},
     ],
