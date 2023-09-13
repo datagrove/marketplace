@@ -19,6 +19,8 @@ export const French = {
     resetPassword: "réinitialiser le mot de passe",
     terms: 'Termes et Conditions',
     privacy: "Politique de Confidentialité",
+    about: 'À Propos De Nous',
+    impact: 'Impact',
   },
 
   buttons: {
@@ -122,6 +124,7 @@ export const French = {
 
   menus: {
     services: 'Trouver des Services',
+    contactUs: 'Contactez-nous',
   },
 
   toolTips: {
@@ -200,7 +203,7 @@ export const French = {
       {
         // title: "Soutien",
         links: [
-          { text: "Documentation", href: '#' },
+          { text: "Contactez-nous", href: 'mailto:support@todoservis.com' },
           // { text: string, href: string },
           // { text: string, href: string },
           // { text: string, href: string },
@@ -210,7 +213,7 @@ export const French = {
       {
         // title: "Entreprise",
         links: [
-          { text: "À Propos", href: '#'},
+          { text: "À Propos", href: 'about'},
           // { text: string, href: string },
           // { text: string, href: string },
           // { text: string, href: string },

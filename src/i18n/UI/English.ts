@@ -19,6 +19,8 @@ export const English = {
     resetPassword: 'Set New Password',
     terms: 'Terms and Conditions',
     privacy: "Privacy Policy",
+    about: 'About Us',
+    impact: 'Impact',
   },
 
   buttons: {
@@ -122,6 +124,7 @@ export const English = {
 
   menus: {
     services: 'Find Services',
+    contactUs: 'Contact Us',
   },
 
   toolTips: {
@@ -200,7 +203,7 @@ export const English = {
       {
         // title: 'Support',
         links: [
-          { text: 'Docs', href: '#' },
+          { text: 'Contact Us', href: 'mailto:support@todoservis.com' },
           // { text: 'Community Forum', href: '#' },
           // { text: 'Professional Services', href: '#' },
           // { text: 'Skills', href: '#' },
@@ -210,7 +213,7 @@ export const English = {
       {
         // title: 'Company',
         links: [
-          { text: 'About', href: '#' },
+          { text: 'About', href: 'about' },
           // { text: 'Blog', href: '#' },
           // { text: 'Careers', href: '#' },
           // { text: 'Press', href: '#' },

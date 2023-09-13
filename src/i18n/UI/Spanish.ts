@@ -19,6 +19,8 @@ export const Spanish = {
     resetPassword: 'Resetear la Contraseña',
     terms: 'Términos y Condiciones',
     privacy: "Política de Privacidad",
+    about: 'Sobre Nosotras',
+    impact: 'Impacto',
   },
 
   buttons: {
@@ -122,6 +124,7 @@ export const Spanish = {
   },
   menus: {
     services: 'Buscar Servicios',
+    contactUs: 'Contacta Con Nosotras',
   },
 
   toolTips: {
@@ -200,7 +203,7 @@ export const Spanish = {
       {
         // title: 'Apoyo',
         links: [
-          { text: 'Documentación', href: '#' },
+          { text: 'Contacta Con Nosotras', href: 'mailto:support@todoservis.com' },
           // { text: 'Community Forum', href: '#' },
           // { text: 'Professional Services', href: '#' },
           // { text: 'Skills', href: '#' },
@@ -210,7 +213,7 @@ export const Spanish = {
       {
         // title: 'Empresa',
         links: [
-          { text: 'Acerca', href: '#' },
+          { text: 'Acerca', href: 'about' },
           // { text: 'Blog', href: '#' },
           // { text: 'Careers', href: '#' },
           // { text: 'Press', href: '#' },

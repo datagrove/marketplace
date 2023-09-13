@@ -19,6 +19,8 @@ export interface uiObject {
     resetPassword: string,
     terms: string,
     privacy: string,
+    about: string,
+    impact: string,
   },
 
   buttons: {
@@ -123,6 +125,7 @@ export interface uiObject {
 
   menus: {
     services: string,
+    contactUs: string,
   },
 
   toolTips: {
