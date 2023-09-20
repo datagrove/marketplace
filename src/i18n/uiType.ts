@@ -19,6 +19,8 @@ export interface uiObject {
     resetPassword: string,
     terms: string,
     privacy: string,
+    about: string,
+    impact: string,
   },
 
   buttons: {
@@ -77,6 +79,7 @@ export interface uiObject {
     todoFetch: string,
     mustSignIn: string,
     profileEdits: string,
+    noClient: string,
   },
 
   formLabels: {
@@ -123,6 +126,7 @@ export interface uiObject {
 
   menus: {
     services: string,
+    contactUs: string,
   },
 
   toolTips: {
@@ -159,6 +163,7 @@ export interface uiObject {
     noPost: string,
     clientExists: string,
     clientCreateProfileError: string,
+    clientEditProfileError: string,
   },
 
   headerData: {

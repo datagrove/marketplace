@@ -19,6 +19,8 @@ export const English = {
     resetPassword: 'Set New Password',
     terms: 'Terms and Conditions',
     privacy: "Privacy Policy",
+    about: 'About Us',
+    impact: 'Impact',
   },
 
   buttons: {
@@ -74,9 +76,10 @@ export const English = {
     clickWrap1: 'By clicking',
     clickWrap2: 'you are indicating that you have read and agree to the',
     fetch: 'Fetch Services',
-    todoFetch: 'Todo the service dog will fetch you the services you need!',
+    todoFetch: 'Todo, the service dog, will fetch you the services you need!',
     mustSignIn: 'You must be signed in to view available services.',
     profileEdits: 'Profile edits will only be saved after clicking the Save Profile button!',
+    noClient: "No Client found.",
   },
 
   formLabels: {
@@ -122,6 +125,7 @@ export const English = {
 
   menus: {
     services: 'Find Services',
+    contactUs: 'Contact Us',
   },
 
   toolTips: {
@@ -158,6 +162,7 @@ export const English = {
     noPost: "No post returned",
     clientExists: "Client already exists",
     clientCreateProfileError: "Error creating client profile",
+    clientEditProfileError: "Error updating client profile",
   },
 
   headerData: {
@@ -200,7 +205,7 @@ export const English = {
       {
         // title: 'Support',
         links: [
-          { text: 'Docs', href: '#' },
+          { text: 'Contact Us', href: 'mailto:support@todoservis.com' },
           // { text: 'Community Forum', href: '#' },
           // { text: 'Professional Services', href: '#' },
           // { text: 'Skills', href: '#' },
@@ -210,7 +215,7 @@ export const English = {
       {
         // title: 'Company',
         links: [
-          { text: 'About', href: '#' },
+          { text: 'About', href: 'about' },
           // { text: 'Blog', href: '#' },
           // { text: 'Careers', href: '#' },
           // { text: 'Press', href: '#' },

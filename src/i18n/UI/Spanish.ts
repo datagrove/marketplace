@@ -19,6 +19,8 @@ export const Spanish = {
     resetPassword: 'Resetear la Contraseña',
     terms: 'Términos y Condiciones',
     privacy: "Política de Privacidad",
+    about: 'Sobre Nosotras',
+    impact: 'Impacto',
   },
 
   buttons: {
@@ -75,9 +77,10 @@ export const Spanish = {
     clickWrap1: 'Al hacer clic en',
     clickWrap2: 'estás indicando que has leído y estás de acuerdo con los',
     fetch: 'Obtener Servicios',
-    todoFetch: '¡Todo el perro de servicio te traerá los servicios que necesitas!',
+    todoFetch: '¡Todo, el perro de servicio, te traerá los servicios que necesitas!',
     mustSignIn: 'Debe iniciar sesión para ver los servicios disponibles.',
     profileEdits: '¡Las ediciones del perfil solo se guardarán después de hacer clic en el botón Guardar perfil!',
+    noClient: "No se encontró ninguna cliente.",
   },
 
   formLabels: {
@@ -122,6 +125,7 @@ export const Spanish = {
   },
   menus: {
     services: 'Buscar Servicios',
+    contactUs: 'Contacta Con Nosotras',
   },
 
   toolTips: {
@@ -158,6 +162,7 @@ export const Spanish = {
     noPost: "No se devolvió ninguna publicación",
     clientExists: "La cliente ya existe",
     clientCreateProfileError: "Error al crear el perfil del cliente",
+    clientEditProfileError: "Error al actualizar el perfil del cliente",
   },
 
   headerData: {
@@ -200,7 +205,7 @@ export const Spanish = {
       {
         // title: 'Apoyo',
         links: [
-          { text: 'Documentación', href: '#' },
+          { text: 'Contacta Con Nosotras', href: 'mailto:support@todoservis.com' },
           // { text: 'Community Forum', href: '#' },
           // { text: 'Professional Services', href: '#' },
           // { text: 'Skills', href: '#' },
@@ -210,7 +215,7 @@ export const Spanish = {
       {
         // title: 'Empresa',
         links: [
-          { text: 'Acerca', href: '#' },
+          { text: 'Acerca', href: 'about' },
           // { text: 'Blog', href: '#' },
           // { text: 'Careers', href: '#' },
           // { text: 'Press', href: '#' },

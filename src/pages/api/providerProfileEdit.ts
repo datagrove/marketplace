@@ -12,6 +12,8 @@ export const post: APIRoute = async ({ request, redirect }) => {
 
   //Set internationalization values
   const lang = formData.get("lang");
+  //We know that this will be a string value from our languages array so just tell typescript to trust us
+  //@ts-ignore
   const t = useTranslations(lang);
 
   //set the formData fields to variables
@@ -146,70 +148,13 @@ export const post: APIRoute = async ({ request, redirect }) => {
     location = null;
   } else {
     //Make a new location submission to the location table
-
-    /*Each of these retrieves the appropriate id from the database for the area level
-    (governing district, minor municipality, major municipality, country)
-    in order to make a proper submission to the location table */
-    const { data: districtId, error: districtError } = await supabase
-      .from("governing_district")
-      .select("id")
-      .eq("governing_district", governingDistrict);
-    if (districtError) {
-      return new Response(
-        JSON.stringify({
-          message: (t("apiErrors.noDistrict")),
-        }),
-        { status: 500 }
-      );
-    }
-
-    const { data: minorMunicipalityId, error: minorMunicipalityError } =
-      await supabase
-        .from("minor_municipality")
-        .select("id")
-        .eq("minor_municipality", minorMunicipality);
-    if (minorMunicipalityError) {
-      return new Response(
-        JSON.stringify({
-          message: (t("apiErrors.noMinorMunicipality")),
-        }),
-        { status: 500 }
-      );
-    }
-
-    const { data: majorMunicipalityId, error: majorMunicipalityError } =
-      await supabase
-        .from("major_municipality")
-        .select("id")
-        .eq("major_municipality", majorMunicipality);
-    if (majorMunicipalityError) {
-      return new Response(
-        JSON.stringify({
-          message: (t("apiErrors.noMajorMunicipality")),
-        }),
-        { status: 500 }
-      );
-    }
-
-    const { data: countryId, error: countryError } = await supabase
-      .from("country")
-      .select("id")
-      .eq("country", country);
-    if (countryError) {
-      return new Response(
-        JSON.stringify({
-          message: (t("apiErrors.noCountry")),
-        }),
-        { status: 500 }
-      );
-    }
-
+   
     //Build our submission to the location table keys need to match the field in the database you are trying to fill.
     let locationSubmission = {
-      minor_municipality: minorMunicipalityId[0].id,
-      major_municipality: majorMunicipalityId[0].id,
-      governing_district: districtId[0].id,
-      country: countryId[0].id,
+      minor_municipality: minorMunicipality,
+      major_municipality: majorMunicipality,
+      governing_district: governingDistrict,
+      country: country,
       user_id: user.id,
     };
 

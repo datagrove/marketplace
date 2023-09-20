@@ -19,6 +19,8 @@ export const French = {
     resetPassword: "réinitialiser le mot de passe",
     terms: 'Termes et Conditions',
     privacy: "Politique de Confidentialité",
+    about: 'À Propos De Nous',
+    impact: 'Impact',
   },
 
   buttons: {
@@ -74,7 +76,7 @@ export const French = {
     clickWrap1: 'En cliquant sur',
     clickWrap2: 'vous indiquez que vous avez lu et accepté les',
     fetch: 'Récupérer des services',
-    todoFetch: "Todo le chien d'assistance ira vous chercher les services dont vous avez besoin !",
+    todoFetch: "Todo, le chien d'assistance, ira vous chercher les services dont vous avez besoin !",
     mustSignIn: 'Vous devez être connecté pour voir les services disponibles.',
     profileEdits: "Les modifications du profil ne seront enregistrées qu'après avoir cliqué sur le bouton Enregistrer le profil !",
   },
@@ -122,6 +124,7 @@ export const French = {
 
   menus: {
     services: 'Trouver des Services',
+    contactUs: 'Contactez-nous',
   },
 
   toolTips: {
@@ -158,6 +161,8 @@ export const French = {
     noPost: "Aucun message n'a été renvoyé",
     clientExists: "Le client existe déjà",
     clientCreateProfileError: "Erreur lors de la création du profil client",
+    clientEditProfileError: "Erreur lors de la mise à jour du profil client",
+    noClient: "Aucun client trouvé.",
   },
 
   headerData: {
@@ -200,7 +205,7 @@ export const French = {
       {
         // title: "Soutien",
         links: [
-          { text: "Documentation", href: '#' },
+          { text: "Contactez-nous", href: 'mailto:support@todoservis.com' },
           // { text: string, href: string },
           // { text: string, href: string },
           // { text: string, href: string },
@@ -210,7 +215,7 @@ export const French = {
       {
         // title: "Entreprise",
         links: [
-          { text: "À Propos", href: '#'},
+          { text: "À Propos", href: 'about'},
           // { text: string, href: string },
           // { text: string, href: string },
           // { text: string, href: string },
