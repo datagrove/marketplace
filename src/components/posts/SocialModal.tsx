@@ -44,8 +44,8 @@ const SocialModal: Component<Post> = function(props) {
     }
     
     return (
-        <div class="right-[50%]">
-            <div class="">
+        <div class="border-4 border-blue-400">
+            {/* <div class="border-4 border-red-400"> */}
                 <Show
                     when={ isOpen()}
                     fallback={
@@ -59,21 +59,23 @@ const SocialModal: Component<Post> = function(props) {
                         </button>
                     }
                 >
-                    <div class="rounded-lg flex flex-col-reverse items-end w-[75vMin] md:w-[50vMin] absolute right-[12%] md:right-[25%] z-40 bg-background2 dark:bg-background2-DM">
-                        {/* <SocialMediaShares id={ props.id } /> */}
+                    <div class="w-screen h-screen left-0 absolute border-4 border-red-300 flex justify-center bg-background1-DM">
+                        <div class="border-4 border-yellow-400 rounded-lg flex flex-col-reverse items-end w-[75vMin] md:w-[50vMin] md:h-[62vMin] z-40 bg-background2 dark:bg-background2-DM">
+                            {/* <SocialMediaShares id={ props.id } /> */}
 
-                        <SocialMediaShares id={ props.id } title={ props.title } image_urls={ props.image_urls }/>
-                        
-                        <button
-                            aria-aria-label='Close Dialog'
-                            class="modal-close w-8 h-8 flex justify-center items-start text-icon2 dark:text-icon2-DM"
-                            onClick={ closeModal }
-                        >
-                            &times;
-                        </button>
+                            <SocialMediaShares id={ props.id } title={ props.title } image_urls={ props.image_urls }/>
+                            
+                            <button
+                                aria-aria-label='Close Dialog'
+                                class="modal-close w-8 h-8 flex justify-center items-start text-icon2 dark:text-icon2-DM"
+                                onClick={ closeModal }
+                            >
+                                &times;
+                            </button>
+                        </div>
                     </div>
                 </Show>
-            </div>
+            {/* </div> */}
 
         </div>
     )
