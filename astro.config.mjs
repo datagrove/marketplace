@@ -13,7 +13,7 @@ import AstroPWA from "@vite-pwa/astro"
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkToc from "remark-toc";
 import rehypeSlug from 'rehype-slug';
-
+import compress from "astro-compress";
 const locales = languages;
 const defaultLocale = defaultLang;
 
@@ -30,7 +30,9 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkToc],
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'append' }]],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
+      behavior: 'append'
+    }]]
   },
   integrations: [
     solid(), 
@@ -44,55 +46,20 @@ export default defineConfig({
     i18n({
       locales,
       defaultLocale,
-      exclude: ['pages/offline.astro', 'pages/fr/*', 'pages/es/*', 'pages/en/*'],
-    }), 
+      exclude: ['pages/offline.astro', 'pages/fr/*', 'pages/es/*', 'pages/en/*', 'pages/api/*'],
+    }),
     sitemap({
       i18n: {
         locales,
         defaultLocale,
-        exclude: ['pages/offline.astro', 'pages/fr/*', 'pages/es/*', 'pages/en/*']
+        exclude: ['pages/offline.astro', 'pages/fr/*', 'pages/es/*', 'pages/en/*', 'pages/api/*'],
       },
       filter: defaultLocaleSitemapFilter({
         defaultLocale
-      })
-    }), 
-    mdx(),
-    // AstroPWA({
-    //   registerType: 'autoUpdate',
-    //   devOptions: {
-    //     enabled: true
-    //   },
-    // })
-  ],
+      }) 
+  }), mdx(), compress()]
 
 //   vite: {
-//     plugins: [
-//       VitePWA({
-//         devOptions: {
-//           enabled: true,
-//           type: 'module'
-//         },
-//         manifest: {
-//           name: 'TodoServis',
-//           short_name: 'TodoServis',
-//           description: SITE.description,
-//           theme_color: SITE.themeColor,
-//           icons: [
-//             { src: "/icon-192.png", type: "image/png", sizes: "192x192" },
-//             { src: "/icon-512.png", type: "image/png", sizes: "512x512" },
-//             { src: "/icon-512.png", type: "image/png", sizes: "512x512", purpose: "any maskable" }
-//           ]
-//         },
-//         workbox: {
-// 				  globDirectory: 'dist',
-// 				  globPatterns: [
-// 				    '**\/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}',
-// 				  ],
-//           navigateFallback: null,
-//         },
-//         useCredentials: true,
-//       })
-//     ]
 //   //   define: {
 //   //     'process.env.PUBLIC_VITE_SUPABASE_URL': JSON.stringify(process.env.PUBLIC_VITE_SUPABASE_URL),
 //   //     'process.env.PUBLIC_VITE_SUPABASE_ANON_KEY': JSON.stringify(process.env.PUBLIC_VITE_SUPABASE_ANON_KEY),

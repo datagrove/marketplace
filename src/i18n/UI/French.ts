@@ -15,6 +15,7 @@ export const French = {
     createProviderAccount: "Créer un compte fournisseur",
     editProviderAccount: "Modifier le compte du fournisseur",
     viewProviderAccount: "Mon compte fournisseur",
+    clientViewProviderAccount: "Profil du fournisseur",
     page404: "404 - Page non trouvée",
     requestPasswordReset: "Demander la réinitialisation du mot de passe",
     resetPassword: "réinitialiser le mot de passe",
@@ -22,7 +23,31 @@ export const French = {
     privacy: "Politique de Confidentialité",
     about: 'À Propos De Nous',
     impact: 'Impact',
+
+    fullPost: "Voir le message complet",
     offline: 'Hors ligne',
+  },
+
+  pageDescriptions: {
+    services: "Trouvez les services dont vous avez besoin pour accomplir votre travail. Recherchez des mots-clés, filtrez par catégorie et filtrez par emplacement pour trouver ce dont vous avez besoin. Affichez les aperçus des articles et cliquez sur un article pour en savoir plus.",
+    signUp: "Fournissez votre e-mail et créez un mot de passe pour vous inscrire pour rechercher des services ou publier des services sur Todo Servis.",
+    login: "Entrez votre email et votre mot de passe pour vous connecter à Todo Servis.",
+    home: "Todo Servis, où vous trouverez tout ce dont vous avez besoin pour accomplir votre travail. ",
+    // signIn: string,
+    createClientAccount: "Rejoignez Todo Servis en tant que client et débloquez un monde de services. Inscrivez-vous aujourd'hui pour trouver et entrer en contact avec les meilleurs fournisseurs de services de votre région.",
+    viewClientAccount: "Accédez et gérez les informations de votre compte client sans effort sur Todo Servis.",
+    createPost: "Créez une publication comprenant un titre, une catégorie, une description, un emplacement et des images pour proposer votre service sur Todo Servis.",
+    createProviderAccount: "Créez un compte fournisseur pour commencer à publier vos services sur Todo Servis",
+    viewProviderAccount: "Gérez les détails de votre compte fournisseur et consultez vos publications sur Todo Servis.",
+    clientViewProviderAccount: "Découvrez-en davantage sur ce fournisseur. Explorez leur profil et les services disponibles.",
+    page404: "404 Page non trouvée",
+    requestPasswordReset: "Mot de passe oublié? Demandez une réinitialisation sécurisée du mot de passe pour votre compte Todo Servis. Entrez votre email et suivez les instructions pour retrouver l'accès.",
+    resetPassword: "Réinitialisez votre mot de passe en toute sécurité avec Todo Servis. Suivez le lien de votre e-mail pour choisir un nouveau mot de passe.",
+    terms: "Consultez nos termes et conditions. Remarque : les traductions sont fournies à titre gracieux, les termes officiels contraignants sont en espagnol.",
+    privacy: "Consultez notre politique de confidentialité. Veuillez noter que les traductions sont fournies à titre gracieux, la politique officielle contraignante est en espagnol.",
+    about: "Découvrez l'histoire de Todo Servis – qui nous sommes, notre mission et notre passion de contribuer à révolutionner la façon dont les particuliers et les entreprises trouvent et fournissent des services. Découvrez notre équipe et les valeurs qui nous animent. Rejoignez-nous dans notre voyage !",
+    impact: "Découvrez l’impact significatif de Todo Servis. Découvrez comment nous faisons la différence et apprenez-en davantage sur nos projets et nos contributions à un changement positif.",
+    fullPost: "En savoir plus sur ce service et contacter le fournisseur si vous êtes intéressé. Découvrez des images supplémentaires et la description complète du service.",
   },
 
   buttons: {
@@ -106,6 +131,8 @@ export const French = {
     posts: 'Messages du fournisseur',
     profileInfo: 'Informations sur le profil',
     yourPosts: 'Vos Publications',
+    optional: '(facultative)',
+    required: 'Champs Obligatoires',
   },
 
   postLabels: {
@@ -139,6 +166,8 @@ export const French = {
     changeEmail: "Si vous mettez à jour votre adresse e-mail, vous devez confirmer le changement à l'ancienne adresse e-mail et à la nouvelle adresse e-mail pour finaliser la modification.",
     locationUpdate: "Si vous mettez à jour votre emplacement, tous les champs doivent être remplis.",
     postImages: "La première image téléchargée sera affichée dans les aperçus des publications. Pour télécharger des images supplémentaires, cliquez simplement à nouveau sur Télécharger l'image.",
+    firstNameEdit: "Cela devrait être votre nom légal tel qu'il apparaît sur votre pièce d'identité gouvernementale. Si vous ne fournissez pas de nom d’affichage, votre nom et prénom seront affichés à la place. Ces valeurs peuvent être mises à jour après la création d'un compte client ou fournisseur. Puisqu'il s'agit de votre nom légal, les mêmes nom et prénom doivent être utilisés sur vos comptes client et fournisseur.",
+    lastNameEdit: "Cela devrait être votre nom légal tel qu'il apparaît sur votre pièce d'identité gouvernementale. Si vous ne fournissez pas de nom d’affichage, votre nom et prénom seront affichés à la place. Ces valeurs peuvent être mises à jour après la création d'un compte client ou fournisseur. Puisqu'il s'agit de votre nom légal, les mêmes nom et prénom doivent être utilisés sur vos comptes client et fournisseur.",
   },
 
   apiErrors: {
@@ -165,6 +194,15 @@ export const French = {
     clientCreateProfileError: "Erreur lors de la création du profil client",
     clientEditProfileError: "Erreur lors de la mise à jour du profil client",
     noClient: "Aucun client trouvé.",
+  },
+
+  ariaLabels: {
+    todo: "Todo Servis Logo Retour à la page d'accueil",
+    logo: "Logo Todo Servis",
+    navigation: "La navigation",
+    checkboxMajorMunicipality: "Case à cocher pour sélectionner la grande municipalité",
+    checkboxMinorMunicipality: "Case à cocher pour sélectionner une commune mineure",
+    checkboxGoverningDistrict: "Case à cocher pour sélectionner le district administratif",
   },
 
   headerData: {
@@ -264,5 +302,15 @@ productCategoryInfo:{
       // Add more products as needed
     ]
   },
+
+  clearFilters: {
+    filterButtons: [
+        { text: "Effacer Tous Les Filtres", ariaLabel: "Effacer Tous Les Filtres" },
+        { text: "Effacer le Filtre de Catégorie", ariaLabel: "Effacer le Filtre de Catégorie" },
+        { text: "Effacer le Filtre des Grandes Municipalités", ariaLabel: "Effacer le Filtre des Grandes Municipalités" },
+        { text: "Effacer le Filtre des Municipalités Mineures", ariaLabel: "Effacer le Filtre des Municipalités Mineures" },
+        { text: "Effacer le Filtre de District de Gouvernement", ariaLabel: "Effacer le Filtre de District de Gouvernement" },
+    ]
+  }
 
 } as const;

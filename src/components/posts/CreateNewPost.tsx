@@ -14,6 +14,7 @@ import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { TinyComp } from "./TinyComp";
 
+
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
 const values = ui[lang] as uiObject;
@@ -39,6 +40,8 @@ export const CreateNewPost: Component = () => {
   const [formData, setFormData] = createSignal<FormData>();
   const [response] = createResource(formData, postFormData);
   const [imageUrl, setImageUrl] = createSignal<Array<string>>([]);
+
+
 
   createEffect(async () => {
     const { data, error } = await supabase.auth.getSession();
@@ -229,6 +232,7 @@ export const CreateNewPost: Component = () => {
     }
     setFormData(formData);
   }
+
   TinyComp();
 
   return (

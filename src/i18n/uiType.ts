@@ -15,6 +15,7 @@ export interface uiObject {
     createProviderAccount: string,
     editProviderAccount: string,
     viewProviderAccount: string,
+    clientViewProviderAccount: string,
     page404: string,
     requestPasswordReset: string,
     resetPassword: string,
@@ -22,7 +23,30 @@ export interface uiObject {
     privacy: string,
     about: string,
     impact: string,
+    fullPost: string,
     offline: string,
+  },
+
+  pageDescriptions: {
+    services: string,
+    signUp: string,
+    login: string,
+    home: string,
+    signIn: string,
+    createClientAccount: string,
+    viewClientAccount: string,
+    createPost: string,
+    createProviderAccount: string,
+    viewProviderAccount: string,
+    clientViewProviderAccount: string,
+    page404: string,
+    requestPasswordReset: string,
+    resetPassword: string,
+    terms: string,
+    privacy: string,
+    about: string,
+    impact: string,
+    fullPost: string,
   },
 
   buttons: {
@@ -108,6 +132,8 @@ export interface uiObject {
     posts: string,
     profileInfo: string,
     yourPosts: string,
+    optional: string,
+    required: string,
   },
 
   postLabels: {
@@ -141,6 +167,8 @@ export interface uiObject {
     changeEmail: string,
     locationUpdate: string,
     postImages: string,
+    firstNameEdit: string,
+    lastNameEdit: string,
   },
 
   apiErrors: {
@@ -166,6 +194,15 @@ export interface uiObject {
     clientExists: string,
     clientCreateProfileError: string,
     clientEditProfileError: string,
+  },
+
+  ariaLabels: {
+    todo: string,
+    logo: string,
+    navigation: string,
+    checkboxMajorMunicipality: string,
+    checkboxMinorMunicipality: string,
+    checkboxGoverningDistrict: string,
   },
 
   headerData: {
@@ -262,4 +299,14 @@ productCategoryInfo:{
       // Add more products as needed
     ]
   },
+
+  clearFilters: {
+    filterButtons: [
+        { text: string, ariaLabel: string },
+        { text: string, ariaLabel: string },
+        { text: string, ariaLabel: string },
+        { text: string, ariaLabel: string },
+        { text: string, ariaLabel: string },
+    ]
+  }
 }

@@ -15,6 +15,7 @@ export const Spanish = {
     createProviderAccount: 'Crear Cuenta de Proveedor',
     editProviderAccount: 'Editar Cuenta de Proveedor',
     viewProviderAccount: 'Mi Cuenta de proveedor',
+    clientViewProviderAccount: "Perfil del proveedor",
     page404: '404 - Página no Encontrada',
     requestPasswordReset: 'Solicitud para Recuperar la Contraseña',
     resetPassword: 'Resetear la Contraseña',
@@ -22,7 +23,30 @@ export const Spanish = {
     privacy: "Política de Privacidad",
     about: 'Sobre Nosotras',
     impact: 'Impacto',
+    fullPost: "Ver publicación completa",
     offline: 'Desconectada',
+  },
+
+  pageDescriptions: {
+    services: "Encuentre los servicios que necesita para realizar el trabajo. Busque palabras clave, filtre por categoría y filtre por ubicación para encontrar lo que necesita. Vea vistas previas de publicaciones y haga clic en una publicación para obtener más información.",
+    signUp: "Proporcione su correo electrónico y cree una contraseña para registrarse para buscar servicios o publicar servicios en Todo Servis.",
+    login: "Ingrese su correo electrónico y contraseña para iniciar sesión en Todo Servis.",
+    home: 'Todo Servis, el hogar de todo lo que necesita para realizar el trabajo.',
+    // signIn: string,
+    createClientAccount: "Únete a Todo Servis como cliente y desbloquea un mundo de servicios. Regístrese hoy para encontrar y conectarse con los principales proveedores de servicios en su área.",
+    viewClientAccount: "Acceda y administre la información de su cuenta de cliente sin esfuerzo en Todo Servis.",
+    createPost: 'Crea una publicación incluyendo título, categoría, descripción e imágenes para ofrecer tu servicio en Todo Servis.',
+    createProviderAccount: 'Cree una cuenta de proveedor para comenzar a publicar sus servicios en Todo Servis',
+    viewProviderAccount: "Administre los detalles de su cuenta de proveedor y revise sus publicaciones en Todo Servis.",
+    clientViewProviderAccount: "Descubra más sobre este proveedor. Explore su perfil y los servicios disponibles.",
+    page404: '404 Pagina no encontrada',
+    requestPasswordReset: "¿Olvidaste tu contraseña? Solicite un restablecimiento seguro de contraseña para su cuenta Todo Servis. Introduce tu correo electrónico y sigue las instrucciones para recuperar el acceso.",
+    resetPassword: "Restablece tu contraseña de forma segura con Todo Servis. Siga el enlace de su correo electrónico para elegir una nueva contraseña.",
+    terms: "Revisa nuestros términos y condiciones. Tenga en cuenta que las traducciones se proporcionan como cortesía; los términos oficiales vinculantes están en español.",
+    privacy: "Revise nuestra política de privacidad. Tenga en cuenta que las traducciones se proporcionan como cortesía, la política oficial vinculante está en español.",
+    about: "Descubra la historia detrás de Todo Servis: quiénes somos, nuestra misión y nuestra pasión por ayudar a revolucionar la forma en que las personas y las empresas encuentran y brindan servicios. Conozca nuestro equipo y los valores que nos impulsan. ¡Únase a nosotros en nuestro viaje!",
+    impact: "Explore el impacto significativo de Todo Servis. Descubra cómo estamos marcando la diferencia y obtenga más información sobre nuestros proyectos y nuestras contribuciones al cambio positivo.",
+    fullPost: "Lea más sobre este servicio y comuníquese con el proveedor si está interesado. Explora imágenes adicionales y la descripción completa del servicio.",
   },
 
   buttons: {
@@ -108,6 +132,8 @@ export const Spanish = {
     posts: 'Publicaciones del Proveedores',
     profileInfo: 'Información del Perfil',
     yourPosts: 'Tus Publicaciones',
+    optional: '(opcional)',
+    required: 'Campos Requeridos',
   },
 
   postLabels: {
@@ -140,6 +166,8 @@ export const Spanish = {
     changeEmail: 'Si actualiza su correo electrónico, debe confirmar el cambio en la dirección de correo electrónico anterior y en la nueva dirección de correo electrónico para completar el cambio.',
     locationUpdate: 'Si actualiza su ubicación, se deben completar todos los campos.',
     postImages: 'La primera imagen cargada se mostrará en las vistas previas de las publicaciones. Para cargar imágenes adicionales, simplemente haga clic en Cargar imagen nuevamente.',
+    firstNameEdit: 'Este debería ser su nombre legal tal como aparece en su identificación gubernamental. Si no proporciona un nombre para mostrar, se mostrarán su nombre y apellido. Estos valores se pueden actualizar después de crear una cuenta de cliente o proveedor. Dado que este es su nombre legal, se debe utilizar el mismo nombre y apellido en sus cuentas de cliente y proveedor.',
+    lastNameEdit: 'Este debería ser su nombre legal tal como aparece en su identificación gubernamental. Si no proporciona un nombre para mostrar, se mostrarán su nombre y apellido. Estos valores se pueden actualizar después de crear una cuenta de cliente o proveedor. Dado que este es su nombre legal, se debe utilizar el mismo nombre y apellido en sus cuentas de cliente y proveedor.',
   },
 
   apiErrors: {
@@ -165,6 +193,15 @@ export const Spanish = {
     clientExists: "La cliente ya existe",
     clientCreateProfileError: "Error al crear el perfil del cliente",
     clientEditProfileError: "Error al actualizar el perfil del cliente",
+  },
+
+  ariaLabels: {
+    todo: 'Logotipo de Todo Servis Volver a la página de inicio',
+    logo: 'Logotipo de Todo Servis',
+    navigation: 'Navegación',
+    checkboxMajorMunicipality: "Casilla de verificación para seleccionar Provincia",
+    checkboxMinorMunicipality: "Casilla de verificación para seleccionar Cantón",
+    checkboxGoverningDistrict: "Casilla de verificación para seleccionar Distrito",
   },
 
   headerData: {
@@ -263,6 +300,14 @@ export const Spanish = {
     ],
   },
 
-
+  clearFilters: {
+    filterButtons: [
+        { text: "Borra Todos los Filtros", ariaLabel: "Borra Todos los Filtros" },
+        { text: "Borra Categorías", ariaLabel: "Borra Categorías" },
+        { text: "Borra Municipio Importante", ariaLabel: "Borra Municipio Importante" },
+        { text: "Borra Munucipio Menor", ariaLabel: "Borra Munucipio Menor" },
+        { text: "Borra Distrito Gobernante", ariaLabel: "Borra Distrito Gobernante" },
+    ]
+  }
 
 } as const;
