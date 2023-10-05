@@ -117,7 +117,7 @@ export const SocialMediaShares: Component<Post> = (props) => {
     }
     
     return (
-        <div class="w-full px-4 pb-4">
+        <div class="w-full h-full px-4 pb-4">
             <div>
                 <h1 class="text-htext2 dark:text-htext2-DM text-xl pb-4">Share this service: </h1>
                 

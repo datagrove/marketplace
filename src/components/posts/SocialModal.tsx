@@ -17,18 +17,26 @@ interface Props {
     posts: Array<Post>;
 }
 
-let modalOverlay = document.getElementById("modal-overlay");
 
 const SocialModal: Component<Post> = function(props) {
     const [isOpen, setIsOpen] = createSignal(false);
-    const elements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    let modal: HTMLElement;
 
     function openModal(e:Event) {
         e.preventDefault();
         e.stopPropagation();
 
         setIsOpen(true);
+
+        const testOverlay = document.body.append
+
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = "modal-overlay"
+        modalOverlay.style.cssText = 'position:absolute;top:0;width:100vw;height:100vh;background-color:red;z-index:30';
+        document.body.appendChild(modalOverlay);
+
+        // document.body.classList.add("bg-red-400");
+
+        modalOverlay?.classList.add("bg-red-400");
 
         if(modalOverlay?.classList.contains("hidden")) {
             modalOverlay.classList.remove("hidden");
@@ -41,10 +49,14 @@ const SocialModal: Component<Post> = function(props) {
         e.stopPropagation();
 
         setIsOpen(false);
+
+        const overlay = document.getElementById("modal-overlay");
+
+        overlay?.remove();
     }
     
     return (
-        <div class="border-4 border-blue-400">
+        <div id="social-modal-div" class="border-4 border-blue-400 relative">
             {/* <div class="border-4 border-red-400"> */}
                 <Show
                     when={ isOpen()}
@@ -59,8 +71,8 @@ const SocialModal: Component<Post> = function(props) {
                         </button>
                     }
                 >
-                    <div class="w-screen h-screen left-0 absolute border-4 border-red-300 flex justify-center bg-background1-DM">
-                        <div class="border-4 border-yellow-400 rounded-lg flex flex-col-reverse items-end w-[75vMin] md:w-[50vMin] md:h-[62vMin] z-40 bg-background2 dark:bg-background2-DM">
+                    <div  class="w-screen h-screen -right-8 -top-28 absolute border-4 border-red-300 flex justify-center ">
+                        <div class="border-4 border-yellow-400 rounded-lg flex flex-col-reverse items-end w-[75vMin] md:w-[50vMin] h-[70vMin] z-40 bg-background2 dark:bg-background2-DM testClass">
                             {/* <SocialMediaShares id={ props.id } /> */}
 
                             <SocialMediaShares id={ props.id } title={ props.title } image_urls={ props.image_urls }/>
