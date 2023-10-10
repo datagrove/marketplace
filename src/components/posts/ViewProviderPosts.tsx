@@ -45,27 +45,54 @@ export const ViewProviderPosts: Component = () => {
   createEffect(async () => {
     const { data, error } = await supabase
       .from("providerposts")
-      .select("*")
-      .eq("user_id", session()!.user.id);
-    if (!data) {
-      alert("No posts available.");
-    }
-    if (error) {
-      console.log("supabase error: " + error.message);
-    } else {
-      data?.map(item => {
-        productCategories.forEach(productCategories => {
-          if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name
-          }
+      .select(`
+        *,
+        post_category: service_category (category)
+      `)
+      .eq("user_id", session()!.user.id)
+      // category 5 is automotive, category 10 is legal
+      // .eq("service_category", 5)
+      .eq("service_category", 10) 
+      
+      if (!data) {
+          alert("No posts available.");
+      }
+
+      if (error) {
+        console.log("supabase error: " + error.message);
+      } else {      
+
+        data?.map(item => {
+          // alert(item.post_category.category)
+          item.category = item.post_category.category
         })
-        delete item.service_category
-      })
 
-      console.log("data: ", data);
+        setPosts(data);
+      }
+    
+    // const { data, error } = await supabase
+    //   .from("providerposts")
+    //   .select("*")
+    //   .eq("user_id", session()!.user.id);
+    // if (!data) {
+    //   alert("No posts available.");
+    // }
+    // if (error) {
+    //   console.log("supabase error: " + error.message);
+    // } else {
+    //   data?.map(item => {
+    //     productCategories.forEach(productCategories => {
+    //       if (item.service_category.toString() === productCategories.id) {
+    //         item.category = productCategories.name
+    //       }
+    //     })
+    //     delete item.service_category
+    //   })
 
-      setPosts(data);
-    }
+    //   console.log("data: ", data);
+
+    //   setPosts(data);
+    // }
   });
   return (
     <div>
