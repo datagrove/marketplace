@@ -1,6 +1,7 @@
 import { Component, createEffect, createSignal } from 'solid-js'
 import { supabase } from '../../lib/supabaseClient'
-import { CategoryCarousel } from './CategoryCarousel'
+import { CategoryCarouselTest } from './CategoryCarouselTest'
+import { CategoryCarousel} from './CategoryCarousel'
 import { ViewCard } from './ViewCard';
 import { LocationFilter } from './LocationFilter';
 import { SearchBar } from './SearchBar'
@@ -382,6 +383,10 @@ export const ServicesView: Component = () => {
 
                 </div>
                 <CategoryCarousel
+                    filterPosts={setCategoryFilter}
+                />
+
+                <CategoryCarouselTest 
                     filterPosts={setCategoryFilter}
                 />
             </div>
