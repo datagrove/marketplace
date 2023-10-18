@@ -1,18 +1,18 @@
 ---
-import Layout from "../layouts/PageLayout.astro";
-import { AuthMode } from "../components/common/AuthMode";
-import { SignUpBtn } from "../components/common/SignUpButton";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import cleaner from "../assets/categoryIcons/cleaner-man.svg";
-import grid from "../assets/grid.svg";
-import services from "../assets/services.png";
-import servicesDM from "../assets/servicesDM.png";
+import Layout from "@layouts/PageLayout.astro";
+import { AuthMode } from "@components/common/AuthMode";
+import { SignUpBtn } from "@components/common/SignUpButton";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import cleaner from "@assets/categoryIcons/cleaner-man.svg";
+import grid from "@assets/grid.svg";
+import services from "@assets/services.png";
+import servicesDM from "@assets/servicesDM.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout pageTitle={t("pageTitles.home")}>
+<Layout pageTitle={t("pageTitles.home")} pageDescription={t("pageDescriptions.home")}>
   <!-- <h1>{t('pageTitles.home')}</h1> -->
   <div class="flex flex-col items-center px-2 md:px-0 md:flex-wrap lg:flex-row">
     <div class="mt-6 mb-6 md:mb-0 md:w-2/3 lg:w-1/2">
@@ -77,11 +77,11 @@ const t = useTranslations(lang);
       { }
       
       <div class="inline dark:hidden">
-        <img src={ services } alt="homepage image of various services"/>
+        <img src= {services.src}  alt="homepage image of various services"/>
       </div>
 
       <div class="hidden dark:inline">
-        <img src={ servicesDM } alt="homepage image of various services"/>
+        <img src={ servicesDM.src } alt="homepage image of various services"/>
       </div>
       
     </div>

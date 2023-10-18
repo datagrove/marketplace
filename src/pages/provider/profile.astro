@@ -1,15 +1,14 @@
 ---
-import Layout from "../../layouts/PageLayout.astro";
-
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { ProviderProfileView } from "../../components/users/ProviderProfileView";
+import Layout from "@layouts/PageLayout.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { ProviderProfileView } from "@components/users/ProviderProfileView";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
 
-<Layout pageTitle={t("pageTitles.viewProviderAccount")}>
+<Layout pageTitle={t("pageTitles.viewProviderAccount")} pageDescription={t("pageDescriptions.viewProviderAccount")}>
   <div>
     <ProviderProfileView client:only="solid-js" />
   </div>

@@ -1,14 +1,14 @@
 ---
 import { SITE } from "../../config";
-import PageLayout from "../../layouts/PageLayout.astro";
-import { SetNewPassword } from "../../components/users/SetNewPassword";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PageLayout from "@layouts/PageLayout.astro";
+import { SetNewPassword } from "@components/users/SetNewPassword";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<PageLayout pageTitle={t("pageTitles.resetPassword")}>
+<PageLayout pageTitle={t("pageTitles.resetPassword")} pageDescription={t("pageDescriptions.resetPassword")}>
   <div
     class="border border-border1 dark:border-border1-DM rounded flex flex-col items-center w-96"
   >

@@ -1,6 +1,6 @@
 import { supabase } from "../../lib/supabaseClientServer";
 import type { APIRoute } from "astro";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations } from "@i18n/utils";
 
 export const post: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
@@ -53,6 +53,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
       access_token: access_token!.toString(),
     });
   if (sessionError) {
+    console.log("supabase error: " + sessionError.message);
     return new Response(
       JSON.stringify({
         message: (t("apiErrors.noSession")),

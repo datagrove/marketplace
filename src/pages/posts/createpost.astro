@@ -1,13 +1,17 @@
 ---
-import Layout from "../../layouts/PageLayout.astro";
-import { CreateNewPost } from "../../components/posts/CreateNewPost";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Layout from "@layouts/PageLayout.astro";
+import { CreateNewPost } from "@components/posts/CreateNewPost";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout pageTitle={t("pageTitles.createPost")}>
+<Layout pageTitle={t("pageTitles.createPost")} stylesheets={`<link rel="stylesheet" href="/tinymce/skins/ui/oxide/skin.min.css">
+  <link rel="stylesheet" href="/tinymce/skins/ui/oxide-dark/skin.min.css">
+  <link rel="stylesheet" href="/tinymce/skins/content/default/content.min.css">
+  <link rel="stylesheet" href="/tinymce/skins/ui/oxide/content.min.css">
+  <link rel="stylesheet" href="/tinymce/skins/ui/oxide-dark/content.min.css">`} pageDescription={t("pageDescriptions.createPost")}>
   <div
     class="border border-border1 dark:border-border1-DM rounded flex flex-col items-center w-96"
   >

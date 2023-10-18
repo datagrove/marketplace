@@ -1,9 +1,9 @@
 ---
 import { SITE } from "../config";
-import type BaseLayout from "../layouts/BaseLayout.astro";
-import PageLayout from "../layouts/PageLayout.astro";
+import type BaseLayout from "@layouts/BaseLayout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import { Auth } from "../lib/Auth";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const AuthData = { mode: "sign_up" };
 ---
 
-<PageLayout pageTitle={t("pageTitles.signUp")}>
+<PageLayout pageTitle={t("pageTitles.signUp")} pageDescription={t("pageDescriptions.signUp")}>
   <div>
     <div class="text-center mt-4 mb-8">
       <h2 class="text-xl w-full italic text-ptext1 dark:text-ptext1-DM">{t("pageTitles.signUp")}</h2>
