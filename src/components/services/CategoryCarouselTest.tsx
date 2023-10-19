@@ -32,6 +32,16 @@ import { doc } from 'prettier';
 
 let categories: Array<any> = []
 
+const { data, error } = await supabase.from('post_category').select('*');
+
+if (error) {
+    console.log("supabase error: " + error.message)
+} else {
+    data.forEach(category => {
+        categories.push({ category: category.category, id: category.id })
+    })
+}
+
 categories.map(
     category => {
         if (category.id === 1) {
@@ -91,12 +101,15 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
     const [catFilter, setCatFilter] = createSignal<catArray>([]);
     
     async function fetchData() {
-        alert("array?: " + Array.isArray(catFilter()))
+
+        let selectedCats = catFilter().map((item) => Number(item))
+
+        console.log("selectedCats: ", selectedCats)
 
         const { data, error } = await supabase
             .from("providerposts")
             .select("*")
-            .in('service_category', catFilter())
+            .in('service_category', selectedCats)
 
         if(!data) {
             alert("No posts available")
@@ -119,29 +132,28 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
         fetchData();
     }
 
-
-
     return (
             <div class="product-carousel my-2 border-4 border-red-400">
                 TEST TEST TEST
+                <br />
+                { allCategoryInfo[0] }
                 <div class="flex flex-start justify-between">
                     <button class="w-12 hidden">
                         <img
-                            src={leftArrow}
+                            src={ leftArrow.src }
                             alt="Left Arrow"
                         />
                     </button>
 
                     <div class="flex justify-between items-center w-full overflow-auto py-4">
                         { allCategoryInfo?.map((item) => (
-                            
                             <button 
                                 id={ item.id }
                                 class='catBtn flex flex-col flex-none justify-center items-center w-20 h-20' 
                                 onClick={ handleFilterChange }
                             >
                                 <div class="bg-iconbg1 dark:bg-iconbg1-DM rounded-full">
-                                    <img src={ item.icon } alt={item.ariaLabel} title={item.description} class="w-12 p-1 m-2" /> 
+                                    <img src={ item.icon.src } alt={item.ariaLabel} title={item.description} class="w-12 p-1 m-2" /> 
                                 </div>
                                 
                                 <p class="text-ptext1 dark:text-ptext2-DM my-2 text-center text-xs">{item.name} </p>
@@ -153,7 +165,7 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
 
                     <button class="w-12 hidden">
                         <img
-                            src={rightArrow}
+                            src={ rightArrow.src }
                             alt="Right Arrow"
                         />
                     </button>
