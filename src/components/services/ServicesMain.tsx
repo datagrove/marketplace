@@ -116,6 +116,7 @@ export const ServicesView: Component = () => {
         filterPosts()
     }
 
+    //this function will need to be updated for filtered calls to db
     const filterPosts = () => {
 
         if (!data) {

@@ -113,7 +113,7 @@ export const CategoryCarousel: Component<Props> = (props) => {
                                 id={ item.id }
                                 class='catBtn flex flex-col flex-none justify-center items-center w-20 h-20' 
                                 onClick={(e) => {
-                                    props.filterPosts(item.category)
+                                    props.filterPosts(item.category) // look up by item id, change function in services main to accept id not category
 
                                     let currBtn = e.target;
 

@@ -110,6 +110,7 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
             .from("providerposts")
             .select("*")
             .in('service_category', selectedCats)
+            console.log("data: ", data)
 
         if(!data) {
             alert("No posts available")
@@ -123,6 +124,10 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
     // function that adds or removes filters to a filter list
     const handleFilterChange = (event: any ) => {
         // alert("Button id: " + event.target.id)
+
+        //use filterPosts function to invoke the callback function on servieMain
+        //send it item.catgory
+        
         if(catFilter().includes(event.target.id)) {
             setCatFilter((prevArr) => prevArr.filter(item => item !== event.target.id));
         } else {
@@ -136,7 +141,7 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
             <div class="product-carousel my-2 border-4 border-red-400">
                 TEST TEST TEST
                 <br />
-                { allCategoryInfo[0] }
+                allCategoryInfo length: { allCategoryInfo.length }
                 <div class="flex flex-start justify-between">
                     <button class="w-12 hidden">
                         <img
