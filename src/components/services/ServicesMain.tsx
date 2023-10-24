@@ -27,10 +27,6 @@ if (user.session === null || user.session === undefined) {
     location.href = `/${lang}/login`;
 }
 
-let testPostsArr = allFilters.fetchAllPosts()
-console.log("testPostsArr type Array?: ", Array.isArray(testPostsArr))
-console.log("testPostsArr: ", testPostsArr)
-
 const { data, error } = await supabase.from('providerposts').select('*');
 
 data?.map(item => {
@@ -56,7 +52,7 @@ interface ProviderPost {
 }
 
 export const ServicesView: Component = () => {
-    const [posts, setPosts] = createSignal<Array<ProviderPost>>([])
+    const [posts, setPosts] = createSignal<Array<any>>([])
     const [searchPost, setSearchPost] = createSignal<Array<ProviderPost>>([])
     const [currentPosts, setCurrentPosts] = createSignal<Array<ProviderPost>>([])
     const [filters, setFilters] = createSignal<Array<string>>([])
@@ -68,11 +64,48 @@ export const ServicesView: Component = () => {
     if (!data) {
         alert(t('messages.noPosts'))
     } else {
-        console.log("All posts in else statement: ", testPostsArr)
-        setPosts([]) //why not testPostsArr??
         setPosts(data)
         setCurrentPosts(data)  
     }
+
+    // let testPostArr2 = async function() {
+    //     const res = await allFilters.fetchAllPosts()
+
+    //     console.log("testArr2 res: ", res)
+    //     console.log("testArr2 res type: ", typeof(res))
+    //     console.log("testArr2 res array?: ", Array.isArray(res))
+
+    //     if(res === null || res === undefined) {
+    //         console.error()
+    //     } else {
+    //         setPosts(res)
+    //     }
+    // }
+
+    // testPostArr2();
+
+    let testPost3 = async function() {
+        // console.log("filters in testPost3: ", filters())
+        const res = await allFilters.fetchFilteredPosts(["1", "3"], ["Cartago"], ["Paraíso"], ["Orosi"])
+    
+        console.log("category filters: ", filters())
+        console.log("location: ", locationFilters())
+
+        console.log("test3 res: ", res)
+        console.log("test3 res type: ", typeof(res))
+        console.log("test3 res array?: ", Array.isArray(res))
+
+        if(res === null || res === undefined) {
+            console.error()
+        } else {
+            setPosts(res)
+            console.log("results after setting: ", posts())
+        }
+    }
+
+    testPost3();
+    // console.log("posts after test: ", posts())
+
 
     const searchPosts = async (searchString: string) => {
         console.log(searchString);
@@ -402,6 +435,7 @@ export const ServicesView: Component = () => {
                 </button>
 
                 {/* <div>{ testPostsArr[0] }</div> */}
+
             </div>
 
             <div class="md:h-full flex flex-col md:flex-row items-center md:items-start ">
