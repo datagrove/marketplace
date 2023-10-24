@@ -21,6 +21,7 @@ export interface uiObject {
     resetPassword: string,
     terms: string,
     privacy: string,
+    acceptableUse: string,
     about: string,
     impact: string,
     fullPost: string,
@@ -44,6 +45,7 @@ export interface uiObject {
     resetPassword: string,
     terms: string,
     privacy: string,
+    acceptableUse: string,
     about: string,
     impact: string,
     fullPost: string,
@@ -194,6 +196,7 @@ export interface uiObject {
     clientExists: string,
     clientCreateProfileError: string,
     clientEditProfileError: string,
+    createUserError: string,
   },
 
   ariaLabels: {

@@ -1,6 +1,6 @@
 import { supabase } from "../../lib/supabaseClientServer";
 import type { APIRoute } from "astro";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations } from "@i18n/utils";
 
 export const post: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
@@ -129,7 +129,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
       console.log(profileError);
       return new Response(
         JSON.stringify({
-          message: (t("apiErrors.profileError")),
+          message: (t("apiErrors.profileEditError")),
         }),
         { status: 500 }
       );

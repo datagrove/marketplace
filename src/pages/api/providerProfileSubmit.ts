@@ -1,6 +1,6 @@
 import { supabase } from "../../lib/supabaseClientServer";
 import type { APIRoute } from "astro";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations } from "@i18n/utils";
 
 export const post: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
@@ -12,6 +12,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
 
   //Set internationalization values
   const lang = formData.get("lang");
+  //@ts-ignore
   const t = useTranslations(lang);
 
   //set the formData fields to variables
@@ -53,6 +54,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
       access_token: access_token!.toString(),
     });
   if (sessionError) {
+    console.log("supabase error: " + sessionError.message);
     return new Response(
       JSON.stringify({
         message: (t("apiErrors.noSession")),
@@ -121,6 +123,7 @@ export const post: APIRoute = async ({ request, redirect }) => {
   //     last_name: lastName,
   //     email: user.email,
   //   };
+
 
   //   //Submit to the profile table and select it back (the select back is not entirely necessary)
   //   const { data: profileData, error: profileError } = await supabase
