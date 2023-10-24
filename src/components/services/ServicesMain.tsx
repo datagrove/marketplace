@@ -1,4 +1,5 @@
-import { Component, createEffect, createSignal } from 'solid-js'
+import type { Component } from 'solid-js'
+import { createSignal } from 'solid-js'
 import { supabase } from '../../lib/supabaseClient'
 import { CategoryCarouselTest } from './CategoryCarouselTest'
 import { CategoryCarousel} from './CategoryCarousel'
@@ -8,6 +9,7 @@ import { SearchBar } from './SearchBar'
 import { ui } from '../../i18n/ui'
 import type { uiObject } from '../../i18n/uiType';
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import * as allFilters from '../services/fetchPosts';
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -25,6 +27,10 @@ if (user.session === null || user.session === undefined) {
     location.href = `/${lang}/login`;
 }
 
+let testPostsArr = allFilters.fetchAllPosts()
+console.log("testPostsArr type Array?: ", Array.isArray(testPostsArr))
+console.log("testPostsArr: ", testPostsArr)
+
 const { data, error } = await supabase.from('providerposts').select('*');
 
 data?.map(item => {
@@ -35,8 +41,6 @@ data?.map(item => {
     })
     delete item.service_category
 })
-
-
 
 interface ProviderPost {
     content: string;
@@ -60,12 +64,14 @@ export const ServicesView: Component = () => {
     const [minorLocationFilters, setMinorLocationFilters] = createSignal<Array<string>>([])
     const [governingLocationFilters, setGoverningLocationFilters] = createSignal<Array<string>>([])
 
-    //start the page as displaying all posts
+    // start the page as displaying all posts
     if (!data) {
         alert(t('messages.noPosts'))
     } else {
+        console.log("All posts in else statement: ", testPostsArr)
+        setPosts([]) //why not testPostsArr??
         setPosts(data)
-        setCurrentPosts(data)
+        setCurrentPosts(data)  
     }
 
     const searchPosts = async (searchString: string) => {
@@ -390,6 +396,12 @@ export const ServicesView: Component = () => {
                 <CategoryCarouselTest 
                     filterPosts={setCategoryFilter}
                 />
+
+                <button onclick={ allFilters.testImport } class="border-2 rounded p-2 bg-orange-200 m-1">
+                    Test Import Function
+                </button>
+
+                {/* <div>{ testPostsArr[0] }</div> */}
             </div>
 
             <div class="md:h-full flex flex-col md:flex-row items-center md:items-start ">

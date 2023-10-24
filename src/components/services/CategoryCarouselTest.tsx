@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabaseClient'
 import { ui } from '../../i18n/ui'
 import type { uiObject } from '../../i18n/uiType';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import * as allFilters from '../services/fetchPosts';
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const values = ui[lang] as uiObject
@@ -99,10 +100,11 @@ type catArray = number[];
 
 export const CategoryCarouselTest: Component<Props> = (props) => {
     const [catFilter, setCatFilter] = createSignal<catArray>([]);
+
+    let selectedCats = catFilter().map((item) => Number(item))
     
     async function fetchData() {
 
-        let selectedCats = catFilter().map((item) => Number(item))
 
         console.log("selectedCats: ", selectedCats)
 
