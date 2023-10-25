@@ -27,14 +27,16 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 console.error(e);
             }
         // only category filter
-        } else if(categoryFilters.length > 0 && locationFilters.length === 0 && minorLocationFilters.length === 0 && governingLocationFilters.length === 0) {
-            let catArray = categoryFilters.map((item: any) => Number(item))
-    
+        } else if(categoryFilters.length > 0 && locationFilters.length === 0 && minorLocationFilters.length === 0 && governingLocationFilters.length === 0) {    
             const { data: catPosts, error } = await supabase
-                    .from("providerposts")
-                    .select("*")
-                    .in('service_category', catArray)
-                    console.log("category data: ", catPosts)
+                .from("post_category")
+                .select("category")
+                .in("category", categoryFilters)
+                // .in("service_category", categoryFilters)
+                    // .from("providerposts")
+                    // .select("*")
+                    // .in('service_category', catArray)
+                    // console.log("category data: ", catPosts)
         
                 if(!catPosts) {
                     alert("No posts available")
@@ -93,7 +95,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
         // all filters on
         } else if(categoryFilters.length > 0 && locationFilters.length > 0 && minorLocationFilters.length > 0 && governingLocationFilters.length > 0) {
             try {
-                alert("All filters")
+                // alert("All filters")
                 let catArray = categoryFilters.map((item: any) => Number(item))
 
                 const { data, error } = await supabase
@@ -117,7 +119,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
         // only first location filter
         } else if(categoryFilters.length === 0 && locationFilters.length > 0 && minorLocationFilters.length === 0 && governingLocationFilters.length === 0) {
             try {
-                alert("First location filter")
+                // alert("First location filter")
 
                 const { data, error } = await supabase
                 .from("providerposts")
@@ -138,7 +140,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
         // first and second location filters on
         } else if(categoryFilters.length === 0 && locationFilters.length > 0 && minorLocationFilters.length > 0 && governingLocationFilters.length === 0) {
             try {
-                alert("Major and minor location filters")
+                // alert("Major and minor location filters")
 
                 const { data, error } = await supabase
                 .from("providerposts")
@@ -159,7 +161,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
         // all location filters on
         } else if(categoryFilters.length === 0 && locationFilters.length > 0 && minorLocationFilters.length > 0 && governingLocationFilters.length > 0) {
             try {
-                alert("All and only location filters")
+                // alert("All and only location filters")
 
                 const { data, error } = await supabase
                 .from("providerposts")

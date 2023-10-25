@@ -90,13 +90,13 @@ for (let i = 0; i < categoriesData.length; i++) {
 
 interface Props {
     // Define the type for the filterPosts prop
-    filterPosts: (currentCategory: string) => void;
+    filterPosts: (currentCategory: number) => void;
 }
 
 let dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 let light = window.matchMedia("(prefers-color-scheme: light)" || "(prefers-color-scheme: no-preference" ).matches;
 
-type catArray = number[];
+type catArray = string[];
 
 export const CategoryCarouselTest: Component<Props> = (props) => {
     const [catFilter, setCatFilter] = createSignal<catArray>([]);
@@ -104,7 +104,6 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
     let selectedCats = catFilter().map((item) => Number(item))
     
     async function fetchData() {
-
 
         console.log("selectedCats: ", selectedCats)
 
@@ -124,19 +123,23 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
     }
 
     // function that adds or removes filters to a filter list
-    const handleFilterChange = (event: any ) => {
-        // alert("Button id: " + event.target.id)
+    const handleFilterChange = (e: any ) => {
+        // alert("Button i type: " + typeof(event.target.id)) id type is a string
 
         //use filterPosts function to invoke the callback function on servieMain
         //send it item.catgory
+
+        console.log("e.props?: ", props.filterPosts(4))
         
-        if(catFilter().includes(event.target.id)) {
-            setCatFilter((prevArr) => prevArr.filter(item => item !== event.target.id));
+        if(catFilter().includes(e.target.id)) {
+            setCatFilter((prevArr) => prevArr.filter(item => item !== e.target.id));
         } else {
-            setCatFilter((prevArr) => [...prevArr, event.target.id ])
+            setCatFilter((prevArr) => [...prevArr, e.target.id ])
         }
 
-        fetchData();
+        console.log("catFilter in change: ", catFilter())
+
+        // fetchData();
     }
 
     return (
@@ -157,7 +160,10 @@ export const CategoryCarouselTest: Component<Props> = (props) => {
                             <button 
                                 id={ item.id }
                                 class='catBtn flex flex-col flex-none justify-center items-center w-20 h-20' 
-                                onClick={ handleFilterChange }
+                                onclick={ handleFilterChange }
+                                // onclick={(e) => {
+                                //     props.filterPosts(item.category.id)
+                                // }}
                             >
                                 <div class="bg-iconbg1 dark:bg-iconbg1-DM rounded-full">
                                     <img src={ item.icon.src } alt={item.ariaLabel} title={item.description} class="w-12 p-1 m-2" /> 

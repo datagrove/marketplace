@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js'
-import { createSignal } from 'solid-js'
+import { createSignal, createEffect } from 'solid-js'
 import { supabase } from '../../lib/supabaseClient'
 import { CategoryCarouselTest } from './CategoryCarouselTest'
 import { CategoryCarousel} from './CategoryCarousel'
@@ -52,7 +52,7 @@ interface ProviderPost {
 }
 
 export const ServicesView: Component = () => {
-    const [posts, setPosts] = createSignal<Array<any>>([])
+    const [posts, setPosts] = createSignal<Array<ProviderPost>>([])
     const [searchPost, setSearchPost] = createSignal<Array<ProviderPost>>([])
     const [currentPosts, setCurrentPosts] = createSignal<Array<ProviderPost>>([])
     const [filters, setFilters] = createSignal<Array<string>>([])
@@ -67,6 +67,17 @@ export const ServicesView: Component = () => {
         setPosts(data)
         setCurrentPosts(data)  
     }
+
+    createEffect(async() => {
+        const res = await allFilters.fetchFilteredPosts(filters(), locationFilters(), minorLocationFilters(), governingLocationFilters())
+    
+        if(res === null || res === undefined) {
+            console.error()
+        } else {
+            setPosts(res)
+            console.log("results after createEffect: ", posts())
+        }
+    })
 
     // let testPostArr2 = async function() {
     //     const res = await allFilters.fetchAllPosts()
@@ -103,7 +114,7 @@ export const ServicesView: Component = () => {
         }
     }
 
-    testPost3();
+    // testPost3();
     // console.log("posts after test: ", posts())
 
 
@@ -138,7 +149,26 @@ export const ServicesView: Component = () => {
         filterPosts()
     }
 
+    // const setCategoryFilter = (currentCategory: string) => {
+
+    //     if (filters().includes(currentCategory)) {
+    //         let currentFilters = filters().filter((el) => el !== currentCategory)
+    //         setFilters(currentFilters)
+    //     } else {
+    //         setFilters([...filters(), currentCategory])
+    //         console.log("Category Filters Updated: ")
+    //         console.log(filters())
+    //     }
+
+    //     console.log("Category Filters: ")
+    //     console.log(filters())
+
+    //     filterPosts()
+    // }
+
     const setCategoryFilter = (currentCategory: string) => {
+
+        console.log("currCat from catFilter: ", currentCategory)
 
         if (filters().includes(currentCategory)) {
             let currentFilters = filters().filter((el) => el !== currentCategory)
@@ -426,9 +456,9 @@ export const ServicesView: Component = () => {
                     filterPosts={setCategoryFilter}
                 />
 
-                <CategoryCarouselTest 
+                {/* <CategoryCarouselTest 
                     filterPosts={setCategoryFilter}
-                />
+                /> */}
 
                 <button onclick={ allFilters.testImport } class="border-2 rounded p-2 bg-orange-200 m-1">
                     Test Import Function
@@ -441,6 +471,7 @@ export const ServicesView: Component = () => {
             <div class="md:h-full flex flex-col md:flex-row items-center md:items-start ">
                 <div class="md:w-48 md:mr-4 w-11/12">
                     <LocationFilter filterPostsByMajorMunicipality={filterPostsByMajorMunicipality} filterPostsByMinorMunicipality={filterPostsByMinorMunicipality} filterPostsByGoverningDistrict={filterPostsByGoverningDistrict} />
+                    {/* <LocationFilter filterPostsByMajorMunicipality={ allFilters.fetchFilteredPosts } filterPostsByMinorMunicipality={filterPostsByMinorMunicipality} filterPostsByGoverningDistrict={filterPostsByGoverningDistrict} /> */}
                 </div>
                 
                 <div class="md:flex-1 w-11/12 items-center">
