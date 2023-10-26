@@ -182,11 +182,34 @@ export const ServicesView: Component = () => {
         console.log("Category Filters: ")
         console.log(filters())
 
-        filterPosts()
+        filterPosts() 
+    }
+
+    const filterPosts = async() => {
+        // alert("filterPosts function")
+
+        if (!data) {
+            alert(t('messages.noPosts'))
+        } else if (searchPost().length === 0) {
+            //Start each filter with all the posts so that when you switch categories it is filtering ALL posts again
+            setPosts(data)
+        } else (
+            setPosts(searchPost())
+        )
+
+        const res = await allFilters.fetchFilteredPosts(filters(), locationFilters(), minorLocationFilters(), governingLocationFilters())
+    
+        if(res === null || res === undefined) {
+            console.error()
+        } else {
+            setPosts(res)
+            setCurrentPosts(res)
+            console.log("results after createEffect: ", posts())
+        }
     }
 
     //this function will need to be updated for filtered calls to db
-    const filterPosts = () => {
+    const filterPostsOriginal = () => {
 
         if (!data) {
             alert(t('messages.noPosts'))
@@ -460,9 +483,9 @@ export const ServicesView: Component = () => {
                     filterPosts={setCategoryFilter}
                 /> */}
 
-                <button onclick={ allFilters.testImport } class="border-2 rounded p-2 bg-orange-200 m-1">
+                {/* <button onclick={ allFilters.testImport } class="border-2 rounded p-2 bg-orange-200 m-1">
                     Test Import Function
-                </button>
+                </button> */}
 
                 {/* <div>{ testPostsArr[0] }</div> */}
 
