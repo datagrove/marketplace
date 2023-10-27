@@ -198,13 +198,53 @@ export const ServicesView: Component = () => {
         )
 
         const res = await allFilters.fetchFilteredPosts(filters(), locationFilters(), minorLocationFilters(), governingLocationFilters())
+
+        // alert("res: " + res)
     
         if(res === null || res === undefined) {
             console.error()
         } else {
+            console.log("res in filterPosts: ", res)
+
+            res.map(
+                post => {
+                    if (post.service_category === 1) {
+                        post.service_category = "Gardening"
+                    } else if (post.service_category === 2) {
+                        post.service_category = "Beauty"
+                    } else if (post.service_category === 3) {
+                        post.service_category = "Construction"
+                    } else if (post.service_category === 4) {
+                        post.service_category = "Computer"
+                    } else if (post.service_category === 5) {
+                        post.service_category = "Automotive"
+                    } else if (post.service_category === 6) {
+                        post.service_category = "Creative"
+                    } else if (post.service_category === 7) {
+                        post.service_category = "Financial"
+                    } else if (post.service_category === 8) {
+                        post.service_category = "Cleaning"
+                    } else if (post.service_category === 9) {
+                        post.service_category = "Pet"
+                    } else if (post.service_category === 10) {
+                        post.service_category = "Legal"
+                    } else if (post.service_category === 11) {
+                        post.service_category = "Health"
+                    } else if (post.service_category === 12) {
+                        post.service_category = "Labor"
+                    } else if (post.service_category === 13) {
+                        post.service_category = "Travel"
+                    } 
+                }
+            )
+
+            console.log("res after map: ", res)
+
             setPosts(res)
+            console.log("posts after res map: ", posts())
+            
             setCurrentPosts(res)
-            console.log("results after createEffect: ", posts())
+            console.log("currPosts after res: ", currentPosts())
         }
     }
 

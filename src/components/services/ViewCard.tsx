@@ -30,6 +30,8 @@ interface Props {
 export const ViewCard: Component<Props> = (props) => {
   const [newPosts, setNewPosts] = createSignal<Array<any>>([]);
 
+  console.log("props in ViewCard: ", props)
+
   createEffect(async () => {
     if (props.posts) {
       const updatedPosts = await Promise.all(
