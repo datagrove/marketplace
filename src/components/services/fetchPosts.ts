@@ -526,7 +526,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("governing_district", governingLocationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -547,7 +547,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("major_municipality", locationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -569,7 +569,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("minor_municipality", minorLocationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {

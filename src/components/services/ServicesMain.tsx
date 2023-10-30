@@ -80,7 +80,7 @@ export const ServicesView: Component = () => {
 
     const searchPosts = async (searchText: string) => {
         if(searchText === "") {
-            alert("Please enter term to search")
+            alert(t('messages.noSearchTerm'))
         } else {
             setSearchString(searchText)
         }
