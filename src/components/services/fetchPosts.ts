@@ -1,10 +1,12 @@
 import { supabase } from '../../lib/supabaseClient';
+import { ui } from '../../i18n/ui'
+import type { uiObject } from '../../i18n/uiType';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-export async function testImport() {
-    alert("The test import worked!")
-}
+const lang = getLangFromUrl(new URL(window.location.href));
+const t = useTranslations(lang);
 
-// one giant filter function that includes the logic for all combinations - switch statement? If/then?
+// one giant filter function that includes the logic for all combinations 
 
 export async function fetchFilteredPosts(categoryFilters: any, locationFilters: any, minorLocationFilters: any, governingLocationFilters: any, searchString: string) {
     // alert("category + location: " + categoryFilters + ", " + locationFilters)
@@ -69,7 +71,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("service_category", categoryIntegers)
         
                 if(!catPosts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
         
                 if(error) {
@@ -310,7 +312,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 if(error) {
                     console.log("supabase error: " + error.message);
                 } else if( searchPosts.length === 0) {
-                    alert("No results found")   
+                    alert(t('messages.noPosts'))
                 } else {
                     console.log("fetch Search bar: ", searchPosts)
                     return searchPosts
@@ -359,7 +361,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("service_category", categoryIntegers)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -413,7 +415,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("major_municipality", locationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -468,7 +470,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("minor_municipality", minorLocationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -590,7 +592,7 @@ export async function fetchFilteredPosts(categoryFilters: any, locationFilters: 
                 .in("governing_district", governingLocationFilters)
 
                 if(!posts) {
-                    alert("No posts available")
+                    alert(t('messages.noPosts'))
                 }
 
                 if(error) {
@@ -656,7 +658,7 @@ export async function fetchPostsByCategory(selectedCats: Array<string>) {
             console.log("category data: ", catPosts)
 
         if(!catPosts) {
-            alert("No posts available")
+            alert(t('messages.noPosts'))
         }
 
         if(error) {

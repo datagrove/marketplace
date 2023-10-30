@@ -83,7 +83,6 @@ export const ServicesView: Component = () => {
             alert("Please enter term to search")
         } else {
             setSearchString(searchText)
-            alert("searchString: " + searchString())
         }
 
         filterPosts();
