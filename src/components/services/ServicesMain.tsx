@@ -25,8 +25,6 @@ if (user.session === null || user.session === undefined) {
     location.href = `/${lang}/login`;
 }
 
-// const { data, error } = await supabase.from('providerposts').select('*');
-
 const [totalPosts, setTotalPosts] = createSignal<number>(0)
 
 function getFromAndTo(){
@@ -65,7 +63,6 @@ async function getPosts() {
         posts = data
     }
     trimmingObject(posts)
-    console.log(posts)
     return posts 
 }
 
@@ -94,9 +91,10 @@ export const ServicesView: Component = () => {
 
     // const [paginationProps,page,setPage] = createPagination({pages:5})
     const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
-    
     setPosts(pages())
     console.log(pages(),"pages")
+
+
 
     //start the page as displaying all posts
     if (!pages()) {
@@ -133,7 +131,6 @@ export const ServicesView: Component = () => {
                 setSearchPost(searchResults)
             }
         }
-
         filterPosts()
     }
 
@@ -427,12 +424,26 @@ export const ServicesView: Component = () => {
                         <LocationFilter filterPostsByMajorMunicipality={filterPostsByMajorMunicipality} filterPostsByMinorMunicipality={filterPostsByMinorMunicipality} filterPostsByGoverningDistrict={filterPostsByGoverningDistrict} />
                     </div>
                 
+                <Show when={currentPosts().length === 0}>
                     <div class="md:flex-1 w-11/12 items-center">
                         <ViewCard posts={pages()} />
                         <Show when={!end()}>
                             <h1 use:infiniteScrollLoader>Loading...</h1>
                         </Show>
                     </div>
+                </Show>
+
+                
+                <Show when={currentPosts().length >0}>
+                    <div class="md:flex-1 w-11/12 items-center">
+                        <ViewCard posts={currentPosts()} />
+                        <Show when={!end()}>
+                            <h1 use:infiniteScrollLoader>Loading...</h1>
+                        </Show>
+                    </div>
+                </Show>
+    
+
             </div>
         <div>
     </div>
