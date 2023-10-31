@@ -25,7 +25,7 @@ if (user.session === null || user.session === undefined) {
     location.href = `/${lang}/login`;
 }
 
-const { data, error } = await supabase.from('providerposts').select('*');
+// const { data, error } = await supabase.from('providerposts').select('*');
 
 const [totalPosts, setTotalPosts] = createSignal<number>(0)
 
@@ -33,13 +33,18 @@ function getFromAndTo(){
    const itemPerPage = 10 
     let from = totalPosts() * itemPerPage
     let to = from + itemPerPage
-
-        console.log({from,to})
     if(from >= 0){
         setTotalPosts(totalPosts() + 1)
-        }
-
+    }
     return {from,to}
+}
+
+function trimmingObject(arrayObj: any) {
+     arrayObj.forEach((obj: any) => {
+        delete obj.email
+        delete obj.provider_id
+        })
+    return arrayObj
     }
 
 async function getPosts() {
@@ -49,31 +54,20 @@ async function getPosts() {
     if (error) {
         console.log(error)
     } else {
-    
     data?.map(item => {
     productCategories.forEach(productCategories => {
         if (item.service_category.toString() === productCategories.id) {
             item.category = productCategories.name
-        }
-    })
+            }
+        })
     delete item.service_category
-})
+    })
         posts = data
     }
+    trimmingObject(posts)
     console.log(posts)
     return posts 
 }
-
-// data?.map(item => {
-//     productCategories.forEach(productCategories => {
-//         if (item.service_category.toString() === productCategories.id) {
-//             item.category = productCategories.name
-//         }
-//     })
-//     delete item.service_category
-// })
-
-
 
 interface ProviderPost {
     content: string;
@@ -102,24 +96,22 @@ export const ServicesView: Component = () => {
     const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
     
     setPosts(pages())
-    console.log(posts())
-
-    
+    console.log(pages(),"pages")
 
     //start the page as displaying all posts
-    if (!data) {
+    if (!pages()) {
         alert(t('messages.noPosts'))
     } else {
-        setPosts(data)
-        setCurrentPosts(data)
+        setPosts(pages())
+        setCurrentPosts(pages())
     }
 
     const searchPosts = async (searchString: string) => {
         console.log(searchString);
         if (searchString === '') {
             console.log("Data: ")
-            console.log(data)
-            setSearchPost(data!)
+            console.log(pages())
+            setSearchPost(pages()!)
         } else {
             const { data: searchResults, error: searchError } = await supabase
                 .from('providerposts')
@@ -155,20 +147,17 @@ export const ServicesView: Component = () => {
             console.log("Category Filters Updated: ")
             console.log(filters())
         }
-
         console.log("Category Filters: ")
         console.log(filters())
-
         filterPosts()
     }
 
     const filterPosts = () => {
-
-        if (!data) {
+        if (!pages()) {
             alert(t('messages.noPosts'))
         } else if (searchPost().length === 0) {
             //Start each filter with all the posts so that when you switch categories it is filtering ALL posts again
-            setPosts(data)
+            setPosts(pages()!)
         } else (
             setPosts(searchPost())
         )
@@ -396,8 +385,6 @@ export const ServicesView: Component = () => {
         filterPosts();
     }
 
-    // const [paginationProps,page,setPage] = createPagination({pages:10})
-
     return (
         <div class=''>
             <div>
@@ -436,27 +423,21 @@ export const ServicesView: Component = () => {
             </div>
 
             <div class="md:h-full flex flex-col md:flex-row items-center md:items-start ">
-                <div class="md:w-48 md:mr-4 w-11/12">
-                    <LocationFilter filterPostsByMajorMunicipality={filterPostsByMajorMunicipality} filterPostsByMinorMunicipality={filterPostsByMinorMunicipality} filterPostsByGoverningDistrict={filterPostsByGoverningDistrict} />
-                </div>
+                    <div class="md:w-48 md:mr-4 w-11/12">
+                        <LocationFilter filterPostsByMajorMunicipality={filterPostsByMajorMunicipality} filterPostsByMinorMunicipality={filterPostsByMinorMunicipality} filterPostsByGoverningDistrict={filterPostsByGoverningDistrict} />
+                    </div>
                 
-                <div class="md:flex-1 w-11/12 items-center">
-                    <ViewCard posts={currentPosts()} />
-                </div>
+                    <div class="md:flex-1 w-11/12 items-center">
+                        <ViewCard posts={pages()} />
+                        <Show when={!end()}>
+                            <h1 use:infiniteScrollLoader>Loading...</h1>
+                        </Show>
+                        <Show when={end()}>
+                            <h1>End of posts</h1>
+                        </Show>
+                    </div>
             </div>
-            <div>
-            <div class="h-[90%] overflow-scroll">
-              <For each={pages()}>{item => <p>1</p>}</For>
-                <Show when={!end()}>
-                    <h1 use:infiniteScrollLoader>Loading...</h1>
-                </Show>
-                <Show when={end()}>
-                    <h1>End of posts</h1>
-                </Show>
-            </div>
-
-
-            </div>
-        </div>
-    )
-}
+        <div>
+    </div>
+</div>
+)}
