@@ -27,10 +27,25 @@ if (user.session === null || user.session === undefined) {
 
 const { data, error } = await supabase.from('providerposts').select('*');
 
+const [totalPosts, setTotalPosts] = createSignal<number>(0)
+
+function getFromAndTo(){
+   const itemPerPage = 10 
+    let from = totalPosts() * itemPerPage
+    let to = from + itemPerPage
+
+        console.log({from,to})
+    if(from >= 0){
+        setTotalPosts(totalPosts() + 1)
+        }
+
+    return {from,to}
+    }
+
 async function getPosts() {
-    let page = 1
+    const {from, to} = getFromAndTo()
     let posts = []
-    const { data, error } = await supabase.from('providerposts').select('*').range(page, 10);
+    const { data, error } = await supabase.from('providerposts').select('*').range(from,to);
     if (error) {
         console.log(error)
     } else {
