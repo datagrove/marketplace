@@ -432,12 +432,10 @@ export const ServicesView: Component = () => {
                         <Show when={!end()}>
                             <h1 use:infiniteScrollLoader>Loading...</h1>
                         </Show>
-                        <Show when={end()}>
-                            <h1>End of posts</h1>
-                        </Show>
                     </div>
             </div>
         <div>
     </div>
 </div>
-)}
+)
+}
