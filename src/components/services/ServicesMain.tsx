@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal } from 'solid-js'
+import { Component, createEffect, createSignal ,Show,For} from 'solid-js'
 import { supabase } from '../../lib/supabaseClient'
 import { CategoryCarousel } from './CategoryCarousel'
 import { ViewCard } from './ViewCard';
@@ -7,6 +7,7 @@ import { SearchBar } from './SearchBar'
 import { ui } from '../../i18n/ui'
 import type { uiObject } from '../../i18n/uiType';
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { createInfiniteScroll, createPagination } from '@solid-primitives/pagination';
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -26,7 +27,14 @@ if (user.session === null || user.session === undefined) {
 
 const { data, error } = await supabase.from('providerposts').select('*');
 
-data?.map(item => {
+async function getPosts(page:number) {
+    let posts = []
+    const { data, error } = await supabase.from('providerposts').select('*').range(page, 10);
+    if (error) {
+        console.log(error)
+    } else {
+    
+    data?.map(item => {
     productCategories.forEach(productCategories => {
         if (item.service_category.toString() === productCategories.id) {
             item.category = productCategories.name
@@ -34,6 +42,20 @@ data?.map(item => {
     })
     delete item.service_category
 })
+        posts = data
+    }
+    console.log(posts)
+    return posts 
+}
+
+// data?.map(item => {
+//     productCategories.forEach(productCategories => {
+//         if (item.service_category.toString() === productCategories.id) {
+//             item.category = productCategories.name
+//         }
+//     })
+//     delete item.service_category
+// })
 
 
 
@@ -58,6 +80,15 @@ export const ServicesView: Component = () => {
     const [locationFilters, setLocationFilters] = createSignal<Array<string>>([])
     const [minorLocationFilters, setMinorLocationFilters] = createSignal<Array<string>>([])
     const [governingLocationFilters, setGoverningLocationFilters] = createSignal<Array<string>>([])
+
+
+    // const [paginationProps,page,setPage] = createPagination({pages:5})
+    const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
+    
+    setPosts(pages())
+    console.log(posts())
+
+    
 
     //start the page as displaying all posts
     if (!data) {
@@ -349,6 +380,8 @@ export const ServicesView: Component = () => {
         filterPosts();
     }
 
+    // const [paginationProps,page,setPage] = createPagination({pages:10})
+
     return (
         <div class=''>
             <div>
@@ -394,6 +427,16 @@ export const ServicesView: Component = () => {
                 <div class="md:flex-1 w-11/12 items-center">
                     <ViewCard posts={currentPosts()} />
                 </div>
+            </div>
+            <div>
+            <div class="h-[90%] overflow-scroll">
+              <For each={pages()}>{item => <p>{JSON.stringify(item)}</p>}</For>
+                <Show when={!end()}>
+                    <h1 use:infiniteScrollLoader>Loading...</h1>
+                </Show>
+            </div>
+
+
             </div>
         </div>
     )
