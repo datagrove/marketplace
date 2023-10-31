@@ -27,7 +27,8 @@ if (user.session === null || user.session === undefined) {
 
 const { data, error } = await supabase.from('providerposts').select('*');
 
-async function getPosts(page:number) {
+async function getPosts() {
+    let page = 1
     let posts = []
     const { data, error } = await supabase.from('providerposts').select('*').range(page, 10);
     if (error) {
@@ -430,9 +431,12 @@ export const ServicesView: Component = () => {
             </div>
             <div>
             <div class="h-[90%] overflow-scroll">
-              <For each={pages()}>{item => <p>{JSON.stringify(item)}</p>}</For>
+              <For each={pages()}>{item => <p>1</p>}</For>
                 <Show when={!end()}>
                     <h1 use:infiniteScrollLoader>Loading...</h1>
+                </Show>
+                <Show when={end()}>
+                    <h1>End of posts</h1>
                 </Show>
             </div>
 
