@@ -432,6 +432,16 @@ export const ServicesView: Component = () => {
                         </Show>
                     </div>
                 </Show>
+
+                 <Show when={currentPosts().length >0}>	
+                    <div class="md:flex-1 w-11/12 items-center">	
+                        <ViewCard posts={currentPosts()} />	
+                        <Show when={!end()}>	
+                            <h1 use:infiniteScrollLoader>Loading...</h1>	
+                        </Show>	
+                    </div>	
+                </Show>	
+
             </div>
         <div>
     </div>
