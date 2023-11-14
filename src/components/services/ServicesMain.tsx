@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { createEffect, createSignal ,Show,For} from 'solid-js'
+import { createEffect, createSignal ,Show, onMount} from 'solid-js'
 import { supabase } from "../../lib/supabaseClient";
 import { CategoryCarousel } from "./CategoryCarousel";
 import { ViewCard } from "./ViewCard";
@@ -10,6 +10,8 @@ import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import * as allFilters from "../posts/fetchPosts";
 import { createInfiniteScroll, createPagination } from '@solid-primitives/pagination';
+
+import { InfiniteScroll } from "@components/posts/InfiniteScroll";
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -27,46 +29,50 @@ if (user.session === null || user.session === undefined) {
   location.href = `/${lang}/login`;
 }
 
-const [totalPosts, setTotalPosts] = createSignal<number>(0)
+// const [totalPosts, setTotalPosts] = createSignal<number>(0)
 
-function getFromAndTo(){
-   const itemPerPage = 10 
-    let from = totalPosts() * itemPerPage
-    let to = from + itemPerPage
-    if(from >= 0){
-        setTotalPosts(totalPosts() + 1)
-    }
-    return {from,to}
-}
+// function getFromAndTo(){
+//    const itemPerPage = 10 
+//     let from = totalPosts() * itemPerPage
+//     let to = from + itemPerPage
+//     if(from >= 0){
+//         setTotalPosts(totalPosts() + 1)
+//     }
+//     return {from,to}
+// }
 
-function trimmingObject(arrayObj: any) {
-     arrayObj.forEach((obj: any) => {
-        delete obj.email
-        delete obj.provider_id
-        })
-    return arrayObj
-    }
+// function trimmingObject(arrayObj: any) {
+//      arrayObj.forEach((obj: any) => {
+//         delete obj.email
+//         delete obj.provider_id
+//         })
+//     return arrayObj
+//     }
 
-async function getPosts() {
-    const {from, to} = getFromAndTo()
-    let posts = []
-    const { data, error } = await supabase.from('providerposts').select('*').range(from,to);
-    if (error) {
-        console.log(error)
-    } else {
-    data?.map(item => {
-    productCategories.forEach(productCategories => {
-        if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name
-            }
-        })
-    delete item.service_category
-    })
-        posts = data
-    }
-    trimmingObject(posts)
-    return posts 
-}
+// async function getPosts() {
+//     const {from, to} = getFromAndTo()
+//     let posts: Array<ProviderPost> = []
+//     const { data, error } = await supabase.from('providerposts').select('*').range(from,to);
+//     if (error) {
+//         console.log(error)
+//         onMount(() => {
+//           let noPostsMessage = document.getElementById("no-posts-message");
+//           noPostsMessage?.classList.remove("hidden");
+//         })
+//     } else {
+//     data?.map(item => {
+//     productCategories.forEach(productCategories => {
+//         if (item.service_category.toString() === productCategories.id) {
+//             item.category = productCategories.name
+//             }
+//         })
+//     delete item.service_category
+//     })
+//         posts = data
+//     }
+//     trimmingObject(posts)
+//     return posts 
+// }
 
 interface ProviderPost {
   content: string;
@@ -95,21 +101,40 @@ export const ServicesView: Component = () => {
   >([]);
   const [searchString, setSearchString] = createSignal<string>("");
   const [noPostsVisible, setNoPostsVisible] = createSignal<boolean>(false);
-  const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
-    setPosts(pages())
-    console.log(pages(),"pages")
+  const [end, setEnd] = createSignal<boolean>(false);
+  const [infiniteScrollLoader, setInfiniteScrollLoader] = createSignal<(() => void) | null>(null);
+  // const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
 
-  // start the page as displaying all posts
-  if (!pages()) {
-    let noPostsMessage = document.getElementById("no-posts-message");
-    noPostsMessage?.classList.remove("hidden");
-
-    setPosts([]);
-    setCurrentPosts([]);
-  } else {
-    setPosts(pages());
-    setCurrentPosts(pages());
+  const handleDataFetched = (data: any[]) => {
+    data?.map(item => {
+          productCategories.forEach(productCategories => {
+              if (item.service_category.toString() === productCategories.id) {
+                  item.category = productCategories.name
+                  }
+              })
+          delete item.service_category
+            })
+    setPosts(data);
+    setCurrentPosts(data);
   }
+
+  const onEndReached = (end:boolean) => {
+    if(end) {
+      setEnd(true);
+    }
+  }
+
+  const handleInfiniteScrollLoader = () => {
+    setInfiniteScrollLoader(()=>null);
+  };
+  
+  <InfiniteScroll
+  itemsPerPage={10}
+  query={allFilters.fetchAllPosts()}
+  onDataFetched={handleDataFetched}
+  onEndReached={onEndReached}
+  onInfiniteScrollLoader={() => setInfiniteScrollLoader(handleInfiniteScrollLoader)}
+/>;
 
   const searchPosts = async (searchText: string) => {
     setSearchString(searchText);
@@ -146,8 +171,13 @@ export const ServicesView: Component = () => {
       noPostsMessage?.classList.remove("hidden");
 
 
-      setPosts(pages());
-      setCurrentPosts(pages());
+      <InfiniteScroll
+  itemsPerPage={10}
+  query={allFilters.fetchAllPosts()}
+  onDataFetched={handleDataFetched}
+  onEndReached={onEndReached}
+  onInfiniteScrollLoader={handleInfiniteScrollLoader}
+/>;
       console.error();
 
     } else if (Object.keys(res).length === 0) {
@@ -162,21 +192,21 @@ export const ServicesView: Component = () => {
         clearAllFilters();
       }, 3000));
 
+      <InfiniteScroll itemsPerPage={10} query={allFilters.fetchAllPosts()} onDataFetched={handleDataFetched} onEndReached={onEndReached} />;
+      // let allPosts = await allFilters.fetchAllPosts();
 
-      let allPosts = await allFilters.fetchAllPosts();
+      // //Add the categories to the posts in the current language
+      // allPosts?.map((item) => {
+      //   productCategories.forEach((productCategories) => {
+      //     if (item.service_category.toString() === productCategories.id) {
+      //       item.category = productCategories.name;
+      //     }
+      //   });
+      //   delete item.service_category;
+      // });
 
-      //Add the categories to the posts in the current language
-      allPosts?.map((item) => {
-        productCategories.forEach((productCategories) => {
-          if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name;
-          }
-        });
-        delete item.service_category;
-      });
-
-      setPosts(pages()!);
-      setCurrentPosts(pages()!);
+      // setPosts(pages()!);
+      // setCurrentPosts(pages()!);
     } else {
     
       for (let i = 0; i < timeouts.length; i++) {
@@ -184,18 +214,18 @@ export const ServicesView: Component = () => {
       }
 
       timeouts = [];
+      <InfiniteScroll itemsPerPage={10} query={allFilters.fetchAllPosts()} onDataFetched={handleDataFetched} onEndReached={onEndReached} />;
+      // res.map((post) => {
+      //   productCategories.forEach((productCategory) => {
+      //     if (post.service_category.toString() === productCategory.id) {
+      //       post.category = productCategory.name;
+      //     }
+      //   });
+      //   delete post.service_category;
+      // });
 
-      res.map((post) => {
-        productCategories.forEach((productCategory) => {
-          if (post.service_category.toString() === productCategory.id) {
-            post.category = productCategory.name;
-          }
-        });
-        delete post.service_category;
-      });
-
-      setPosts(res);
-      setCurrentPosts(res);
+      // setPosts(res);
+      // setCurrentPosts(res);
     }
   };
 
@@ -406,21 +436,21 @@ export const ServicesView: Component = () => {
             </h1>
           </div>
           <Show when={currentPosts().length === 0}>
-                    <div class="md:flex-1 w-11/12 items-center">
-                        <ViewCard posts={pages()} />
-                        <Show when={!end()}>
-                            <h1 use:infiniteScrollLoader>Loading...</h1>
-                        </Show>
-                    </div>
-        </Show>
-         <Show when={currentPosts().length >0}>	
-                    <div class="md:flex-1 w-11/12 items-center">	
-                        <ViewCard posts={currentPosts()} />	
-                        <Show when={!end()}>	
-                            <h1 use:infiniteScrollLoader>Loading...</h1>	
-                        </Show>	
-                    </div>	
+  
+            <ViewCard posts={currentPosts()} />
+              <Show when={!end()}>
+                <h1 >Loading...</h1>
+              </Show>
+
+          </Show>
+          <Show when={currentPosts().length >0}>	
+	
+              <ViewCard posts={currentPosts()} />	
+                <Show when={!end()}>	
+                  <h1 use:infiniteScrollLoader>Loading...</h1>	
                 </Show>	
+
+          </Show>	
 
         </div>
       </div>
