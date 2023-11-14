@@ -10,6 +10,8 @@ import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import * as allFilters from "../posts/fetchPosts";
 import { createInfiniteScroll, createPagination } from '@solid-primitives/pagination';
+import { PostgrestFilterBuilder } from '@supabase/postgrest-js'
+
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -28,6 +30,7 @@ if (user.session === null || user.session === undefined) {
 }
 
 const [totalPosts, setTotalPosts] = createSignal<number>(0)
+const [query, setQuery] = createSignal<PostgrestFilterBuilder<any, any, any[], unknown>>(allFilters.fetchAllPosts())
 
 function getFromAndTo(){
    const itemPerPage = 10 
@@ -49,8 +52,9 @@ function trimmingObject(arrayObj: any) {
 
 async function getPosts() {
     const {from, to} = getFromAndTo()
+    const queryQ = query()
     let posts = []
-    const { data, error } = await supabase.from('providerposts').select('*').range(from,to);
+    const { data, error } = await queryQ.range(from,to);
     if (error) {
         console.log(error)
     } else {
@@ -96,20 +100,11 @@ export const ServicesView: Component = () => {
   const [searchString, setSearchString] = createSignal<string>("");
   const [noPostsVisible, setNoPostsVisible] = createSignal<boolean>(false);
   const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
+    
+    setQuery(allFilters.fetchAllPosts())
+  
     setPosts(pages())
     console.log(pages(),"pages")
-
-  // start the page as displaying all posts
-  if (!pages()) {
-    let noPostsMessage = document.getElementById("no-posts-message");
-    noPostsMessage?.classList.remove("hidden");
-
-    setPosts([]);
-    setCurrentPosts([]);
-  } else {
-    setPosts(pages());
-    setCurrentPosts(pages());
-  }
 
   const searchPosts = async (searchText: string) => {
     setSearchString(searchText);
@@ -134,13 +129,13 @@ export const ServicesView: Component = () => {
 
     const noPostsMessage = document.getElementById("no-posts-message");
 
-    const res = await allFilters.fetchFilteredPosts(
+    setQuery(allFilters.fetchFilteredPosts(
       filters(),
       locationFilters(),
       minorLocationFilters(),
       governingLocationFilters(),
       searchString()
-    );
+    ));
 
     if (res === null || res === undefined) {
       noPostsMessage?.classList.remove("hidden");
