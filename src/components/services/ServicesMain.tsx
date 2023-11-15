@@ -264,11 +264,15 @@ export const ServicesView: Component = () => {
     ) as NodeListOf<HTMLInputElement>;
 
     majorMuniCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
+
+    setClearMajorMunicipalityFilter(true);
 
     setLocationFilters([]);
     filterPosts();
+
+    setClearMajorMunicipalityFilter(false);
   };
 
   const clearMinorMunicipality = () => {
@@ -277,11 +281,15 @@ export const ServicesView: Component = () => {
     ) as NodeListOf<HTMLInputElement>;
 
     minorMuniCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
+
+    setClearMinorMunicipalityFilter(true);
 
     setMinorLocationFilters([]);
     filterPosts();
+
+    setClearMinorMunicipalityFilter(false);
   };
 
   const clearDistrict = () => {
@@ -290,9 +298,11 @@ export const ServicesView: Component = () => {
     ) as NodeListOf<HTMLInputElement>;
 
     districtCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
 
+    //No signal to set here because choosing a governing district does not impact any other choices
+    
     setGoverningLocationFilters([]);
     filterPosts();
   };
