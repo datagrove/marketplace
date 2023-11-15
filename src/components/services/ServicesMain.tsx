@@ -147,11 +147,6 @@ export const ServicesView: Component = () => {
 
     console.log(page(), "page");
 
-    setTotalPosts(0);
-    setPages([]);
-    setPage(0);
-    setEnd(false);
-
     setQuery(
       allFilters.fetchFilteredPosts(
         filters(),
@@ -161,6 +156,11 @@ export const ServicesView: Component = () => {
         searchString()
       )
     );
+
+    setTotalPosts(0);
+    setPages([]);
+    setPage(0);
+    setEnd(false);
   };
 
   const filterPostsByMajorMunicipality = (location: string) => {
