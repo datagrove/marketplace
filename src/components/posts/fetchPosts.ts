@@ -27,34 +27,11 @@ export function fetchFilteredPosts(categoryFilters: Array<number>, locationFilte
             }
             
             return query;
-            // try {
-            //     const { data: posts, error } = await query
-            //     if(error) {
-            //         console.log("supabase error: " + error.message);
-            //     } else {
-            //         return posts;
-            //     }
-            // } catch (e) {
-            //     console.error(e);
-            // }
-         
-    // } catch(e) { 
-    //     console.error(e)
-    // }
+
 } 
 
 export function fetchAllPosts() {
     let query = supabase.from("providerposts").select("*");
     return query;
-    // try {
-    //     const { data: allPosts, error } = await supabase.from("providerposts").select("*")
 
-    //     if(error) {
-    //         console.log("supabase error: " + error.message);
-    //     } else {
-    //         return allPosts
-    //     }
-    // } catch(e) {
-    //     console.error(e);
-    // }
 }

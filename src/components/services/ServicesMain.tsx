@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { createEffect, createSignal ,Show,For} from 'solid-js'
+import { createEffect, createSignal, Show, onMount, batch } from "solid-js";
 import { supabase } from "../../lib/supabaseClient";
 import { CategoryCarousel } from "./CategoryCarousel";
 import { ViewCard } from "./ViewCard";
@@ -9,9 +9,11 @@ import { ui } from "../../i18n/ui";
 import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import * as allFilters from "../posts/fetchPosts";
-import { createInfiniteScroll, createPagination } from '@solid-primitives/pagination';
-import { PostgrestFilterBuilder } from '@supabase/postgrest-js'
-
+import {
+  createInfiniteScroll,
+  createPagination,
+} from "@solid-primitives/pagination";
+import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -29,47 +31,66 @@ if (user.session === null || user.session === undefined) {
   location.href = `/${lang}/login`;
 }
 
-const [totalPosts, setTotalPosts] = createSignal<number>(0)
-const [query, setQuery] = createSignal<PostgrestFilterBuilder<any, any, any[], unknown>>(allFilters.fetchAllPosts())
+const [totalPosts, setTotalPosts] = createSignal<number>(0);
+const [query, setQuery] = createSignal<
+  PostgrestFilterBuilder<any, any, any[], unknown>
+>(allFilters.fetchAllPosts());
 
-function getFromAndTo(){
-   const itemPerPage = 10 
-    let from = totalPosts() * itemPerPage
-    let to = from + itemPerPage
-    if(from >= 0){
-        setTotalPosts(totalPosts() + 1)
-    }
-    return {from,to}
+function getFromAndTo() {
+  const itemPerPage = 10;
+  let from = totalPosts() * itemPerPage;
+  let to = from + itemPerPage - 1;
+  if (from >= 0) {
+    setTotalPosts(totalPosts() + 1);
+  }
+  return { from, to };
 }
 
 function trimmingObject(arrayObj: any) {
-     arrayObj.forEach((obj: any) => {
-        delete obj.email
-        delete obj.provider_id
-        })
-    return arrayObj
-    }
+  arrayObj.forEach((obj: any) => {
+    delete obj.email;
+    delete obj.provider_id;
+  });
+  return arrayObj;
+}
 
 async function getPosts() {
-    const {from, to} = getFromAndTo()
-    const queryQ = query()
-    let posts = []
-    const { data, error } = await queryQ.range(from,to);
-    if (error) {
-        console.log(error)
-    } else {
-    data?.map(item => {
-    productCategories.forEach(productCategories => {
+  const { from, to } = getFromAndTo();
+  console.log(from, to, "from and to");
+  const queryQ = query();
+  let posts = [];
+  const { data, error } = await queryQ.range(from, to);
+  console.log(data?.length, "Query Data");
+  if (error) {
+    console.log(error);
+    onMount(() => {
+      let noPostsMessage = document.getElementById("no-posts-message");
+      noPostsMessage?.classList.remove("hidden");
+    });
+    // } else if (data?.length === 0) {
+    //   console.log("No posts found");
+    //   onMount(() => {
+    //     let noPostsMessage = document.getElementById("no-posts-message");
+    //     noPostsMessage?.classList.remove("hidden");
+
+    //     setTimeout(() => {
+    //       noPostsMessage?.classList.add("hidden");
+    //     }, 3000);
+    //   });
+  } else {
+    data?.map((item) => {
+      productCategories.forEach((productCategories) => {
         if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name
-            }
-        })
-    delete item.service_category
-    })
-        posts = data
-    }
-    trimmingObject(posts)
-    return posts 
+          item.category = productCategories.name;
+        }
+      });
+      delete item.service_category;
+    });
+    posts = data;
+  }
+  trimmingObject(posts);
+  console.log(posts, "posts from getPosts");
+  return posts;
 }
 
 interface ProviderPost {
@@ -86,9 +107,6 @@ interface ProviderPost {
 }
 
 export const ServicesView: Component = () => {
-  const [posts, setPosts] = createSignal<Array<ProviderPost>>([]);
-  const [searchPost, setSearchPost] = createSignal<Array<ProviderPost>>([]);
-  const [currentPosts, setCurrentPosts] = createSignal<Array<ProviderPost>>([]);
   const [filters, setFilters] = createSignal<Array<number>>([]);
   const [locationFilters, setLocationFilters] = createSignal<Array<string>>([]);
   const [minorLocationFilters, setMinorLocationFilters] = createSignal<
@@ -98,13 +116,11 @@ export const ServicesView: Component = () => {
     Array<string>
   >([]);
   const [searchString, setSearchString] = createSignal<string>("");
-  const [noPostsVisible, setNoPostsVisible] = createSignal<boolean>(false);
-  const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
-    
-    setQuery(allFilters.fetchAllPosts())
-  
-    setPosts(pages())
-    console.log(pages(),"pages")
+  const [pages, infiniteScrollLoader, { page, setPage, setEnd, setPages, end }] =
+    createInfiniteScroll(getPosts);
+
+  createEffect(() => console.log(pages(), "pages"));
+  createEffect(() => console.log(page(), "page"));
 
   const searchPosts = async (searchText: string) => {
     setSearchString(searchText);
@@ -120,78 +136,31 @@ export const ServicesView: Component = () => {
       setFilters([...filters(), currentCategory]);
     }
 
+    console.log(filters(), "category filter");
+
     filterPosts();
   };
 
   let timeouts: (string | number | NodeJS.Timeout | undefined)[] = [];
 
-  const filterPosts = async () => {
+  const filterPosts = () => {
 
-    const noPostsMessage = document.getElementById("no-posts-message");
+    console.log(page(), "page");
 
-    setQuery(allFilters.fetchFilteredPosts(
-      filters(),
-      locationFilters(),
-      minorLocationFilters(),
-      governingLocationFilters(),
-      searchString()
-    ));
+    setTotalPosts(0);
+    setPages([]);
+    setPage(0);
+    setEnd(false);
 
-    if (res === null || res === undefined) {
-      noPostsMessage?.classList.remove("hidden");
-
-
-      setPosts(pages());
-      setCurrentPosts(pages());
-      console.error();
-
-    } else if (Object.keys(res).length === 0) {
-      noPostsMessage?.classList.remove("hidden");
-
-      setTimeout(() => {
-        noPostsMessage?.classList.add("hidden");
-      }, 3000);
-
-      timeouts.push(setTimeout(() => {
-        //Clear all filters after the timeout otherwise the message immediately disappears (probably not a perfect solution)
-        clearAllFilters();
-      }, 3000));
-
-
-      let allPosts = await allFilters.fetchAllPosts();
-
-      //Add the categories to the posts in the current language
-      allPosts?.map((item) => {
-        productCategories.forEach((productCategories) => {
-          if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name;
-          }
-        });
-        delete item.service_category;
-      });
-
-      setPosts(pages()!);
-      setCurrentPosts(pages()!);
-    } else {
-    
-      for (let i = 0; i < timeouts.length; i++) {
-        clearTimeout(timeouts[i]);
-      }
-
-      timeouts = [];
-
-      res.map((post) => {
-        productCategories.forEach((productCategory) => {
-          if (post.service_category.toString() === productCategory.id) {
-            post.category = productCategory.name;
-          }
-        });
-        delete post.service_category;
-      });
-
-      setPosts(res);
-      setCurrentPosts(res);
-    }
+    setQuery(
+      allFilters.fetchFilteredPosts(
+        filters(),
+        locationFilters(),
+        minorLocationFilters(),
+        governingLocationFilters(),
+        searchString()
+      )
+    );
   };
 
   const filterPostsByMajorMunicipality = (location: string) => {
@@ -270,7 +239,6 @@ export const ServicesView: Component = () => {
       if (checkbox && checkbox.checked) checkbox.click();
     });
 
-    setSearchPost([]);
     setSearchString("");
     setFilters([]);
     setLocationFilters([]);
@@ -400,23 +368,10 @@ export const ServicesView: Component = () => {
               {t("messages.noPostsSearch")}
             </h1>
           </div>
-          <Show when={currentPosts().length === 0}>
-                    <div class="md:flex-1 w-11/12 items-center">
-                        <ViewCard posts={pages()} />
-                        <Show when={!end()}>
-                            <h1 use:infiniteScrollLoader>Loading...</h1>
-                        </Show>
-                    </div>
-        </Show>
-         <Show when={currentPosts().length >0}>	
-                    <div class="md:flex-1 w-11/12 items-center">	
-                        <ViewCard posts={currentPosts()} />	
-                        <Show when={!end()}>	
-                            <h1 use:infiniteScrollLoader>Loading...</h1>	
-                        </Show>	
-                    </div>	
-                </Show>	
-
+          <ViewCard posts={pages()} />
+          <Show when={!end()}>
+            <h1 use:infiniteScrollLoader>Loading...</h1>
+          </Show>
         </div>
       </div>
     </div>
