@@ -56,18 +56,16 @@ function trimmingObject(arrayObj: any) {
 
 async function getPosts() {
   const { from, to } = getFromAndTo();
-  console.log(from, to, "from and to");
   const queryQ = query();
   let posts = [];
   const { data, error } = await queryQ.range(from, to);
-  console.log(data?.length, "Query Data");
   if (error) {
     console.log(error);
     onMount(() => {
       let noPostsMessage = document.getElementById("no-posts-message");
       noPostsMessage?.classList.remove("hidden");
     });
-    // } else if (data?.length === 0) {
+    // } else if (data?.length === 0 && page === 0) {
     //   console.log("No posts found");
     //   onMount(() => {
     //     let noPostsMessage = document.getElementById("no-posts-message");
@@ -89,7 +87,6 @@ async function getPosts() {
     posts = data;
   }
   trimmingObject(posts);
-  console.log(posts, "posts from getPosts");
   return posts;
 }
 
@@ -115,17 +112,47 @@ export const ServicesView: Component = () => {
   const [governingLocationFilters, setGoverningLocationFilters] = createSignal<
     Array<string>
   >([]);
-  const [clearMajorMunicipalityFilter, setClearMajorMunicipalityFilter] = createSignal<boolean>(false);
-  const [clearMinorMunicipalityFilter, setClearMinorMunicipalityFilter] = createSignal<boolean>(false);
+  const [clearMajorMunicipalityFilter, setClearMajorMunicipalityFilter] =
+    createSignal<boolean>(false);
+  const [clearMinorMunicipalityFilter, setClearMinorMunicipalityFilter] =
+    createSignal<boolean>(false);
   const [searchString, setSearchString] = createSignal<string>("");
-  const [pages, infiniteScrollLoader, { page, setPage, setEnd, setPages, end }] =
-    createInfiniteScroll(getPosts);
+  const [
+    pages,
+    infiniteScrollLoader,
+    { page, setPage, setEnd, setPages, end },
+  ] = createInfiniteScroll(getPosts);
+
+  createEffect(async () => {
+    console.log(query(), "query");
+  });
 
   createEffect(() => console.log(pages(), "pages"));
-  createEffect(() => console.log(page(), "page"));
+  createEffect(() => {
+    console.log(page(), "page");
+    // if (page() === 1 && pages().length === 0) {
+    //     let noPostsMessage = document.getElementById("no-posts-message");
+    //     noPostsMessage?.classList.remove("hidden");
 
-  const searchPosts = async (searchText: string) => {
+    //     setTimeout(() => {
+    //       noPostsMessage?.classList.add("hidden");
+    //     }, 3000);
+
+    //     // setQuery(allFilters.fetchAllPosts());
+    
+    //     // setTotalPosts(0);
+    //     // setPages([]);
+    //     // setPage(0);
+    //     // setEnd(false);
+    //   } else {
+    //     let noPostsMessage = document.getElementById("no-posts-message");
+    //     noPostsMessage?.classList.add("hidden");
+    // }
+  });
+
+  const searchPosts = (searchText: string) => {
     setSearchString(searchText);
+    console.log(searchString() + " search string");
 
     filterPosts();
   };
@@ -138,18 +165,10 @@ export const ServicesView: Component = () => {
       setFilters([...filters(), currentCategory]);
     }
 
-    console.log(filters(), "category filter");
-    console.log(page(), "category page");
-    console.log(pages(), "category pages");
-    console.log(end(), "category end");
-    console.log(totalPosts(), "category totalPosts");
-
     filterPosts();
   };
 
   let timeouts: (string | number | NodeJS.Timeout | undefined)[] = [];
-
-  
 
   const filterPostsByMajorMunicipality = (location: string) => {
     if (locationFilters().includes(location)) {
@@ -235,11 +254,6 @@ export const ServicesView: Component = () => {
     setLocationFilters([]);
     setMinorLocationFilters([]);
     setGoverningLocationFilters([]);
-    
-    console.log(page(), "clear filter page");
-    console.log(pages(), "clear filter pages");
-    console.log(end(), "clear filter end");
-    console.log(totalPosts(), "clear filter totalPosts");
 
     filterPosts();
 
@@ -302,13 +316,12 @@ export const ServicesView: Component = () => {
     });
 
     //No signal to set here because choosing a governing district does not impact any other choices
-    
+
     setGoverningLocationFilters([]);
     filterPosts();
   };
 
   const filterPosts = () => {
-
     console.log(page(), "page");
 
     setQuery(
