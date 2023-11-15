@@ -115,6 +115,8 @@ export const ServicesView: Component = () => {
   const [governingLocationFilters, setGoverningLocationFilters] = createSignal<
     Array<string>
   >([]);
+  const [clearMajorMunicipalityFilter, setClearMajorMunicipalityFilter] = createSignal<boolean>(false);
+  const [clearMinorMunicipalityFilter, setClearMinorMunicipalityFilter] = createSignal<boolean>(false);
   const [searchString, setSearchString] = createSignal<string>("");
   const [pages, infiniteScrollLoader, { page, setPage, setEnd, setPages, end }] =
     createInfiniteScroll(getPosts);
@@ -137,31 +139,17 @@ export const ServicesView: Component = () => {
     }
 
     console.log(filters(), "category filter");
+    console.log(page(), "category page");
+    console.log(pages(), "category pages");
+    console.log(end(), "category end");
+    console.log(totalPosts(), "category totalPosts");
 
     filterPosts();
   };
 
   let timeouts: (string | number | NodeJS.Timeout | undefined)[] = [];
 
-  const filterPosts = () => {
-
-    console.log(page(), "page");
-
-    setQuery(
-      allFilters.fetchFilteredPosts(
-        filters(),
-        locationFilters(),
-        minorLocationFilters(),
-        governingLocationFilters(),
-        searchString()
-      )
-    );
-
-    setTotalPosts(0);
-    setPages([]);
-    setPage(0);
-    setEnd(false);
-  };
+  
 
   const filterPostsByMajorMunicipality = (location: string) => {
     if (locationFilters().includes(location)) {
@@ -228,23 +216,35 @@ export const ServicesView: Component = () => {
     });
 
     majorMuniCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
 
     minorMuniCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
 
     districtCheckboxes.forEach((checkbox) => {
-      if (checkbox && checkbox.checked) checkbox.click();
+      if (checkbox && checkbox.checked) checkbox.checked = false;
     });
+
+    setClearMajorMunicipalityFilter(true);
+    setClearMinorMunicipalityFilter(true);
 
     setSearchString("");
     setFilters([]);
     setLocationFilters([]);
     setMinorLocationFilters([]);
     setGoverningLocationFilters([]);
+    
+    console.log(page(), "clear filter page");
+    console.log(pages(), "clear filter pages");
+    console.log(end(), "clear filter end");
+    console.log(totalPosts(), "clear filter totalPosts");
+
     filterPosts();
+
+    setClearMajorMunicipalityFilter(false);
+    setClearMinorMunicipalityFilter(false);
   };
 
   const clearServiceCategories = () => {
@@ -295,6 +295,31 @@ export const ServicesView: Component = () => {
 
     setGoverningLocationFilters([]);
     filterPosts();
+  };
+
+  const filterPosts = () => {
+
+    console.log(page(), "page");
+
+    setQuery(
+      allFilters.fetchFilteredPosts(
+        filters(),
+        locationFilters(),
+        minorLocationFilters(),
+        governingLocationFilters(),
+        searchString()
+      )
+    );
+
+    setTotalPosts(0);
+    setPages([]);
+    setPage(0);
+    setEnd(false);
+
+    console.log(page(), "filterposts page");
+    console.log(pages(), "filterposts pages");
+    console.log(end(), "filterposts end");
+    console.log(totalPosts(), "filterposts totalPosts");
   };
 
   return (
@@ -356,6 +381,8 @@ export const ServicesView: Component = () => {
             filterPostsByMajorMunicipality={filterPostsByMajorMunicipality}
             filterPostsByMinorMunicipality={filterPostsByMinorMunicipality}
             filterPostsByGoverningDistrict={filterPostsByGoverningDistrict}
+            clearMajorMunicipalityFilter={clearMajorMunicipalityFilter()}
+            clearMinorMunicipalityFilter={clearMinorMunicipalityFilter()}
           />
         </div>
 

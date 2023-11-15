@@ -88,6 +88,8 @@ interface Props {
   filterPostsByMajorMunicipality: (location: string) => void;
   filterPostsByMinorMunicipality: (location: string) => void;
   filterPostsByGoverningDistrict: (location: string) => void;
+  clearMajorMunicipalityFilter: boolean;
+  clearMinorMunicipalityFilter: boolean;
 }
 
 export const LocationFilter: Component<Props> = (props) => {
@@ -156,6 +158,10 @@ export const LocationFilter: Component<Props> = (props) => {
   createEffect(() => {
     filteredMinorMunis = [];
 
+    if (props.clearMajorMunicipalityFilter === true) {
+      setLocationFilters([]);
+    }
+
     locationFilters().forEach((item) => {
       let currentMinorMunis = minor_municipalities.filter(
         (el) => el.major_municipality === item.id
@@ -187,6 +193,10 @@ export const LocationFilter: Component<Props> = (props) => {
 
   createEffect(() => {
     filteredGoverningDistricts = [];
+
+    if (props.clearMinorMunicipalityFilter === true) {
+      setMinorLocationFilters([]);
+    }
 
     minorLocationFilters().forEach((item) => {
       let currentGoverningDistricts = governing_districts.filter(
