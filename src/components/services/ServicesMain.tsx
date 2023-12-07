@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { createSignal, createEffect } from "solid-js";
+import { createEffect, createSignal ,Show,For} from 'solid-js'
 import { supabase } from "../../lib/supabaseClient";
 import { CategoryCarousel } from "./CategoryCarousel";
 import { ViewCard } from "./ViewCard";
@@ -9,6 +9,7 @@ import { ui } from "../../i18n/ui";
 import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import * as allFilters from "../posts/fetchPosts";
+import { createInfiniteScroll, createPagination } from '@solid-primitives/pagination';
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -26,16 +27,46 @@ if (user.session === null || user.session === undefined) {
   location.href = `/${lang}/login`;
 }
 
-const { data, error } = await supabase.from("providerposts").select("*");
+const [totalPosts, setTotalPosts] = createSignal<number>(0)
 
-data?.map((item) => {
-  productCategories.forEach((productCategories) => {
-    if (item.service_category.toString() === productCategories.id) {
-      item.category = productCategories.name;
+function getFromAndTo(){
+   const itemPerPage = 10 
+    let from = totalPosts() * itemPerPage
+    let to = from + itemPerPage
+    if(from >= 0){
+        setTotalPosts(totalPosts() + 1)
     }
-  });
-  delete item.service_category;
-});
+    return {from,to}
+}
+
+function trimmingObject(arrayObj: any) {
+     arrayObj.forEach((obj: any) => {
+        delete obj.email
+        delete obj.provider_id
+        })
+    return arrayObj
+    }
+
+async function getPosts() {
+    const {from, to} = getFromAndTo()
+    let posts = []
+    const { data, error } = await supabase.from('providerposts').select('*').range(from,to);
+    if (error) {
+        console.log(error)
+    } else {
+    data?.map(item => {
+    productCategories.forEach(productCategories => {
+        if (item.service_category.toString() === productCategories.id) {
+            item.category = productCategories.name
+            }
+        })
+    delete item.service_category
+    })
+        posts = data
+    }
+    trimmingObject(posts)
+    return posts 
+}
 
 interface ProviderPost {
   content: string;
@@ -64,17 +95,20 @@ export const ServicesView: Component = () => {
   >([]);
   const [searchString, setSearchString] = createSignal<string>("");
   const [noPostsVisible, setNoPostsVisible] = createSignal<boolean>(false);
+  const [pages,infiniteScrollLoader,{end}] = createInfiniteScroll(getPosts)
+    setPosts(pages())
+    console.log(pages(),"pages")
 
   // start the page as displaying all posts
-  if (!data) {
+  if (!pages()) {
     let noPostsMessage = document.getElementById("no-posts-message");
     noPostsMessage?.classList.remove("hidden");
 
     setPosts([]);
     setCurrentPosts([]);
   } else {
-    setPosts(data);
-    setCurrentPosts(data);
+    setPosts(pages());
+    setCurrentPosts(pages());
   }
 
   const searchPosts = async (searchText: string) => {
@@ -112,8 +146,8 @@ export const ServicesView: Component = () => {
       noPostsMessage?.classList.remove("hidden");
 
 
-      setPosts([]);
-      setCurrentPosts([]);
+      setPosts(pages());
+      setCurrentPosts(pages());
       console.error();
 
     } else if (Object.keys(res).length === 0) {
@@ -141,8 +175,8 @@ export const ServicesView: Component = () => {
         delete item.service_category;
       });
 
-      setPosts(allPosts!);
-      setCurrentPosts(allPosts!);
+      setPosts(pages()!);
+      setCurrentPosts(pages()!);
     } else {
     
       for (let i = 0; i < timeouts.length; i++) {
@@ -371,7 +405,23 @@ export const ServicesView: Component = () => {
               {t("messages.noPostsSearch")}
             </h1>
           </div>
-          <ViewCard posts={currentPosts()} />
+          <Show when={currentPosts().length === 0}>
+                    <div class="md:flex-1 w-11/12 items-center">
+                        <ViewCard posts={pages()} />
+                        <Show when={!end()}>
+                            <h1 use:infiniteScrollLoader>Loading...</h1>
+                        </Show>
+                    </div>
+        </Show>
+         <Show when={currentPosts().length >0}>	
+                    <div class="md:flex-1 w-11/12 items-center">	
+                        <ViewCard posts={currentPosts()} />	
+                        <Show when={!end()}>	
+                            <h1 use:infiniteScrollLoader>Loading...</h1>	
+                        </Show>	
+                    </div>	
+                </Show>	
+
         </div>
       </div>
     </div>
