@@ -324,6 +324,9 @@ productCategoryInfo:{
       { name: "Santé", description: "Services de santé", ariaLabel: "Santé", id: "11" },
       { name: "Travail", description: "Services du travail", ariaLabel: "Travail", id: "12" },
       { name: "Voyage", description: "Services de voyage", ariaLabel: "Voyage", id: "13" },
+      { name: 'Éducation', description: 'Enseignement, Tutorat, Formation et Autres Services Éducatifs', ariaLabel: "Éducation", id: "14" },
+      { name: 'Nourriture et Boisson', description: 'Les Services Alimentaires', ariaLabel: "Alimentaires", id: "15" },
+      { name: 'Virtuel', description: 'Services Virtuels', ariaLabel: "Virtuel", id: "16" },
       // Add more products as needed
     ]
   },

@@ -321,6 +321,9 @@ export const Spanish = {
       { name: 'Salud', description: 'Servicios de Salud', ariaLabel: "Salud", id: "11" },
       { name: 'Servicios Laborales', description: 'Servicios Laborales', ariaLabel: "Servicios Laborales", id: "12" },
       { name: 'Viajes', description: 'Servicios de Viaje', ariaLabel: "Viajes", id: "13" },
+      { name: 'Educación', description: 'Enseñanza, Tutoría, Capacitación y Otros Servicios Educativos', ariaLabel: "Educación", id: "14" },
+      { name: 'Comida y Bebida', description: 'Servicios de Comida', ariaLabel: "Comida", id: "15" },
+      { name: 'Virtual', description: 'Servicios Virtuales', ariaLabel: "Virtual", id: "16" },
       // Add more products as needed
     ],
   },
