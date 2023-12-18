@@ -1112,6 +1112,9 @@ export const ProviderProfileView: Component = () => {
                     </div>
                   </summary>
                   <div class="p-2">
+                  <div class="pb-4 flex justify-center">
+                    <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+                  </div>
                     <div class="justify-center flex">
                       <a
                         class="btn-primary mx-6 mb-4"
@@ -1747,6 +1750,9 @@ export const ProviderProfileView: Component = () => {
             </div>
 
             {/* View Post Cards*/}
+            <div class="pt-6">
+              <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+            </div>
             <div class="my-6">
               <ViewProviderPosts />
             </div>

@@ -237,6 +237,9 @@ export const CreateNewPost: Component = () => {
 
   return (
     <div>
+      <div class="pb-4">
+        <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+      </div>
       <form onSubmit={submit}>
         <label for="Title" class="text-ptext1 dark:text-ptext1-DM">
           {t("formLabels.title")}:

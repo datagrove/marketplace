@@ -110,6 +110,7 @@ export const French = {
     mustSignIn: 'Vous devez être connecté pour voir les services disponibles.',
     profileEdits: "Les modifications du profil ne seront enregistrées qu'après avoir cliqué sur le bouton Enregistrer le profil !",
     noPostsSearch: "Aucun article ne correspond à cette recherche spécifique - veuillez essayer un autre filtre ou un autre mot clé",
+    noDelete: "Veuillez noter: Notre fonctionnalité Modifier les Article est actuellement en construction. Pour mettre à jour le contenu de la publication entre-temps, veuillez supprimer la publication obsolète et en créer une nouvelle. Merci pour votre patience!",
   },
   
   formLabels: {
