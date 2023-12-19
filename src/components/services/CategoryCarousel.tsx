@@ -26,6 +26,9 @@ import leftArrow from "../../assets/categoryIcons/circled-left-arrow.svg";
 import beauty from "../../assets/categoryIcons/beauty-salon.svg";
 import finance from "../../assets/categoryIcons/banking-bank.svg";
 import financeDM from "../../assets/categoryIcons/banking-bank-DM.svg";
+import education from "../../assets/categoryIcons/education.svg";
+import food from "../../assets/categoryIcons/plate.svg";
+import virtual from "../../assets/categoryIcons/virtual.svg";
 import { currentLanguage } from "../../lib/languageSelectionStore";
 import { doc } from "prettier";
 
@@ -69,6 +72,12 @@ categories.map((category) => {
     category.icon = worker;
   } else if (category.id === 13) {
     category.icon = travel;
+  } else if (category.id === 14) {
+    category.icon = education
+  } else if (category.id === 15) {
+    category.icon = food
+  } else if (category.id === 16) {
+    category.icon = virtual
   }
 });
 
