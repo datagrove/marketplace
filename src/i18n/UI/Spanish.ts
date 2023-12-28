@@ -10,11 +10,11 @@ export const Spanish = {
     signIn: 'Iniciar Sesión',
     createClientAccount: 'Crear Cuenta de Cliente',
     editClientAccount: 'Editar Cuenta de Cliente',
-    viewClientAccount: 'Ver Cuenta de Cliente',
+    viewClientAccount: 'Mi Perfil de Cliente',
     createPost: 'Crear Publicación',
     createProviderAccount: 'Crear Cuenta de Proveedor',
     editProviderAccount: 'Editar Cuenta de Proveedor',
-    viewProviderAccount: 'Mi Cuenta de proveedor',
+    viewProviderAccount: 'Cambiar a Cuenta de Proveedor',
     clientViewProviderAccount: "Perfil del proveedor",
     page404: '404 - Página no Encontrada',
     requestPasswordReset: 'Solicitud para Recuperar la Contraseña',
@@ -161,6 +161,7 @@ export const Spanish = {
   menus: {
     services: 'Buscar Servicios',
     contactUs: 'Contáctenos',
+    aboutUs: 'Acerca de TodoServis',
   },
 
   toolTips: {

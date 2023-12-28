@@ -162,6 +162,7 @@ export interface uiObject {
   menus: {
     services: string,
     contactUs: string,
+    aboutUs: string,
   },
 
   toolTips: {

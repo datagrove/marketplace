@@ -10,11 +10,11 @@ export const English = {
     signIn: 'Sign In',
     createClientAccount: 'Create Client Account',
     editClientAccount: 'Edit Client Account',
-    viewClientAccount: 'My Client Account',
+    viewClientAccount: 'My Client Profile',
     createPost: 'Create Post',
     createProviderAccount: 'Create Provider Account',
     editProviderAccount: 'Edit Provider Account',
-    viewProviderAccount: 'My Provider Profile',
+    viewProviderAccount: 'Switch to Provider Account',
     clientViewProviderAccount: 'Provider Profile',
     page404: '404 - Page Not Found',
     requestPasswordReset: 'Request Password Reset',
@@ -162,6 +162,7 @@ export const English = {
   menus: {
     services: 'Find Services',
     contactUs: 'Contact Us',
+    aboutUs: 'About TodoServis',
   },
 
   toolTips: {

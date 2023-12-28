@@ -10,11 +10,11 @@ export const French = {
     signIn: "S'identifier",
     createClientAccount: 'Créer un compte client',
     editClientAccount: 'Modifier le compte client',
-    viewClientAccount: "Voir le compte client",
+    viewClientAccount: "Mon Profil Client",
     createPost: "Créer un article",
     createProviderAccount: "Créer un compte fournisseur",
     editProviderAccount: "Modifier le compte du fournisseur",
-    viewProviderAccount: "Mon compte fournisseur",
+    viewProviderAccount: "Passer au Compte Fournisseur",
     clientViewProviderAccount: "Profil du fournisseur",
     page404: "404 - Page non trouvée",
     requestPasswordReset: "Demander la réinitialisation du mot de passe",
@@ -161,6 +161,7 @@ export const French = {
   menus: {
     services: 'Trouver des Services',
     contactUs: 'Contactez-nous',
+    aboutUs: 'Á Propos de TodoServis',
   },
 
   toolTips: {

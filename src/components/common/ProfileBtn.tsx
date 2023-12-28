@@ -40,14 +40,31 @@ export const ProfileBtn = () => {
     if (isUser()) {
       return (
         <div class="">
-          <div class="pb-2 border-b-2 border-border1 dark:border-border1-DM">
+          <div class="py-1">
             <ClientRouting />
           </div>
-          <div class="mt-2 border-b-2 border-border1 dark:border-border1-DM pb-2">
-            <div>
+
+          <div class="py-1">
+            <a href={`/${lang}/about`}>{t('menus.aboutUs')}</a>
+          </div>
+
+          <div class="py-1">
+            <a href={`mailto:support@todoservis.com`}>{t('menus.contactUs')}</a>
+          </div>
+
+          <div class="py-1">
+            <a href={`/${lang}/terms`}>{t('pageTitles.terms')}</a>
+          </div>
+
+          <div class="md:hidden py-1">
+            <LanguagePicker />
+          </div>
+
+          <div class="my-2">
+            <div class="border border-border1 dark:border-border1-DM rounded px-2">
             <ProviderRegistrationRouting />
             </div>
-            <CreatePostsRouting />
+            {/* <CreatePostsRouting /> */}
           </div>
         </div>
       );
@@ -63,19 +80,18 @@ export const ProfileBtn = () => {
         </svg>
       </button>
       <ul id="profileItems" class="hidden fixed z-50 right-2 bg-background1 dark:bg-background1-DM m-2 p-2 rounded-lg justify-start shadow-md shadow-shadow-LM dark:shadow-shadow-DM">
-        {renderWhenUser()}
+        {/* {renderWhenUser()} */}
         <div class="mt-2">
-        <div>
-          <a href={`/${lang}`}>{t('pageTitles.home')}</a>
+          {/* Home */}
+          <div class="">
+            <a href={`/${lang}`}>{t('pageTitles.home')}</a>
+          </div>
         </div>
-        <div>
-        <a href={`mailto:support@todoservis.com`}>{t('menus.contactUs')}</a>
-        </div>
-          <AuthMode />
-        </div>
-        <div class="md:hidden mt-2">
-          <LanguagePicker />
-        </div>
+
+        {renderWhenUser()}
+
+        <AuthMode />
+        
       </ul>
     </div>
   );
