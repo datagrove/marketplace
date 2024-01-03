@@ -305,6 +305,9 @@ export interface uiObject {
       { ariaLabel: string, icon: string, href: string },
     ],
     footNote: string,
+    footerAdd: string,
+    footerPosts: string,
+    footerProfile: string,
   },
 
 productCategoryInfo:{

@@ -1,10 +1,14 @@
 ---
 import { SITE } from "../../config";
 import { Icon } from 'astro-icon/components';
-import { getLangFromUrl } from "../../i18n/utils";
+import { createSignal, createEffect } from "solid-js";
+import type { AuthSession } from "@supabase/supabase-js";
+import { supabase } from "../../lib/supabaseClient";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { useTransition } from "react";
 
 const lang = getLangFromUrl(Astro.url);
-
+const t = useTranslations(lang);
 
 //Defines the types for the items from the config file
 interface Link {
@@ -25,81 +29,172 @@ export interface Props {
   theme?: string;
 }
 
+async function isProvider() {  
+  const lang = getLangFromUrl(Astro.url);
+  const t = useTranslations(lang);
+  
+  const [provider, setProvider] = createSignal(false);
+  const [session, setSession] = createSignal<AuthSession | null>(null);
+
+  if(session()) {
+    try {
+      if(session() === null) {
+        alert("Not a provider?")
+        alert(t("messages.signIn"));
+        location.href = `/${lang}/login`;
+      } else {
+        const { data: provider, error: providerError } = await supabase
+          .from("providers")
+          .select("*")
+          .eq("user_id", session()!.user.id);
+
+          if(!provider) {
+            return false;
+          } else {
+            return true;
+          }
+      }
+    } catch(e) {
+      console.error(e)
+    }
+  }
+
+}
+
+let provider = isProvider();
+
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = ''} = Astro.props;
 ---
-<footer class="flex flex-col bg-background2 dark:bg-background2-DM mt-4 py-4 -mx-4">
-  <div class="w-full flex flex-col items-center">
-      <div class="">
-        <div class="mb-2 text-center text-ptext2 dark:text-text2-DM  md:w-full">
-          <a class="inline-block font-bold text-xl" href={SITE.url}>{SITE?.name}</a>
-        </div>
-      </div>
 
-      <div class="flex justify-center text-center max-w-screen-sm w-full my-2 md:my-4">
+<div class="">
+  <div class="flex flex-col bg-background2 dark:bg-background2-DM mt-4 py-4 -mx-4">
+    <div class="w-full flex flex-col items-center">
+        <div class="">
+          <div class="mb-2 text-center text-ptext2 dark:text-text2-DM  md:w-full">
+            <a class="inline-block font-bold text-xl" href={SITE.url}>{SITE?.name}</a>
+          </div>
+        </div>
+
+        <div class="flex justify-center text-center max-w-screen-sm w-full my-2 md:my-4">
+            {
+              secondaryLinks.map(({ text, href }) => (
+              <div class="flex text-center items-center justify-center w-1/4 text-ptext2 dark:text-ptext2-DM px-4"> 
+                <div class="flex justify-center items-center">
+                  <a
+                    class="text-muted text-center text-sm text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
+                    href={`/${lang}/${href}`}
+                    set:html={text}
+                  />
+                </div>
+              </div> 
+              ))
+            }
+          <!-- </div> -->
           {
-            secondaryLinks.map(({ text, href }) => (
-            <div class="flex text-center items-center justify-center w-1/4 text-ptext2 dark:text-ptext2-DM px-4"> 
-              <div class="flex justify-center items-center">
-                <a
-                  class="text-muted text-center text-sm text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
-                  href={`/${lang}/${href}`}
-                  set:html={text}
-                />
+            links.map(({ title, links }) => (
+              <div class="flex justify-center items-center w-1/4 px-4">
+                {links && Array.isArray(links) && links.length > 0 && (
+                  <ul class="text-sm">
+                    {links.map(({ text, href, ariaLabel }) => (
+                      <li class="text-link2 dark:text-link2-DM">
+                        <a
+                          class="text-muted text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
+                          href={href}
+                          aria-label={ariaLabel}
+                        >
+                          <Fragment set:html={text} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            </div> 
             ))
           }
-        <!-- </div> -->
-        {
-          links.map(({ title, links }) => (
-            <div class="flex justify-center items-center w-1/4 px-4">
-              {links && Array.isArray(links) && links.length > 0 && (
-                <ul class="text-sm">
-                  {links.map(({ text, href, ariaLabel }) => (
-                    <li class="text-link2 dark:text-link2-DM">
-                      <a
-                        class="text-muted text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
-                        href={href}
-                        aria-label={ariaLabel}
-                      >
-                        <Fragment set:html={text} />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))
-        }
+        </div>
       </div>
-    </div>
-    
-    <div class="text-center text-text2 dark:text-text2-DM">
-      {
-        socialLinks?.length ? (
-          <ul class="flex justify-center mb-2">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
-              <li>
-                <a
-                  class="text-muted dark:text-icon2-DM text-icon2 hover:bg-shadow-LM dark:hover:bg-shadow-DM focus:outline-none focus:ring-4 rounded-lg text-sm p-2 inline-flex items-center"
-                  aria-label={ariaLabel}
-                  href={href}
-                  target="_blank"
-                >
-                  {icon && <Icon name={icon} class="w-5 h-5" />}
-                  <Fragment set:html={text}/>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          ''
-        )
-      }
+      
+      <div class="text-center text-text2 dark:text-text2-DM">
+        {
+          socialLinks?.length ? (
+            <ul class="flex justify-center mb-2">
+              {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+                <li>
+                  <a
+                    class="text-muted dark:text-icon2-DM text-icon2 hover:bg-shadow-LM dark:hover:bg-shadow-DM focus:outline-none focus:ring-4 rounded-lg text-sm p-2 inline-flex items-center"
+                    aria-label={ariaLabel}
+                    href={href}
+                    target="_blank"
+                  >
+                    {icon && <Icon name={icon} class="w-5 h-5" />}
+                    <Fragment set:html={text}/>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            ''
+          )
+        }
 
-      <div class="text-sm dark:text-text2-DM text-text2">
-        <Fragment set:html={footNote} />
+        <div class="text-sm dark:text-text2-DM text-text2">
+          <Fragment set:html={footNote} />
+        </div>
       </div>
     </div>
   </div>
-</footer>
+
+  { provider && 
+
+  <div class="flex flex-col bg-background2 dark:bg-background2-DM -mx-4">
+    <div class="border-t py-2 flex justify-center items-center">
+      <div class="flex justify-center items-center">
+        <div class="w-24 flex flex-col justify-center items-center">
+          <a 
+            href={`/${lang}/posts/createpost`}
+            class="flex flex-col justify-center items-center"
+          >
+            <svg class="fill-icon2 dark:fill-icon2-DM" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 1920 1920">
+              <path d="M866.332 213v653.332H213v186.666h653.332v653.332h186.666v-653.332h653.332V866.332h-653.332V213z" fill-rule="evenodd"/>
+            </svg>
+            <p class="text-ptext2 dark:text-ptext2-DM text-xs">{t('footerData.footerAdd')}</p>
+          </a>
+        </div>
+
+        <div class="w-24 flex flex-col justify-center items-center">
+          <a 
+            href={`/${lang}/provider/profile`}
+            class="flex flex-col justify-center items-center"
+          >
+            <svg class="fill-icon2 dark:fill-icon2-DM" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24">
+              <path d="M6 7H4V9H6V7Z" />
+              <path d="M20.0699 7H8.06995V9H20.0699V7Z" />
+              <path d="M20.0699 11H8.06995V13H20.0699V11Z" />
+              <path d="M8.06995 15H20.0699V17H8.06995V15Z" />
+              <path d="M4 11H6V13H4V11Z" />
+              <path d="M6 15H4V17H6V15Z" />
+            </svg>
+            <p class="text-ptext2 dark:text-ptext2-DM text-xs">{t('footerData.footerPosts')}</p>
+          </a>
+        </div>
+
+        <div class="w-24 flex flex-col justify-center items-center">
+          <a 
+            href={`/${lang}/provider/profile`}
+            class="flex flex-col justify-center items-center"
+          >
+            <svg class="fill-icon2 dark:fill-icon2-DM" width="48px" height="48px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z" />
+            </svg>
+            <p class="text-ptext2 dark:text-ptext2-DM text-xs">{t('footerData.footerProfile')}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="text-sm dark:text-text2-DM text-text2 text-center pb-2">
+      <Fragment set:html={footNote} />
+    </div> -->
+  </div>
+}
+</div>

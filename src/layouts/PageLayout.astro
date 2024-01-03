@@ -2,6 +2,7 @@
 import Layout from '../layouts/BaseLayout.astro';
 // import { headerData, footerData } from '../data';
 import Footer from "../components/common/Footer.astro";
+// import { ProviderFooter } from "../components/common/ProviderFooter";
 import Header from "../components/common/Header.astro";
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { ui } from '../i18n/ui'
@@ -27,6 +28,9 @@ const {pageTitle, pageDescription } = Astro.props
     </main>
     <div class="footer sticky top-[100vh]">
       <Footer {...footerData} />
+    </div>
+    <div>
+      <!-- <ProviderFooter /> -->
     </div>
   </div>
 </Layout>
