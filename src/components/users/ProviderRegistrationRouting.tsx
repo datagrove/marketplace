@@ -21,6 +21,11 @@ export const ProviderRegistrationRouting = () => {
     const createProviderProfileLink = document.getElementById(
         "createProviderAccount"
     );
+
+    function providerMode() {
+
+    }
+
     const isProvider = async () => {
         try {
             const { data, error } = await supabase
@@ -41,7 +46,7 @@ export const ProviderRegistrationRouting = () => {
     isProvider();
 
     return (
-        <a href={providerRouting()} class="" id="createEditProviderProfile">
+        <a href={providerRouting()} class="border-4 border-purple-300" id="createEditProviderProfile">
             {createText()}
         </a>
     );
