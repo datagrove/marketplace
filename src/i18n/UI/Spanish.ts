@@ -15,6 +15,7 @@ export const Spanish = {
     createProviderAccount: 'Crear Cuenta de Proveedor',
     editProviderAccount: 'Editar Cuenta de Proveedor',
     viewProviderAccount: 'Cambiar a Cuenta de Proveedor',
+    changeToUserAccount: 'Cambiar a Cuenta de Usuario',
     clientViewProviderAccount: "Perfil del proveedor",
     page404: '404 - Página no Encontrada',
     requestPasswordReset: 'Solicitud para Recuperar la Contraseña',

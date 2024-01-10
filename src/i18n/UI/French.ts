@@ -15,6 +15,7 @@ export const French = {
     createProviderAccount: "Créer un compte fournisseur",
     editProviderAccount: "Modifier le compte du fournisseur",
     viewProviderAccount: "Passer au Compte Fournisseur",
+    changeToUserAccount: 'Passer au Compte Utilisateur',
     clientViewProviderAccount: "Profil du fournisseur",
     page404: "404 - Page non trouvée",
     requestPasswordReset: "Demander la réinitialisation du mot de passe",

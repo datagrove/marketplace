@@ -49,8 +49,10 @@ async function isProvider() {
           .eq("user_id", session()!.user.id);
 
           if(!provider) {
+            alert("!provider")
             return false;
           } else {
+            alert("provider")
             return true;
           }
       }
@@ -63,92 +65,110 @@ async function isProvider() {
 
 let provider = isProvider();
 
+let test = true;
+
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = ''} = Astro.props;
 ---
 
-<div class="">
-  <div class="flex flex-col bg-background2 dark:bg-background2-DM mt-4 py-4 -mx-4">
-    <div class="w-full flex flex-col items-center">
-        <div class="">
-          <div class="mb-2 text-center text-ptext2 dark:text-text2-DM  md:w-full">
-            <a class="inline-block font-bold text-xl" href={SITE.url}>{SITE?.name}</a>
-          </div>
-        </div>
+<script>
+  function testSwitch() {
+    let providerMode = localStorage.getItem('providerMode')
 
-        <div class="flex justify-center text-center max-w-screen-sm w-full my-2 md:my-4">
+    if(providerMode === "yes") {
+      return true;
+    }
+
+    if(providerMode === "no") {
+      return false;
+    }
+  }
+</script>
+
+<div class="">
+  { test && 
+    <div class="flex flex-col bg-background2 dark:bg-background2-DM mt-4 py-4 -mx-4">
+      <div class="w-full flex flex-col items-center">
+          <div class="">
+            <div class="mb-2 text-center text-ptext2 dark:text-text2-DM  md:w-full">
+              <a class="inline-block font-bold text-xl" href={SITE.url}>{SITE?.name}</a>
+            </div>
+          </div>
+
+          <div class="flex justify-center text-center max-w-screen-sm w-full my-2 md:my-4">
+              {
+                secondaryLinks.map(({ text, href }) => (
+                <div class="flex text-center items-center justify-center w-1/4 text-ptext2 dark:text-ptext2-DM px-4"> 
+                  <div class="flex justify-center items-center">
+                    <a
+                      class="text-muted text-center text-sm text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
+                      href={`/${lang}/${href}`}
+                      set:html={text}
+                    />
+                  </div>
+                </div> 
+                ))
+              }
+            <!-- </div> -->
             {
-              secondaryLinks.map(({ text, href }) => (
-              <div class="flex text-center items-center justify-center w-1/4 text-ptext2 dark:text-ptext2-DM px-4"> 
-                <div class="flex justify-center items-center">
-                  <a
-                    class="text-muted text-center text-sm text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
-                    href={`/${lang}/${href}`}
-                    set:html={text}
-                  />
+              links.map(({ title, links }) => (
+                <div class="flex justify-center items-center w-1/4 px-4">
+                  {links && Array.isArray(links) && links.length > 0 && (
+                    <ul class="text-sm">
+                      {links.map(({ text, href, ariaLabel }) => (
+                        <li class="text-link2 dark:text-link2-DM">
+                          <a
+                            class="text-muted text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
+                            href={href}
+                            aria-label={ariaLabel}
+                          >
+                            <Fragment set:html={text} />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-              </div> 
               ))
             }
-          <!-- </div> -->
-          {
-            links.map(({ title, links }) => (
-              <div class="flex justify-center items-center w-1/4 px-4">
-                {links && Array.isArray(links) && links.length > 0 && (
-                  <ul class="text-sm">
-                    {links.map(({ text, href, ariaLabel }) => (
-                      <li class="text-link2 dark:text-link2-DM">
-                        <a
-                          class="text-muted text-link2 hover:text-link2Hov dark:text-link2-DM dark:hover:text-link2Hov-DM transition duration-150 ease-in-out"
-                          href={href}
-                          aria-label={ariaLabel}
-                        >
-                          <Fragment set:html={text} />
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))
-          }
+          </div>
         </div>
-      </div>
-      
-      <div class="text-center text-text2 dark:text-text2-DM">
-        {
-          socialLinks?.length ? (
-            <ul class="flex justify-center mb-2">
-              {socialLinks.map(({ ariaLabel, href, text, icon }) => (
-                <li>
-                  <a
-                    class="text-muted dark:text-icon2-DM text-icon2 hover:bg-shadow-LM dark:hover:bg-shadow-DM focus:outline-none focus:ring-4 rounded-lg text-sm p-2 inline-flex items-center"
-                    aria-label={ariaLabel}
-                    href={href}
-                    target="_blank"
-                  >
-                    {icon && <Icon name={icon} class="w-5 h-5" />}
-                    <Fragment set:html={text}/>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            ''
-          )
-        }
+        
+        <div class="text-center text-text2 dark:text-text2-DM">
+          {
+            socialLinks?.length ? (
+              <ul class="flex justify-center mb-2">
+                {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+                  <li>
+                    <a
+                      class="text-muted dark:text-icon2-DM text-icon2 hover:bg-shadow-LM dark:hover:bg-shadow-DM focus:outline-none focus:ring-4 rounded-lg text-sm p-2 inline-flex items-center"
+                      aria-label={ariaLabel}
+                      href={href}
+                      target="_blank"
+                    >
+                      {icon && <Icon name={icon} class="w-5 h-5" />}
+                      <Fragment set:html={text}/>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              ''
+            )
+          }
 
-        <div class="text-sm dark:text-text2-DM text-text2">
-          <Fragment set:html={footNote} />
+          <div class="text-sm dark:text-text2-DM text-text2">
+            <Fragment set:html={footNote} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 
-  { provider && 
+  { !test && 
 
   <div class="flex flex-col bg-background2 dark:bg-background2-DM -mx-4">
     <div class="border-t py-2 flex justify-center items-center">
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-start">
         <div class="w-24 flex flex-col justify-center items-center">
           <a 
             href={`/${lang}/posts/createpost`}
@@ -157,7 +177,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = ''} = Astr
             <svg class="fill-icon2 dark:fill-icon2-DM" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 1920 1920">
               <path d="M866.332 213v653.332H213v186.666h653.332v653.332h186.666v-653.332h653.332V866.332h-653.332V213z" fill-rule="evenodd"/>
             </svg>
-            <p class="text-ptext2 dark:text-ptext2-DM text-xs">{t('footerData.footerAdd')}</p>
+            <p class="text-ptext2 dark:text-ptext2-DM text-xs text-center">{t('footerData.footerAdd')}</p>
           </a>
         </div>
 

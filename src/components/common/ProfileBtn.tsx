@@ -98,7 +98,9 @@ export const ProfileBtn = () => {
 
             <Show when={ isProvider() }>
               <div class="border border-border1 dark:border-border1-DM rounded px-2 text-center">
-                Switch to User Account
+                <button>
+                  {t('pageTitles.changeToUserAccount')}
+                </button>
               </div>
             </Show>
 

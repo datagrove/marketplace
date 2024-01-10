@@ -15,6 +15,7 @@ export const English = {
     createProviderAccount: 'Create Provider Account',
     editProviderAccount: 'Edit Provider Account',
     viewProviderAccount: 'Switch to Provider Account',
+    changeToUserAccount: 'Switch to User Account',
     clientViewProviderAccount: 'Provider Profile',
     page404: '404 - Page Not Found',
     requestPasswordReset: 'Request Password Reset',

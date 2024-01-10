@@ -15,6 +15,7 @@ export interface uiObject {
     createProviderAccount: string,
     editProviderAccount: string,
     viewProviderAccount: string,
+    changeToUserAccount: string,
     clientViewProviderAccount: string,
     page404: string,
     requestPasswordReset: string,
