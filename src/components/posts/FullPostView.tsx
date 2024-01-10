@@ -1,4 +1,5 @@
-import { Component, createSignal, createEffect, Show } from "solid-js";
+import type { Component } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import { supabase } from "../../lib/supabaseClient";
 import { DeletePostButton } from "../posts/DeletePostButton";
 import type { AuthSession } from "@supabase/supabase-js";
@@ -41,7 +42,29 @@ export const ViewFullPost: Component<Props> = (props) => {
     const [post, setPost] = createSignal<Post>();
     const [session, setSession] = createSignal<AuthSession | null>(null);
     const [postImages, setPostImages] = createSignal<string[]>([]);
+    const [editPostMode, setEditPostMode] = createSignal<boolean>(false); 
 
+    const enablePostEditMode = () => {
+        // alert("In edit post mode");
+        setEditPostMode(true);
+    }
+
+    const savePost = () => {
+        setEditPostMode(false);
+    }
+
+    createEffect(async() => {
+        if(editPostMode()) {
+            try {
+                const { data: title, error } = await supabase
+                    .from("provider_post")
+                    .select("*")
+
+            } catch(error) {
+                console.error("There was an error: " + error)
+            }
+        }
+    })
     createEffect(() => {
         if (props.id === undefined) {
             location.href = `/${lang}/404`
@@ -304,13 +327,47 @@ export const ViewFullPost: Component<Props> = (props) => {
                     <span class="font-bold">{t('postLabels.location')}</span>{post()?.major_municipality}/{post()?.minor_municipality}/
                     {post()?.governing_district}
                 </p>
-                <p class="my-1"><span class="font-bold">{t('postLabels.category')}</span>{post()?.category}</p>
+                <p class="my-1"><span class="font-bold">{t('postLabels.category')}</span>
+                    <Show when={editPostMode()}>
+                        Editing this post
+                    </Show>
+
+                    <Show when={!editPostMode()}>
+                        No edits right now
+                    </Show>
+                
+                {post()?.category}</p>
                 <div class="my-10 prose dark:prose-invert" id="post-content" innerHTML={post()?.content}></div>
                 <div class="mt-4">
                     <a href={`mailto:${post()?.email}`} class="btn-primary">{t('buttons.contact')}</a>
                 </div>
                 <div class="flex justify-center mt-4">
                     <DeletePostButton id={+props.id!} userId={(post()?.user_id !== undefined ? (post()!.user_id) : (""))} postImage={post()?.image_urls} />
+                </div>
+                <div class="flex justify-center mt-4">
+                    <Show when={ !editPostMode() }>
+                        <button 
+                            onClick={enablePostEditMode}
+                            class="btn-primary"
+                        >
+                            Edit Post
+                        </button>
+                    </Show>
+
+                    {/* <DeletePostButton id={+props.id!} userId={(post()?.user_id !== undefined ? (post()!.user_id) : (""))} postImage={post()?.image_urls} /> */}
+                </div>
+
+                <div>
+                    <Show when={editPostMode()}>
+                        <button
+                            class="btn-primary"
+                            type="submit"
+                            // form="editPost"
+                            onClick={ savePost }
+                        >
+                            Save Post
+                        </button>
+                    </Show>
                 </div>
             </div>
 
