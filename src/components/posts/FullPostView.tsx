@@ -43,14 +43,31 @@ export const ViewFullPost: Component<Props> = (props) => {
     const [session, setSession] = createSignal<AuthSession | null>(null);
     const [postImages, setPostImages] = createSignal<string[]>([]);
     const [editPostMode, setEditPostMode] = createSignal<boolean>(false); 
+    const [postData, setPostData] = createSignal<FormData>();
 
     const enablePostEditMode = () => {
         // alert("In edit post mode");
         setEditPostMode(true);
     }
 
-    const savePost = () => {
+    async function savePost (postData: FormData) {
+        // save the new content to an instance of Post
+        // post the new Post to the database
+        const res = await fetch("/api/providerEditPost", {
+            method: "POST",
+            body: postData,
+        });
+
+        const data = await res.json();
+        
+        if (data.redirect) {
+            alert(data.message);
+            window.location.href = `/${lang}` + data.redirect;
+        }
+        
         setEditPostMode(false);
+
+        return data;
     }
 
     createEffect(async() => {
@@ -251,10 +268,27 @@ export const ViewFullPost: Component<Props> = (props) => {
     return (
         <div class="flex">
             <div class="w-[98%]">
-                <h2 class="text-xl text-ptext1 dark:text-ptext1-DM pb-4 font-bold">
-                    {post()?.title}
-                </h2>
+                <Show when={ !editPostMode() } >
+                    <h2 class="text-xl text-ptext1 dark:text-ptext1-DM pb-4 font-bold">
+                        {post()?.title}
+                    </h2>
+                </Show>
 
+                <Show when={ editPostMode() }>
+                    
+                    <h2 class="text-xl text-ptext1 dark:text-ptext1-DM pb-4 font-bold">
+                        { t("postLabels.title") }
+                        <input 
+                            type="text" 
+                            id="postTitle" 
+                            name="postTitle" 
+                            class="border rounded" 
+                            value={ post()?.title }
+                        >
+                        </input>
+                    </h2>
+                    
+                </Show>
                 {/* <SocialModal id={ ost.id } title={ post.title } image_urls={ post.image_urls }/> */}
             
                 <Show when={postImages().length > 0}>
@@ -323,21 +357,55 @@ export const ViewFullPost: Component<Props> = (props) => {
                     </div>
                 </Show>
                 <p class="my-1"><span class="font-bold">{t('postLabels.provider')}</span><a href={post()?.provider_url} class="text-link1 hover:text-link1Hov dark:text-link1-DM dark:hover:bg-link1Hov-DM">{post()?.provider_name}</a></p>
-                <p class="my-1">
-                    <span class="font-bold">{t('postLabels.location')}</span>{post()?.major_municipality}/{post()?.minor_municipality}/
-                    {post()?.governing_district}
-                </p>
-                <p class="my-1"><span class="font-bold">{t('postLabels.category')}</span>
+                
+
+                    <div class="my-1">
+                        <span class="font-bold">{t('postLabels.location')}</span>
+                        <Show when={ !editPostMode() }>
+                            {post()?.major_municipality}/{post()?.minor_municipality}/
+                            {post()?.governing_district}
+                        </Show>
+
+                        <Show when={ editPostMode() }>   
+                            [Add location drop downs here]
+                        </Show>
+                    </div>
+
+                
+
+                <div class="my-1">
+                    
                     <Show when={editPostMode()}>
-                        Editing this post
+                        <p><span class="font-bold">{t('postLabels.category')}</span>[Add category select here]</p>
                     </Show>
 
                     <Show when={!editPostMode()}>
-                        No edits right now
+                        <p><span class="font-bold">{t('postLabels.category')}</span>{post()?.category}</p>
                     </Show>
+                </div>
                 
-                {post()?.category}</p>
-                <div class="my-10 prose dark:prose-invert" id="post-content" innerHTML={post()?.content}></div>
+                <Show when={ editPostMode() }>
+                    <p class="font-bold">{t("postLabels.description")}</p>
+                    <input
+                        type="textarea"
+                        id="postContent"
+                        name="postContent"
+                        class="border rounded w-full h-1/4"
+                        value={ post()?.content }
+                    >
+                    </input>
+                </Show>
+
+                <Show when={ !editPostMode() }>
+                    <div 
+                        class="my-10 prose dark:prose-invert" 
+                        id="post-content" 
+                        innerHTML={post()?.content}
+                    >
+                    </div>
+                </Show>
+
+                
                 <div class="mt-4">
                     <a href={`mailto:${post()?.email}`} class="btn-primary">{t('buttons.contact')}</a>
                 </div>

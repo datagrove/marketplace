@@ -144,9 +144,11 @@ export const English = {
   },
 
   postLabels: {
+    title: 'Post Title: ',
     provider: 'Provider: ',
     location: 'Location: ',
     category: 'Category: ',
+    description: 'Description: ',
     image: 'Post Image',
     slide: 'Slide',
     providerProfileImage: 'Provider Profile Image',

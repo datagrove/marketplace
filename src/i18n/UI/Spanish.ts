@@ -144,9 +144,11 @@ export const Spanish = {
   },
 
   postLabels: {
+    title: 'Título de la Publicación: ',
     provider: 'Ofrecido por: ',
     location: 'Ubicación: ',
     category: 'Categoría: ',
+    description: 'Descripción: ',
     image: 'Publicar imagen',
     slide: 'Diapositiva',
     providerProfileImage: 'Imagen de Perfil del Proveedor',

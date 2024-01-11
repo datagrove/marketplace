@@ -144,9 +144,11 @@ export interface uiObject {
   },
 
   postLabels: {
+    title: string,
     provider: string,
     location: string,
     category: string,
+    description: string,
     image: string,
     slide: string,
     providerProfileImage: string,

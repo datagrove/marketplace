@@ -143,11 +143,13 @@ export const French = {
   },
 
   postLabels: {
+    title: 'Poste Titre',
     provider: 'Fournisseuse: ',
     location: 'Emplacement: ',
     category: 'Catégorie: ',
+    description: 'Description',
     image: 'Publier une image',
-    slide: 'Diapositive',
+    slide: 'Diapositive: ',
     providerProfileImage: 'Image du profil du fournisseur',
     clientProfileImage: "Image du profil du client",
   },
