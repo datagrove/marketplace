@@ -1,6 +1,7 @@
 export const English = {
   textDirection: 'ltr',
   siteDescription: 'Everything you need to get the job done.',
+  searchLanguage: 'english',
 
   pageTitles: {
     services: 'Services',

@@ -1,6 +1,7 @@
 export const Spanish = {
   textDirection: 'ltr',
   siteDescription: "Todo lo que necesitas para hacer el trabajo.",
+  searchLanguage: 'spanish',
 
   pageTitles: {
     services: 'Servicios',
