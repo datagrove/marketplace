@@ -203,6 +203,7 @@ export interface uiObject {
     clientCreateProfileError: string,
     clientEditProfileError: string,
     createUserError: string,
+    emailNotConfirmed: string,
   },
 
   socialModal: {

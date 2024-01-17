@@ -91,8 +91,8 @@ export const English = {
     error404: 'Something went wrong',
     onlyProvider: "Only providers can create posts.",
     signInAsProvider: "Please sign in to a provider account before posting.",
-    checkEmail: "Check your email for the reset link!",
-    checkConfirmEmail: 'If this email is not already registered, you will receive an email confirmation link.',
+    checkEmail: "Check your email for the reset link! If you did not receive the email, please check your spam folder. Links are valid for 24 hours.",
+    checkConfirmEmail: 'If this email is not already registered, you will receive an email confirmation link. Please check your spam folder if you did not receive the email. Links are valid for 24 hours.',
     signIn: "Please sign in to access this page.",
     createProviderAccount: "Please sign in to create a provider profile.",
     createClientAccount: "Please sign in to create a client profile.",
@@ -203,6 +203,7 @@ export const English = {
     clientCreateProfileError: "Error creating client profile",
     clientEditProfileError: "Error updating client profile",
     createUserError: "Error creating user, please try again or contact us for assistance.",
+    emailNotConfirmed: "Email not registered. If you previously registered this email address please use the forgot password option below, otherwise please use the sign up option below.",
   },
 
   socialModal: {

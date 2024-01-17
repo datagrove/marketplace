@@ -90,8 +90,8 @@ export const Spanish = {
     error404: 'Algo salió mal',
     onlyProvider: 'Solo los proveedores pueden crear publicaciones.',
     signInAsProvider: 'Inicie sesión en una cuenta de proveedor para poder publicar.',
-    checkEmail: "¡Revise su correo electrónico para ver el enlace de reinicio!",
-    checkConfirmEmail: 'Si este correo electrónico aún no está registrado, recibirá un enlace de confirmación por correo electrónico.',
+    checkEmail: "¡Revise su correo electrónico para ver el enlace de reinicio! Si no recibió el correo electrónico, revise su carpeta de correo no deseado. Los enlaces son válidos por 24 horas.",
+    checkConfirmEmail: 'Si este correo electrónico aún no está registrado, recibirá un enlace de confirmación por correo electrónico. Por favor revise su carpeta de spam si no recibió el correo electrónico. Los enlaces son válidos durante 24 horas.',
     signIn: "Inicie sesión para acceder a esta página",
     createProviderAccount: "Inicie sesión para crear un perfil de proveedor",
     createClientAccount: "Inicie sesión para crear un perfil de cliente",
@@ -202,6 +202,7 @@ export const Spanish = {
     clientCreateProfileError: "Error al crear el perfil del cliente",
     clientEditProfileError: "Error al actualizar el perfil del cliente",
     createUserError: "Error al crear usuario, inténtelo nuevamente o contáctenos para obtener ayuda.",
+    emailNotConfirmed: "Correo electrónico no registrado. Si registró previamente esta dirección de correo electrónico, utilice la opción de olvidé mi contraseña que aparece a continuación; de lo contrario, utilice la opción de registro que aparece a continuación.",
   },
 
   socialModal: {
