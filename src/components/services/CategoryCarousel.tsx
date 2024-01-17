@@ -29,6 +29,7 @@ import financeDM from "../../assets/categoryIcons/banking-bank-DM.svg";
 import education from "../../assets/categoryIcons/education.svg";
 import food from "../../assets/categoryIcons/plate.svg";
 import virtual from "../../assets/categoryIcons/virtual.svg";
+import home from "../../assets/categoryIcons/home.svg";
 import { currentLanguage } from "../../lib/languageSelectionStore";
 import { doc } from "prettier";
 
@@ -78,6 +79,8 @@ categories.map((category) => {
     category.icon = food
   } else if (category.id === 16) {
     category.icon = virtual
+  } else if (category.id === 17) {
+    category.icon = home
   }
 });
 
@@ -112,7 +115,7 @@ export const CategoryCarousel: Component<Props> = (props) => {
           <img src={leftArrow.src} alt="Left Arrow" />
         </button>
 
-        <div class="flex justify-between items-start w-full overflow-auto pt-2 h-[7.5rem]">
+        <div class="flex justify-between items-start w-full overflow-scroll pt-2 h-[7.5rem]">
           {allCategoryInfo?.map((item) => (
             <button
               id={item.id}

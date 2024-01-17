@@ -308,14 +308,14 @@ export interface uiObject {
 
 productCategoryInfo:{
     categories: [
-      { name: string, description: string, ariaLabel: string, id: "1" },
+      // { name: string, description: string, ariaLabel: string, id: "1" },
       { name: string, description: string, ariaLabel: string, id: "3" },
       { name: string, description: string, ariaLabel: string, id: "2" },
       { name: string, description: string, ariaLabel: string, id: "5" },
       { name: string, description: string, ariaLabel: string, id: "4" },
       { name: string, description: string, ariaLabel: string, id: "6" },
       { name: string, description: string, ariaLabel: string, id: "7" },
-      { name: string, description: string, ariaLabel: string, id: "8" },
+      // { name: string, description: string, ariaLabel: string, id: "8" },
       { name: string, description: string, ariaLabel: string, id: "9" },
       { name: string, description: string, ariaLabel: string, id: "10" },
       { name: string, description: string, ariaLabel: string, id: "11" },
@@ -324,6 +324,7 @@ productCategoryInfo:{
       { name: string, description: string, ariaLabel: string, id: "14" },
       { name: string, description: string, ariaLabel: string, id: "15" },
       { name: string, description: string, ariaLabel: string, id: "16" },
+      { name: string, description: string, ariaLabel: string, id: "17" },
       // Add more products as needed
     ]
   },

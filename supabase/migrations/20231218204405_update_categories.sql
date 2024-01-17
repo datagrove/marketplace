@@ -1,3 +1,9 @@
-alter table "public"."providers" alter column "language_spoken" set not null;
+INSERT INTO "public"."post_category" ("id", "category", "language") VALUES
+	(14, 'Education', 1),
+    (15, 'Food & Drink', 1),
+    (16, 'Virtual', 1),
+    (17, 'Home & Office', 1);
 
-
+UPDATE "public"."provider_post" 
+SET "service_category" = 17 
+WHERE "service_category" IN (1, 8);
