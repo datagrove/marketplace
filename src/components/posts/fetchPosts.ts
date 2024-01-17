@@ -23,11 +23,11 @@ export async function fetchFilteredPosts(categoryFilters: Array<number>, locatio
                 query = query.in('governing_district', governingLocationFilters);
             }
             if(searchString.length !== 0) {
-                query = query.textSearch('title_content', searchString);
+                query = query.textSearch('title_content', searchString, {config: t('searchLanguage') });
             }
 
             try {
-                const { data: posts, error } = await query
+                const { data: posts, error} = await query
                 if(error) {
                     console.log("supabase error: " + error.message);
                 } else {
