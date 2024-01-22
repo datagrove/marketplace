@@ -72,6 +72,7 @@ export const English = {
     contact: 'Email',
     phone: 'Call',
     saveProfile: 'Save Profile',
+    filters: "Filters",
   },
 
   messages: {
@@ -137,6 +138,9 @@ export const English = {
     yourPosts: 'Your Posts',
     optional: '(optional)',
     required: 'Required Fields',
+    languages: "Languages", 
+    chooseLanguage: "Choose one or more",
+    languagesSpoken: "Languages Spoken",
   },
 
   postLabels: {
@@ -172,6 +176,7 @@ export const English = {
     postImages: 'The first image uploaded will be displayed on post previews. To upload additional images just click "Upload Image" again.',
     firstNameEdit: 'This should be your legal name as it appears on your government ID. If you do not provide a display name your first and last name will be displayed instead. These values can be updated after creating a client or provider account. Since this is your legal name, the same first and last name must be used on your client and provider accounts.',
     lastNameEdit: 'This should be your legal name as it appears on your government ID. If you do not provide a display name your first and last name will be displayed instead. These values can be updated after creating a client or provider account. Since this is your legal name, the same first and last name must be used on your client and provider accounts.',
+    languages: "Please select the languages in which you are able to conduct business. These will be displayed on your profile for clients.",
   },
 
   apiErrors: {
@@ -210,6 +215,8 @@ export const English = {
     embedLink: "Embed Link",
     textLink: "Text Link",
     disclaimer: "TodoServis has no control over information at any external site. TodoServis is not responsible for the quality, content, privacy, or reliability of any linked site and is providing this link to you only as a convenience. In no event shall TodoServis be responsible for your use of a linked site.",
+    shareButton: "Share Button",
+    closeShareMenu: "Close Share Menu",
   },
 
   ariaLabels: {
@@ -293,7 +300,7 @@ export const English = {
       { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/TodoServisCostaRica' },
       // { ariaLabel: 'RSS', icon: 'tabler:rss', href: '/rss.xml' },
       { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/datagrove/marketplace' },
-      { ariaLabel: 'Whatsapp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/message/RUD233VVIVPMG1'},
+      { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/message/RUD233VVIVPMG1'},
       { ariaLabel: 'Discord', icon: 'tabler:brand-discord', href: 'https://discord.gg/NpV44vS6bF'},
     ],
     footNote: `
