@@ -32,6 +32,7 @@ import virtual from "../../assets/categoryIcons/virtual.svg";
 import home from "../../assets/categoryIcons/home.svg";
 import { currentLanguage } from "../../lib/languageSelectionStore";
 import { doc } from "prettier";
+import { each } from "jquery";
 
 let categories: Array<any> = [];
 
@@ -74,13 +75,13 @@ categories.map((category) => {
   } else if (category.id === 13) {
     category.icon = travel;
   } else if (category.id === 14) {
-    category.icon = education
+    category.icon = education;
   } else if (category.id === 15) {
-    category.icon = food
+    category.icon = food;
   } else if (category.id === 16) {
-    category.icon = virtual
+    category.icon = virtual;
   } else if (category.id === 17) {
-    category.icon = home
+    category.icon = home;
   }
 });
 
@@ -107,6 +108,10 @@ let light = window.matchMedia(
   "(prefers-color-scheme: light)" || "(prefers-color-scheme: no-preference"
 ).matches;
 
+allCategoryInfo.forEach((element) => {
+  console.log(element);
+});
+
 export const CategoryCarousel: Component<Props> = (props) => {
   return (
     <div class="product-carousel my-2">
@@ -115,7 +120,7 @@ export const CategoryCarousel: Component<Props> = (props) => {
           <img src={leftArrow.src} alt="Left Arrow" />
         </button>
 
-        <div class="flex justify-between items-start w-full overflow-scroll pt-2 h-[7.5rem]">
+        <div class="flex justify-between items-start w-full overflow-auto pt-2 h-[7.5rem]">
           {allCategoryInfo?.map((item) => (
             <button
               id={item.id}
@@ -133,12 +138,14 @@ export const CategoryCarousel: Component<Props> = (props) => {
               }}
             >
               <div class="bg-iconbg1 dark:bg-iconbg1-DM rounded-full">
-                <img
-                  src={item.icon.src}
-                  alt={item.ariaLabel + " Icon"}
-                  title={item.description}
-                  class="w-12 h-12 p-1 m-2"
-                />
+                {item.icon && item.icon.src ? (
+                  <img
+                    src={item.icon.src}
+                    alt={item.ariaLabel + " Icon"}
+                    title={item.description}
+                    class="w-12 h-12 p-1 m-2"
+                  />
+                ) : null}
               </div>
 
               <div class="flex flex-row justify-center items-center h-44">
