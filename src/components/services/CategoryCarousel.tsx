@@ -114,8 +114,8 @@ allCategoryInfo.forEach((element) => {
 
 export const CategoryCarousel: Component<Props> = (props) => {
   return (
-    <div class="product-carousel my-2">
-      <div class="flex flex-start justify-between scrollbar-thin overflow-x-auto scrollbar-track-rounded-full scrollbar-thumb-rounded-full scrollbar-thumb-shadow-LM scrollbar-track-background1 dark:scrollbar-thumb-shadow-DM dark:scrollbar-track-background1-DM">
+    <div class="product-carousel my-2 rounded-lg p-1 ">
+      <div class="flex flex-start justify-between scrollbar-thin overflow-x-auto drop-shadow-md dark:drop-shadow-[0_4px_3px_rgba(97,97,97,1)] scrollbar-track-rounded-full scrollbar-thumb-rounded-full scrollbar-thumb-shadow-LM scrollbar-track-background1 dark:scrollbar-thumb-shadow-DM dark:scrollbar-track-background1-DM">
         <button class="w-12 hidden">
           <img src={leftArrow.src} alt="Left Arrow" />
         </button>
