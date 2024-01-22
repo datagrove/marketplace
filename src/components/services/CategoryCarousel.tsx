@@ -120,7 +120,7 @@ export const CategoryCarousel: Component<Props> = (props) => {
           <img src={leftArrow.src} alt="Left Arrow" />
         </button>
 
-        <div class="flex justify-between items-start w-full overflow-auto pt-2 h-[7.5rem]">
+        <div class="flex justify-between items-start w-full overflow-x-auto pt-2 h-[7.5rem]">
           {allCategoryInfo?.map((item) => (
             <button
               id={item.id}
