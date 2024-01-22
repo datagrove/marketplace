@@ -327,8 +327,7 @@ productCategoryInfo:{
       { name: "Voyage", description: "Services de voyage", ariaLabel: "Voyage", id: "13" },
       { name: 'Éducation', description: 'Enseignement, Tutorat, Formation et Autres Services Éducatifs', ariaLabel: "Éducation", id: "14" },
       { name: 'Nourriture & Boisson', description: 'Les Services Alimentaires', ariaLabel: "Alimentaires", id: "15" },
-      { name: 'Virtuel', description: 'Services Virtuels', ariaLabel: "Virtuel", id: "16" },
-      { name: 'Bureau & domicile', description: 'Services pour la maison et le bureau : nettoyage, jardinage, lutte antiparasitaire, etc.', ariaLabel: "Bureau & domicile", id: "17" },
+      { name: 'Bureau & domicile', description: 'Services pour la maison et le bureau : nettoyage, jardinage, lutte antiparasitaire, etc.', ariaLabel: "Bureau & domicile", id: "16" },
       // Add more products as needed
     ]
   },

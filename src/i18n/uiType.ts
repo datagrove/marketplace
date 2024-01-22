@@ -325,7 +325,6 @@ productCategoryInfo:{
       { name: string, description: string, ariaLabel: string, id: "14" },
       { name: string, description: string, ariaLabel: string, id: "15" },
       { name: string, description: string, ariaLabel: string, id: "16" },
-      { name: string, description: string, ariaLabel: string, id: "17" },
       // Add more products as needed
     ]
   },

@@ -79,8 +79,6 @@ categories.map((category) => {
   } else if (category.id === 15) {
     category.icon = food;
   } else if (category.id === 16) {
-    category.icon = virtual;
-  } else if (category.id === 17) {
     category.icon = home;
   }
 });

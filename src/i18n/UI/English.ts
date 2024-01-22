@@ -327,8 +327,7 @@ productCategoryInfo:{
       { name: 'Travel', description: 'Travel Services', ariaLabel: "Travel", id: "13" },
       { name: 'Education', description: 'Teaching, Tutoring, Training, and Other Education Services', ariaLabel: "Education", id: "14" },
       { name: 'Food & Drink', description: 'Food Services', ariaLabel: "Food & Drink", id: "15" },
-      { name: 'Virtual', description: 'Virtual or Online Services', ariaLabel: "Virtual", id: "16" },
-      { name: 'Home & Office', description: 'Services for the Home and Office - Cleaning, Gardening, Pest Control, and more', ariaLabel: "Home & Office", id: "17" },
+      { name: 'Home & Office', description: 'Services for the Home and Office - Cleaning, Gardening, Pest Control, and more', ariaLabel: "Home & Office", id: "16" },
       // Add more products as needed
     ]
   },
