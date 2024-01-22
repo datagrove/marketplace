@@ -91,8 +91,8 @@ export const French = {
     error404: "Une erreur est survenue",
     onlyProvider: 'Seuls les fournisseurs peuvent créer des publications.',
     signInAsProvider: "Veuillez vous connecter à un compte de fournisseur avant de publier.",
-    checkEmail: "Vérifiez votre e-mail pour le lien de réinitialisation !",
-    checkConfirmEmail: "Si cet e-mail n'est pas déjà enregistré, vous recevrez un lien de confirmation par e-mail.",
+    checkEmail: "Vérifiez votre courrier électronique pour le lien de réinitialisation ! Si vous n'avez pas reçu l'e-mail, veuillez vérifier votre dossier spam. Les liens sont valables 24 heures.",
+    checkConfirmEmail: "Si cet email n'est pas déjà enregistré, vous recevrez un lien de confirmation par email. Veuillez vérifier votre dossier spam si vous n'avez pas reçu l'e-mail. Les liens sont valables 24 heures.",
     signIn: "Veuillez vous connecter pour accéder à cette page.",
     createProviderAccount: "Veuillez vous connecter pour créer un profil de fournisseur.",
     createClientAccount: "Veuillez vous connecter pour créer un profil client.",
@@ -203,6 +203,7 @@ export const French = {
     clientEditProfileError: "Erreur lors de la mise à jour du profil client",
     noClient: "Aucun client trouvé.",
     createUserError: "Erreur lors de la création de l'utilisateur, veuillez réessayer ou contactez-nous pour obtenir de l'aide.",
+    emailNotConfirmed: "Correo electrónico no registrado. Si registró previamente esta dirección de correo electrónico, utilice la opción de olvidé mi contraseña que aparece a continuación; de lo contrario, utilice la opción de registro que aparece a continuación.",
   },
 
   socialModal: {
