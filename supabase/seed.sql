@@ -460,7 +460,7 @@ Post with multiples images. Succesful.', 178, '2cf81880-3206-4bb1-9734-ddcacd822
 	(103, '2023-09-20 21:35:46.409722+00', 'test2', 7, '<p>test 2</p>', 192, '0517efc0-1beb-4239-a522-748616a0d83f', NULL, false, NULL, NULL);
 
 UPDATE "public"."provider_post" 
-SET "service_category" = 17 
+SET "service_category" = 16 
 WHERE "service_category" IN (1, 8);
 
 INSERT INTO "public"."language" ("id", "language") VALUES
