@@ -366,7 +366,9 @@ INSERT INTO "public"."providers" ("created_at", "provider_name", "user_id", "loc
 	('2023-08-09 18:26:20.371128+00', 'MEEEE', '5f41591b-0850-47b7-b6a4-08251ba79b66', 76, '1234567890', NULL, 5, '{"1"}'),
 	('2023-08-03 19:05:47.022082+00', 'Provider', 'b8a30290-79ac-49bb-9a76-223532e62ae4', 63, '315', NULL, 2, '{"1"}');
 
-
+UPDATE "public"."providers" 
+SET "language_spoken" = '{"2"}' 
+WHERE "language_spoken" = '{"1"}';
 --
 -- Data for Name: provider_post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
