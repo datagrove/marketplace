@@ -1,4 +1,5 @@
-import { Component, createSignal } from "solid-js";
+import type { Component } from "solid-js";
+import { createSignal } from "solid-js";
 import { supabase } from "./supabaseClient";
 import { currentSession } from "./userSessionStore";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
@@ -40,7 +41,13 @@ export const Auth: Component = (props) => {
       location.href = `/${lang}/services`;
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        switch (error.message) {
+          case "Email not confirmed":
+            alert(t("apiErrors.emailNotConfirmed"));
+            break;
+          default:
+            alert(error.message);
+        }
       }
     } finally {
       setLoading(false);
