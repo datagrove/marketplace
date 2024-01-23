@@ -366,7 +366,9 @@ INSERT INTO "public"."providers" ("created_at", "provider_name", "user_id", "loc
 	('2023-08-09 18:26:20.371128+00', 'MEEEE', '5f41591b-0850-47b7-b6a4-08251ba79b66', 76, '1234567890', NULL, 5, '{"1"}'),
 	('2023-08-03 19:05:47.022082+00', 'Provider', 'b8a30290-79ac-49bb-9a76-223532e62ae4', 63, '315', NULL, 2, '{"1"}');
 
-
+UPDATE "public"."providers" 
+SET "language_spoken" = '{"2"}' 
+WHERE "language_spoken" = '{"1"}';
 --
 -- Data for Name: provider_post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -459,6 +461,9 @@ Post with multiples images. Succesful.', 178, '2cf81880-3206-4bb1-9734-ddcacd822
 	(102, '2023-09-20 20:18:31.545462+00', 'Test TinyMCE as independent component', 10, '<h2>This is a <em>test</em></h2>', 191, 'b8a30290-79ac-49bb-9a76-223532e62ae4', NULL, false, NULL, NULL),
 	(103, '2023-09-20 21:35:46.409722+00', 'test2', 7, '<p>test 2</p>', 192, '0517efc0-1beb-4239-a522-748616a0d83f', NULL, false, NULL, NULL);
 
+UPDATE "public"."provider_post" 
+SET "service_category" = 16 
+WHERE "service_category" IN (1, 8);
 
 INSERT INTO "public"."language" ("id", "language") VALUES
 	(4, 'Chinese'),

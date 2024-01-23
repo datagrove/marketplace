@@ -349,7 +349,7 @@ export const ServicesView: Component = () => {
         </button>
       </div>
 
-      <div class="">
+      <div class="h-fit">
         <CategoryCarousel filterPosts={setCategoryFilter} />
       </div>
 
