@@ -111,7 +111,7 @@ export const English = {
     profileEdits: 'Profile edits will only be saved after clicking the Save Profile button!',
     noClient: "No Client found.",
     noPostsSearch: "No posts match this specific search - please try a different filter or key word",
-    noDelete: "Please note: Our Edit Posts feature is currently under construction. To update post content in the meantime, please delete the outdated post and create a new one. Thanks for your patience!",
+    noEdit: "To update or change post content you must delete the outdated post and create a new one.",
   },
 
   formLabels: {

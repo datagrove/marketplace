@@ -1,5 +1,5 @@
+import type { Component } from "solid-js";
 import {
-  Component,
   Suspense,
   createEffect,
   createResource,
@@ -238,7 +238,7 @@ export const CreateNewPost: Component = () => {
   return (
     <div>
       <div class="pb-4">
-        <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+        <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noEdit")}</p>
       </div>
       <form onSubmit={submit}>
         <label for="Title" class="text-ptext1 dark:text-ptext1-DM">

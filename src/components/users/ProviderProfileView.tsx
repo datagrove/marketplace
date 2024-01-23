@@ -226,9 +226,8 @@ export const ProviderProfileView: Component = () => {
           console.log(data);
           data.forEach((item) => {
             item.checked = false;
-            if (provider()?.language_spoken && provider()?.language_spoken.length > 0){
+            if (provider()?.language_spoken){
               provider()?.language_spoken.forEach((language) => {
-                console.log(language);
                 if (language === item.id.toString()) {
                   item.checked = true;
                 }
@@ -1115,7 +1114,7 @@ export const ProviderProfileView: Component = () => {
                   </summary>
                   <div class="p-2">
                   <div class="pb-4 flex justify-center">
-                    <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+                    <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noEdit")}</p>
                   </div>
                     <div class="justify-center flex">
                       <a
@@ -1753,7 +1752,7 @@ export const ProviderProfileView: Component = () => {
 
             {/* View Post Cards*/}
             <div class="pt-6">
-              <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noDelete")}</p>
+              <p class="text-xs text-center italic text-ptext1 dark:text-ptext1-DM">{t("messages.noEdit")}</p>
             </div>
             <div class="my-6">
               <ViewProviderPosts />

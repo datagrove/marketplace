@@ -111,7 +111,7 @@ export const Spanish = {
     profileEdits: '¡Las ediciones del perfil solo se guardarán después de hacer clic en el botón Guardar perfil!',
     noClient: "No se encontró ningún cliente.",
     noPostsSearch: "Ninguna publicación coincide con esta búsqueda específica - pruebe con un filtro o palabra clave diferente",
-    noDelete: "Tenga en cuenta: Nuestra función Editar Publicaciones está actualmente en construcción. Mientras tanto, para actualizar el contenido de la publicación, elimine la publicación desactualizada y cree una nueva. ¡Gracias por su paciencia!",
+    noEdit: "Para actualizar o cambiar el contenido de la publicación, debe eliminar la publicación desactualizada y crear una nueva.",
   },
 
   formLabels: {

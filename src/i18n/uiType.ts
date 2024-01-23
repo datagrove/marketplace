@@ -110,7 +110,7 @@ export interface uiObject {
     profileEdits: string,
     noClient: string,
     noPostsSearch: string,
-    noDelete: string,
+    noEdit: string,
   },
 
   formLabels: {
