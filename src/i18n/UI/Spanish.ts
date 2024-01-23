@@ -309,19 +309,22 @@ export const Spanish = {
 
   productCategoryInfo: {
     categories: [
-      { name: 'Jardinería', description: 'Obtenga ayuda con su jardín y sus áreas verdes.', ariaLabel: "Jardinería", id: "1" },
+      // { name: 'Jardinería', description: 'Obtenga ayuda con su jardín y sus áreas verdes.', ariaLabel: "Jardinería", id: "1" },
       { name: 'Construcción', description: 'Nueva construcción, adiciones o servicios de reparación', ariaLabel: "Construcción", id: "3" },
       { name: 'Belleza', description: 'Salones, Barberias, y otros cuidados personales.', ariaLabel: "Belleza", id: "2" },
       { name: 'Automotriz', description: 'Servicios Automotrices', ariaLabel: "Automotriz", id: "5" },
       { name: 'Computación', description: 'Reparación y servicios de computadoras', ariaLabel: "Computación", id: "4" },
       { name: 'Artes', description: 'Servicios Creativos', ariaLabel: "Artes", id: "6" },
       { name: 'Finanzas', description: 'Servicios Financieros', ariaLabel: "Finanzas", id: "7" },
-      { name: 'Limpieza', description: 'Servicios de Limpieza', ariaLabel: "Limpieza", id: "8" },
+      // { name: 'Limpieza', description: 'Servicios de Limpieza', ariaLabel: "Limpieza", id: "8" },
       { name: 'Mascotas', description: 'Servicios para Mascotas', ariaLabel: "Mascotas", id: "9" },
       { name: 'Legal', description: 'Servicios Legales', ariaLabel: "Servicios Legales", id: "10" },
       { name: 'Salud', description: 'Servicios de Salud', ariaLabel: "Salud", id: "11" },
       { name: 'Servicios Laborales', description: 'Servicios Laborales', ariaLabel: "Servicios Laborales", id: "12" },
       { name: 'Viajes', description: 'Servicios de Viaje', ariaLabel: "Viajes", id: "13" },
+      { name: 'Educación', description: 'Enseñanza, Tutoría, Capacitación y Otros Servicios Educativos', ariaLabel: "Educación", id: "14" },
+      { name: 'Comida & Bebida', description: 'Servicios de Comida', ariaLabel: "Comida & Bebida", id: "15" },
+      { name: 'Oficina & casa', description: 'Servicios para el hogar y la oficina: limpieza, jardinería, control de plagas y más', ariaLabel: "Oficina & casa", id: "16" },
       // Add more products as needed
     ],
   },

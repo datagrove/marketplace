@@ -312,19 +312,22 @@ export const English = {
 
 productCategoryInfo:{
     categories: [
-      { name: 'Gardening', description: 'Get help with your garden and landscaping.', ariaLabel: "Gardening", id: "1" },
+      // { name: 'Gardening', description: 'Get help with your garden and landscaping.', ariaLabel: "Gardening", id: "1" },
       { name: 'Construction', description: 'New Construction, Additions, or Repair Services', ariaLabel: "Construction", id: "3" },
       { name: 'Beauty', description: 'Salons, Barbers, and other personal care.', ariaLabel: "Beauty", id: "2" },
       { name: 'Automotive', description: 'Automotive Services', ariaLabel: "Automotive", id: "5" },
       { name: 'Computer', description: 'Computer Repair and Services', ariaLabel: "Computer", id: "4" },
       { name: 'Creative', description: 'Creative Services', ariaLabel: "Creative", id: "6" },
       { name: 'Financial', description: 'Financial Services', ariaLabel: "Financial", id: "7" },
-      { name: 'Cleaning', description: 'Cleaning Services', ariaLabel: "Cleaning", id: "8" },
+      // { name: 'Cleaning', description: 'Cleaning Services', ariaLabel: "Cleaning", id: "8" },
       { name: 'Pets', description: 'Pet Services', ariaLabel: "Pets", id: "9" },
       { name: 'Legal', description: 'Legal Services', ariaLabel: "Legal", id: "10" },
       { name: 'Health', description: 'Health Services', ariaLabel: "Health", id: "11" },
       { name: 'Labor', description: 'Labor Services', ariaLabel: "Labor", id: "12" },
       { name: 'Travel', description: 'Travel Services', ariaLabel: "Travel", id: "13" },
+      { name: 'Education', description: 'Teaching, Tutoring, Training, and Other Education Services', ariaLabel: "Education", id: "14" },
+      { name: 'Food & Drink', description: 'Food Services', ariaLabel: "Food & Drink", id: "15" },
+      { name: 'Home & Office', description: 'Services for the Home and Office - Cleaning, Gardening, Pest Control, and more', ariaLabel: "Home & Office", id: "16" },
       // Add more products as needed
     ]
   },
