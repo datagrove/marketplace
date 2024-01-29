@@ -16,6 +16,7 @@ import UserImage from "./UserImage";
 import { ui } from "../../i18n/ui";
 import type { uiObject } from "../../i18n/uiType";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { i } from "dist/_astro/web.fcb3b003";
 
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
@@ -226,6 +227,7 @@ export const ProviderProfileView: Component = () => {
           console.log(data);
           data.forEach((item) => {
             item.checked = false;
+            //@ts-ignore
             if (provider()?.language_spoken && provider()?.language_spoken.length > 0){
               provider()?.language_spoken.forEach((language) => {
                 console.log(language);
