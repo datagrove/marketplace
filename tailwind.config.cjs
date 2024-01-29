@@ -70,6 +70,21 @@ module.exports = {
 				'shadow-LM': '#9E9E9E',
 				'shadow-DM': '#616161',
 			},
+			typography: {
+				DEFAULT: {
+					css: {
+						blockquote: {
+							fontStyle: 'normal',
+						},
+						'blockquote p:first-of-type::before': {
+							content: 'none',
+						},
+						'blockquote p:last-of-type::after': {
+							content: 'none',
+						},
+					}
+				}
+			}
 		},
 	},
 	plugins: [

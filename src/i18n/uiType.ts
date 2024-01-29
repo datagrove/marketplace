@@ -26,6 +26,7 @@ export interface uiObject {
     impact: string,
     fullPost: string,
     offline: string,
+    faq: string,
   },
 
   pageDescriptions: {
@@ -49,6 +50,7 @@ export interface uiObject {
     about: string,
     impact: string,
     fullPost: string,
+    faq: string,
   },
 
   buttons: {
@@ -72,6 +74,7 @@ export interface uiObject {
     phone: string,
     saveProfile: string,
     filters: string,
+    faq: string,
   },
 
   messages: {

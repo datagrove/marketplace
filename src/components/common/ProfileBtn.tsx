@@ -69,6 +69,9 @@ export const ProfileBtn = () => {
           <a href={`/${lang}`}>{t('pageTitles.home')}</a>
         </div>
         <div>
+          <a href={`/${lang}/faq`}>{t('buttons.faq')}</a>
+        </div>
+        <div>
         <a href={`mailto:support@todoservis.com`}>{t('menus.contactUs')}</a>
         </div>
           <AuthMode />
