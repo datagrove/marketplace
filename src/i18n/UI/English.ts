@@ -74,7 +74,7 @@ export const English = {
     phone: 'Call',
     saveProfile: 'Save Profile',
     filters: "Filters",
-    faq: "FAQs?",
+    faq: "Help Center",
   },
 
   messages: {

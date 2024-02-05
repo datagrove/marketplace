@@ -33,7 +33,7 @@ export const French = {
     services: "Trouvez les services dont vous avez besoin pour accomplir votre travail. Recherchez des mots-clés, filtrez par catégorie et filtrez par emplacement pour trouver ce dont vous avez besoin. Affichez les aperçus des articles et cliquez sur un article pour en savoir plus.",
     signUp: "Fournissez votre e-mail et créez un mot de passe pour vous inscrire pour rechercher des services ou publier des services sur TodoServis.",
     login: "Entrez votre email et votre mot de passe pour vous connecter à TodoServis.",
-    home: "TodoServis, où vous trouverez tout ce dont vous avez besoin pour accomplir votre travail. ",
+    home: "TodoServis, où vous trouverez tout ce dont vous avez besoin pour accomplir votre travail.",
     // signIn: string,
     createClientAccount: "Rejoignez TodoServis en tant que client et débloquez un monde de services. Inscrivez-vous aujourd'hui pour trouver et entrer en contact avec les meilleurs fournisseurs de services de votre région.",
     viewClientAccount: "Accédez et gérez les informations de votre profil client sans effort sur TodoServis.",
@@ -74,7 +74,7 @@ export const French = {
     phone: 'Appel',
     saveProfile: "Enregistrer le profil",
     filters: "Filtres",
-    faq: "FAQs?",
+    faq: "Centre d'Aide",
   },
 
   messages: {
@@ -108,7 +108,7 @@ export const French = {
     clickWrap1: 'En cliquant sur',
     clickWrap2: 'vous indiquez que vous avez lu et accepté les',
     fetch: 'Récupérer des services',
-    todoFetch: "Todo, le chien d'assistance, ira vous chercher les services dont vous avez besoin !",
+    todoFetch: "Todo, le chien d'assistance, ira vous chercher les services dont vous avez besoin!",
     mustSignIn: 'Vous devez être connecté pour voir les services disponibles.',
     profileEdits: "Les modifications du profil ne seront enregistrées qu'après avoir cliqué sur le bouton Enregistrer le profil !",
     noPostsSearch: "Aucun article ne correspond à cette recherche spécifique - veuillez essayer un autre filtre ou un autre mot clé",
@@ -329,7 +329,7 @@ productCategoryInfo:{
       { name: "Voyage", description: "Services de voyage", ariaLabel: "Voyage", id: "13" },
       { name: 'Éducation', description: 'Enseignement, Tutorat, Formation et Autres Services Éducatifs', ariaLabel: "Éducation", id: "14" },
       { name: 'Nourriture & Boisson', description: 'Les Services Alimentaires', ariaLabel: "Alimentaires", id: "15" },
-      { name: 'Bureau & domicile', description: 'Services pour la maison et le bureau : nettoyage, jardinage, lutte antiparasitaire, etc.', ariaLabel: "Bureau & domicile", id: "16" },
+      { name: 'Bureau & domicile', description: 'Services pour la maison et le bureau : nettoyage, jardinage, lutte antiparasitaire, etc.', ariaLabel: "Bureau & Domicile", id: "16" },
       // Add more products as needed
     ]
   },

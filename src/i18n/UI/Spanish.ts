@@ -74,7 +74,7 @@ export const Spanish = {
     phone: 'Llamada',
     saveProfile: 'Guardar Perfil',
     filters: "Filtros",
-    faq: "¿FAQs?",
+    faq: "Centro de Ayuda",
   },
 
   messages: {
@@ -327,7 +327,7 @@ export const Spanish = {
       { name: 'Viajes', description: 'Servicios de Viaje', ariaLabel: "Viajes", id: "13" },
       { name: 'Educación', description: 'Enseñanza, Tutoría, Capacitación y Otros Servicios Educativos', ariaLabel: "Educación", id: "14" },
       { name: 'Comida & Bebida', description: 'Servicios de Comida', ariaLabel: "Comida & Bebida", id: "15" },
-      { name: 'Oficina & casa', description: 'Servicios para el hogar y la oficina: limpieza, jardinería, control de plagas y más', ariaLabel: "Oficina & casa", id: "16" },
+      { name: 'Oficina & casa', description: 'Servicios para el hogar y la oficina: limpieza, jardinería, control de plagas y más', ariaLabel: "Oficina & Casa", id: "16" },
       // Add more products as needed
     ],
   },
