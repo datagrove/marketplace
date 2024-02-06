@@ -9,7 +9,7 @@ module.exports = {
 				'background1-DM': '#000000',
 				'htext1-DM': '#1DD762',
 				'ptext1-DM': '#F0F0F0',
-				'btn1-DM':	'#1DD762',
+				'btn1-DM': '#1DD762',
 				'btn1Text-DM': '#000000',
 				'link1-DM': '#1DD762',
 				'link1Hov-DM': '#17a84d',
@@ -70,7 +70,25 @@ module.exports = {
 				'shadow-LM': '#9E9E9E',
 				'shadow-DM': '#616161',
 			},
+			typography: {
+				DEFAULT: {
+					css: {
+						blockquote: {
+							fontStyle: 'normal',
+						},
+						'blockquote p:first-of-type::before': {
+							content: 'none',
+						},
+						'blockquote p:last-of-type::after': {
+							content: 'none',
+						},
+					}
+				}
+			}
 		},
 	},
-	plugins: [require('@tailwindcss/typography'),],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('tailwind-scrollbar')({ nocompatible: true }),
+	]
 }
